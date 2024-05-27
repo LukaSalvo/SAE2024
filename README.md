@@ -1,2 +1,6 @@
 # 2024_Zeldiablo_salvo4u_korban2u_belaliab1u_scheffe28u
 2024_Zeldiablo_salvo4u_korban2u_belaliab1u_scheffe28u
+Scheffer Benjamin
+Korban Ryan
+Salvo Luka
+Belalia Bendjafar Amin
