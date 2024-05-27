@@ -1,0 +1,20 @@
+@startuml
+actor User
+participant Main
+participant Labyrinthe
+participant Monstre
+
+User -> Main: main()
+activate Main
+Main -> Labyrinthe: Labyrinthe("labySimple/laby0.txt")
+activate Labyrinthe
+Labyrinthe -> Labyrinthe: lireFichier()
+Labyrinthe -> Monstre: Monstre(x, y)
+activate Monstre
+Monstre -> Monstre: setPositionInitiale(x, y)
+deactivate Monstre
+Labyrinthe -> Main: return Labyrinthe
+deactivate Labyrinthe
+Main -> Main: afficherLabyrinthe()
+deactivate Main
+@enduml
