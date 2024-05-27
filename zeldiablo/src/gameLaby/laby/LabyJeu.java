@@ -22,13 +22,13 @@ public class LabyJeu implements Jeu {
         if(clavier.haut){
             labyrinthe.deplacerPerso(Labyrinthe.HAUT);
         }
-        if(clavier.bas){
+        else if(clavier.bas){
             labyrinthe.deplacerPerso(Labyrinthe.BAS);
         }
-        if(clavier.gauche){
+        else if(clavier.gauche){
             labyrinthe.deplacerPerso(Labyrinthe.GAUCHE);
         }
-        if(clavier.droite){
+        else if(clavier.droite){
             labyrinthe.deplacerPerso(Labyrinthe.DROITE);
         }
 
