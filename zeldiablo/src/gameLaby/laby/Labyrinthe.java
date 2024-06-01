@@ -3,6 +3,7 @@ package gameLaby.laby;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 
 /**
  * classe labyrinthe. represente un labyrinthe avec
@@ -16,6 +17,7 @@ public class Labyrinthe {
      */
     public static final char MUR = 'X';
     public static final char PJ = 'P';
+    public static final char MONSTRE = 'M';
     public static final char VIDE = '.';
 
     /**
@@ -30,6 +32,7 @@ public class Labyrinthe {
      * attribut du personnage
      */
     public Perso pj;
+    public Monstre monstre;
 
     /**
      * les murs du labyrinthe
@@ -110,13 +113,16 @@ public class Labyrinthe {
                     case VIDE:
                         this.murs[colonne][numeroLigne] = false;
                         break;
+                    case MONSTRE:
+                        // ajoute monstre
+                        this.murs[colonne][numeroLigne] = false;
+                        this.monstre = new Monstre(colonne, numeroLigne);
                     case PJ:
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
                         // ajoute PJ
                         this.pj = new Perso(colonne, numeroLigne);
                         break;
-
                     default:
                         throw new Error("caractere inconnu " + c);
                 }
@@ -146,12 +152,36 @@ public class Labyrinthe {
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
         // si c'est pas un mur, on effectue le deplacement
-        if (!this.murs[suivante[0]][suivante[1]]) {
+        if (!this.murs[suivante[0]][suivante[1]] && !this.monstre.etrePresent(suivante[0],suivante[1])) {
             // on met a jour personnage
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
+            this.deplacerMonstre(action);
         }
     }
+
+    /**
+     * deplace le Monstre en fonction de l'action.
+     * gere la collision avec les murs
+     *
+     * @param action une des actions possibles
+     */
+    public void deplacerMonstre(String action) {
+        int[] courante = {this.monstre.x, this.monstre.y};
+        String[] actions = {HAUT,BAS,GAUCHE,DROITE};
+        Random rand = new Random();
+        int ind = rand.nextInt(actions.length);
+        int[] suivante = getSuivant(courante[0], courante[1], actions[ind]);
+        int[] suivantePerso = getSuivant(pj.x,pj.y,action);
+
+        // si c'est pas un mur, on effectue le deplacement
+        if (!this.murs[suivante[0]][suivante[1]]  && !this.pj.etrePresent(suivante[0],suivante[1]) && this.murs[suivantePerso[0]][suivantePerso[1]]) {
+            // on met a jour Mostre
+            this.monstre.x = suivante[0];
+            this.monstre.y = suivante[1];
+        }
+    }
+
 
 
     /**
@@ -187,6 +217,7 @@ public class Labyrinthe {
 
     /**
      * return mur en (i,j)
+     *
      * @param x
      * @param y
      * @return

@@ -45,5 +45,9 @@ public class LabyDessin implements DessinJeu {
         Perso perso = game.getLabyrinthe().pj;
         gc.fillOval(perso.getX()*x, perso.getY()*y,x,y );
 
+        // Dessin Mosntre
+        gc.setFill(Color.PURPLE);
+        Monstre monstre = game.getLabyrinthe().monstre;
+        gc.fillOval(monstre.getX()*x, monstre.getY()*y,x,y);
     }
 }

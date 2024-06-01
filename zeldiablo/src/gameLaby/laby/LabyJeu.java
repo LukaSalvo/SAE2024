@@ -32,6 +32,7 @@ public class LabyJeu implements Jeu {
             labyrinthe.deplacerPerso(Labyrinthe.DROITE);
         }
 
+
     }
 
     @Override
