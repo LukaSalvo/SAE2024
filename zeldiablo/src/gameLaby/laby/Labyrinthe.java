@@ -3,6 +3,7 @@ package gameLaby.laby;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -39,6 +40,10 @@ public class Labyrinthe {
      */
     public boolean[][] murs;
 
+    /**
+     *Liste de case pieges
+     */
+    public List<CasePieges> CasesPieges ;
     /**
      * retourne la case suivante selon une actions
      *
