@@ -3,6 +3,8 @@ package gameLaby.laby;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -32,7 +34,7 @@ public class Labyrinthe {
      * attribut du personnage
      */
     public Perso pj;
-    public Monstre monstre;
+    public ArrayList<Monstre> listMonstre = new ArrayList<>();
 
     /**
      * les murs du labyrinthe
@@ -116,7 +118,7 @@ public class Labyrinthe {
                     case MONSTRE:
                         // ajoute monstre
                         this.murs[colonne][numeroLigne] = false;
-                        this.monstre = new Monstre(colonne, numeroLigne);
+                        this.listMonstre.add(new Monstre(colonne, numeroLigne));
                     case PJ:
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
@@ -127,12 +129,12 @@ public class Labyrinthe {
                         throw new Error("caractere inconnu " + c);
                 }
             }
-
             // lecture
             ligne = bfRead.readLine();
             numeroLigne++;
         }
-
+        // Creation des monstre
+        this.creerMonstre(3);
         // ferme fichier
         bfRead.close();
     }
@@ -152,11 +154,14 @@ public class Labyrinthe {
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
         // si c'est pas un mur, on effectue le deplacement
-        if (!this.murs[suivante[0]][suivante[1]] && !this.monstre.etrePresent(suivante[0],suivante[1])) {
+        if (!this.murs[suivante[0]][suivante[1]] && !this.monstresPresent(suivante[0],suivante[1])) {
             // on met a jour personnage
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
-            this.deplacerMonstre(action);
+            for(int i =0; i<this.listMonstre.size();i++){
+                this.deplacerMonstre(action,this.listMonstre.get(i));
+            }
+
         }
     }
 
@@ -166,8 +171,8 @@ public class Labyrinthe {
      *
      * @param action une des actions possibles
      */
-    public void deplacerMonstre(String action) {
-        int[] courante = {this.monstre.x, this.monstre.y};
+    public void deplacerMonstre(String action,Monstre monstre) {
+        int[] courante = {monstre.getX(), monstre.getY()};
         String[] actions = {HAUT,BAS,GAUCHE,DROITE};
         Random rand = new Random();
         int ind = rand.nextInt(actions.length);
@@ -175,11 +180,36 @@ public class Labyrinthe {
         int[] suivantePerso = getSuivant(pj.x,pj.y,action);
 
         // si c'est pas un mur, on effectue le deplacement
-        if (!this.murs[suivante[0]][suivante[1]]  && !this.pj.etrePresent(suivante[0],suivante[1]) && this.murs[suivantePerso[0]][suivantePerso[1]]) {
+        if (!this.murs[suivante[0]][suivante[1]]  && !this.pj.etrePresent(suivante[0],suivante[1]) && this.murs[suivantePerso[0]][suivantePerso[1]] && !this.monstresPresent(suivante[0],suivante[1])) {
             // on met a jour Mostre
-            this.monstre.x = suivante[0];
-            this.monstre.y = suivante[1];
+            monstre.x = suivante[0];
+            monstre.y = suivante[1];
         }
+    }
+
+    public void creerMonstre(int nb){
+        Random rand = new Random();
+        int poxX;
+        int poxY;
+        for(int i=0;i<nb;i++){
+            poxX = rand.nextInt(this.murs.length);
+            poxY = rand.nextInt(this.murs[0].length);
+            while (murs[poxX][poxY] && this.pj.etrePresent(poxX,poxY) && monstresPresent(poxX,poxY)){
+                poxX = rand.nextInt(this.murs.length);
+                poxY = rand.nextInt(this.murs[0].length);
+            }
+            this.listMonstre.add(new Monstre(poxX,poxY));
+        }
+    }
+
+    public boolean monstresPresent(int dx,int dy){
+        boolean res = true;
+        int ind =0;
+        int size = this.listMonstre.size();
+        while (ind<size && this.listMonstre.get(ind).etrePresent(dx,dy)){
+            ind++;
+        }
+        return ind==size;
     }
 
 
