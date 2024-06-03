@@ -1,0 +1,22 @@
+Version 2.0 : Bilan du travail réalisé
+
+1. Tests Unitaire Ajoutés :
+   - Test de la position initiale du monstre
+   - Test pour s'assurer que le personnage ne peut pas se déplacer sur la case du monstre
+   - Test du déplacement du monstre
+   - Test de déplacement valide du personnage
+   - Test pour s'assurer que le personnage ne peut pas traverser un mur
+
+2. Bugs Restants :
+   - Aucun bug majeur trouver avec les tests. Des tests en plus peuvent être fait pour les cas extrêmes ou des comportements pas encore détecté.
+
+3. Éléments Validés :
+   - La logique de déplacement du monstre et du personnage
+   - La détection des collisions avec les murs
+   - L'affichage du labytinthe
+
+4. Améliorations Futures :
+   - Ajouter des tests et des fonctionalités pour des comportements spécifiques du monstre
+   - Ajouter des tests pour les mouvements du personnage dans des labyrinthes plus complexes
+   - Implémenter des tests de performance pour évaluer l'efficacité du déplacement dans de grands labyrinthes
+   - Amélioration des graphismes
