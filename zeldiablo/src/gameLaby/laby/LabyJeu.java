@@ -4,6 +4,8 @@ import moteurJeu.Clavier;
 import moteurJeu.Jeu;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LabyJeu implements Jeu {
     public static final int WIDTH = 800;
@@ -12,7 +14,7 @@ public class LabyJeu implements Jeu {
     private Labyrinthe labyrinthe;
 
     public LabyJeu() throws IOException {
-        this.labyrinthe = new Labyrinthe("labySimple/laby2.txt");
+        this.labyrinthe = new Labyrinthe("labySimple/laby1.txt");
     }
 
     @Override
@@ -31,6 +33,22 @@ public class LabyJeu implements Jeu {
         else if(clavier.droite){
             labyrinthe.deplacerPerso(Labyrinthe.DROITE);
         }
+//        Timer timer = new Timer(false);
+//        long delay = 1000;
+//        TimerTask task = new TimerTask() {
+//            @Override
+//            public void run() {
+//                System.out.println("BONJOUR");
+//                for(Monstre m: labyrinthe.listMonstre)
+//                    labyrinthe.deplacerMonstre(m);
+//                timer.cancel();
+//
+//            }
+//        };
+//
+//        timer.schedule(task,delay);
+
+
 
 
     }

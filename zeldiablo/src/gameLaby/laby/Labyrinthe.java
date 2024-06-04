@@ -165,7 +165,6 @@ public class Labyrinthe {
             this.pj.y = suivante[1];
             for (int i=0;i<listMonstre.size();i++){
                 deplacerMonstre(listMonstre.get(i));
-
             }
 
 
