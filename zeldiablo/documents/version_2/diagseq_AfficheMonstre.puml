@@ -1,3 +1,4 @@
+@startuml
 User -> MainLaby: main()
 activate MainLaby
 MainLaby -> MoteurJeu: setTaille(width, height)
