@@ -11,6 +11,8 @@ public class Monstre {
      */
     int x, y;
 
+    private static final int POINTDEVIEMONSTRE = 75;
+
     /**
      * constructeur
      *
@@ -20,6 +22,7 @@ public class Monstre {
     public Monstre(int dx, int dy) {
         this.x = dx;
         this.y = dy;
+        int pv = POINTDEVIEMONSTRE;
     }
 
     /**
