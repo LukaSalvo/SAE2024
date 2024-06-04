@@ -11,11 +11,11 @@ Main -> Labyrinthe: deplacerPerso(action)
 activate Labyrinthe
 Labyrinthe -> Perso: getSuivant(x, y, action)
 activate Perso
-Perso -> Labyrinthe: return nouvellePosition
+Perso --> Labyrinthe: return nouvellePosition
 deactivate Perso
 Labyrinthe -> Monstre: getPosition()
 activate Monstre
-Monstre -> Labyrinthe: return positionMonstre
+Monstre --> Labyrinthe: return positionMonstre
 deactivate Monstre
 alt Si nouvellePosition != positionMonstre
     Labyrinthe -> Perso: setPosition(nouvellePosition)
