@@ -14,11 +14,11 @@ activate Monstre
 Monstre -> Monstre: choisirDirectionAleatoire()
 Monstre -> Random: randomDirection()
 activate Random
-Random -> Monstre: return direction
+Random --> Monstre: return direction
 deactivate Random
 Monstre -> Labyrinthe: getSuivant(x, y, direction)
 Monstre -> Labyrinthe: getMur(nouvellePosition)
-Labyrinthe -> Monstre: return mur
+Labyrinthe --> Monstre: return mur
 alt Si nouvellePosition n'est pas un mur
     Monstre -> Monstre: setPosition(nouvellePosition)
 end
