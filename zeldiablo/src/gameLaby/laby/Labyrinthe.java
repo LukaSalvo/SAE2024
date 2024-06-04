@@ -159,13 +159,15 @@ public class Labyrinthe {
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
         // si c'est pas un mur, on effectue le deplacement
-        if (!this.murs[suivante[0]][suivante[1]] && !this.monstresPresent(suivante[0],suivante[1])) {
+        if (!this.murs[suivante[0]][suivante[1]] && this.monstresPresent(suivante[0],suivante[1])) {
             // on met a jour personnage
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
-            for(int i =0; i<this.listMonstre.size();i++){
-                this.deplacerMonstre(action,this.listMonstre.get(i));
+            for (int i=0;i<listMonstre.size();i++){
+                deplacerMonstre(action,listMonstre.get(i));
+
             }
+
 
         }
     }
@@ -185,7 +187,7 @@ public class Labyrinthe {
         int[] suivantePerso = getSuivant(pj.x,pj.y,action);
 
         // si c'est pas un mur, on effectue le deplacement
-        if (!this.murs[suivante[0]][suivante[1]]  && !this.pj.etrePresent(suivante[0],suivante[1]) && this.murs[suivantePerso[0]][suivantePerso[1]] && !this.monstresPresent(suivante[0],suivante[1])) {
+        if (!this.murs[suivante[0]][suivante[1]]  && !this.pj.etrePresent(suivante[0],suivante[1]) && this.monstresPresent(suivante[0],suivante[1])) {
             // on met a jour Mostre
             monstre.x = suivante[0];
             monstre.y = suivante[1];
@@ -199,7 +201,7 @@ public class Labyrinthe {
         for(int i=0;i<nb;i++){
             poxX = rand.nextInt(this.murs.length);
             poxY = rand.nextInt(this.murs[0].length);
-            while (murs[poxX][poxY] || pj.etrePresent(poxX,poxY) || monstresPresent(poxX,poxY)){
+            while (murs[poxX][poxY] || pj.etrePresent(poxX,poxY) || !monstresPresent(poxX,poxY)){
                 poxX = rand.nextInt(this.murs.length);
                 poxY = rand.nextInt(this.murs[0].length);
             }
@@ -211,7 +213,8 @@ public class Labyrinthe {
         boolean res = true;
         int ind =0;
         int size = this.listMonstre.size();
-        while (ind<size && this.listMonstre.get(ind).etrePresent(dx,dy)){
+
+        while (ind<size && !this.listMonstre.get(ind).etrePresent(dx,dy)){
             ind++;
         }
         return ind==size;
