@@ -164,7 +164,7 @@ public class Labyrinthe {
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
             for (int i=0;i<listMonstre.size();i++){
-                deplacerMonstre(action,listMonstre.get(i));
+                deplacerMonstre(listMonstre.get(i));
 
             }
 
@@ -178,13 +178,12 @@ public class Labyrinthe {
      *
      * @param action une des actions possibles
      */
-    public void deplacerMonstre(String action,Monstre monstre) {
+    public void deplacerMonstre(Monstre monstre) {
         int[] courante = {monstre.getX(), monstre.getY()};
         String[] actions = {HAUT,BAS,GAUCHE,DROITE};
         Random rand = new Random();
         int ind = rand.nextInt(actions.length);
         int[] suivante = getSuivant(courante[0], courante[1], actions[ind]);
-        int[] suivantePerso = getSuivant(pj.x,pj.y,action);
 
         // si c'est pas un mur, on effectue le deplacement
         if (!this.murs[suivante[0]][suivante[1]]  && !this.pj.etrePresent(suivante[0],suivante[1]) && this.monstresPresent(suivante[0],suivante[1])) {

@@ -12,7 +12,7 @@ public class LabyJeu implements Jeu {
     private Labyrinthe labyrinthe;
 
     public LabyJeu() throws IOException {
-        this.labyrinthe = new Labyrinthe("labySimple/laby1.txt");
+        this.labyrinthe = new Labyrinthe("labySimple/laby2.txt");
     }
 
     @Override

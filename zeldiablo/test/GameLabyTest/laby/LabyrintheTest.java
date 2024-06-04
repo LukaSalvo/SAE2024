@@ -18,9 +18,9 @@ public class LabyrintheTest {
 
     @Test
     public void testMonstrePositionInitiale() {
-        assertNotNull(labyrinthe.monstre);
-        int monstreX = labyrinthe.monstre.getX();
-        int monstreY = labyrinthe.monstre.getY();
+        assertNotNull(labyrinthe.listMonstre.get(0));
+        int monstreX = labyrinthe.listMonstre.get(0).getX();
+        int monstreY = labyrinthe.listMonstre.get(0).getY();
         assertTrue(monstreX >= 0 && monstreX < labyrinthe.getLength());
         assertTrue(monstreY >= 0 && monstreY < labyrinthe.getLengthY());
         assertFalse(labyrinthe.getMur(monstreX, monstreY));
@@ -29,8 +29,8 @@ public class LabyrintheTest {
 
     @Test
     public void testPersoNePeutPasSeDeplacerSurMonstre() {
-        int monstreX = labyrinthe.monstre.getX();
-        int monstreY = labyrinthe.monstre.getY();
+        int monstreX = labyrinthe.listMonstre.get(0).getX();
+        int monstreY = labyrinthe.listMonstre.get(0).getY();
 
         // Pos du perso differente de celle du monstre
         int persoX = labyrinthe.pj.getX();
@@ -48,13 +48,13 @@ public class LabyrintheTest {
 
     @Test
     public void testMonstreDeplacement() {
-        int monstreX = labyrinthe.monstre.getX();
-        int monstreY = labyrinthe.monstre.getY();
+        int monstreX = labyrinthe.listMonstre.get(0).getX();
+        int monstreY = labyrinthe.listMonstre.get(0).getY();
 
-        labyrinthe.deplacerMonstre(Labyrinthe.DROITE);
+        labyrinthe.deplacerMonstre(labyrinthe.listMonstre.get(0));
 
-        int nouveauMonstreX = labyrinthe.monstre.getX();
-        int nouveauMonstreY = labyrinthe.monstre.getY();
+        int nouveauMonstreX = labyrinthe.listMonstre.get(0).getX();
+        int nouveauMonstreY = labyrinthe.listMonstre.get(0).getY();
 
         assertTrue(Math.abs(nouveauMonstreX - monstreX) <= 1 && Math.abs(nouveauMonstreY - monstreY) <= 1);
         assertFalse(labyrinthe.getMur(nouveauMonstreX, nouveauMonstreY));
