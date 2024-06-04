@@ -10,8 +10,13 @@ public class Monstre {
      * position du personnage
      */
     int x, y;
+    int pv;
 
-    private static final int POINTDEVIEMONSTRE = 75;
+    private static final int POINTDEVIEMONSTREENTIER = 75;
+    public static final int POINTDEVIEMONSTREDEMI = 50;
+    public static final int POINTDEVIEMONSTREQUART = 25;
+    public static final int POINTDEVIEMONSTREDEAD = 100;
+
 
     /**
      * constructeur
@@ -22,7 +27,7 @@ public class Monstre {
     public Monstre(int dx, int dy) {
         this.x = dx;
         this.y = dy;
-        int pv = POINTDEVIEMONSTRE;
+        this.pv = POINTDEVIEMONSTREENTIER;
     }
 
     /**
@@ -55,5 +60,10 @@ public class Monstre {
     public int getY() {
         //getter
         return this.y;
+    }
+
+
+    public int getPv(){
+        return this.pv;
     }
 }
