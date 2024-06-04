@@ -3,8 +3,8 @@ package gameArkanoid;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import moteurJeu.Jeu;
 import moteurJeu.DessinJeu;
+import moteurJeu.Jeu;
 
 /**
  * permet d'afficher un jeu de type arkanoid

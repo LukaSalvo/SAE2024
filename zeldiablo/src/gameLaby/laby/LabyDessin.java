@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import moteurJeu.DessinJeu;
 import moteurJeu.Jeu;
@@ -14,6 +15,20 @@ import javafx.scene.paint.Color;
 import java.io.IOException;
 
 public class LabyDessin implements DessinJeu {
+
+
+
+    public static final Color vert = Color.GREEN;
+    public static final Color orange = Color.ORANGE;
+    public static final Color jaune = Color.YELLOW;
+    public static final Color rouge = Color.RED;
+
+    public static final Color bleuNoir = Color.DARKBLUE;
+    public static final Color bleu = Color.BLUE;
+    public static final Color bleuCiel = Color.ALICEBLUE;
+    public static final Color noir = Color.BLACK;
+
+
     @Override
     public void dessinerJeu(Jeu jeu, Canvas canvas) {
         LabyJeu game = (LabyJeu) jeu;
@@ -53,20 +68,17 @@ public class LabyDessin implements DessinJeu {
     private static void DessinerPersonnage(GraphicsContext gc, LabyJeu game, int x, int y) {
         gc.setFill(Color.RED);
         Perso perso = game.getLabyrinthe().pj;
-        gc.setFill(Color.GREEN);
-
-
         if(perso.getPv()>75){
-            gc.setFill(Color.GREEN);
+            gc.setFill(vert);
         }else{
             if(perso.getPv()>50){
-                gc.setFill(Color.YELLOW);
+                gc.setFill(jaune);
             }else{
                 if(perso.getPv() > 25){
-                    gc.setFill(Color.ORANGE);
+                    gc.setFill(orange);
                 }
                 else{
-                    gc.setFill(Color.RED);
+                    gc.setFill(rouge);
                 }
             }
         }
@@ -81,9 +93,28 @@ public class LabyDessin implements DessinJeu {
     }
 
     private static void DessinerMonstre(LabyJeu game, GraphicsContext gc, int x, int y) {
+
         for(Monstre m: game.getLabyrinthe().listMonstre){
-            gc.setFill(Color.PURPLE);
+            if(m.getPv()>75){
+                gc.setFill(bleuCiel);
+            }else{
+                if(m.getPv()>50){
+                    gc.setFill(bleu);
+                }else{
+                    if(m.getPv() > 25){
+                        gc.setFill(bleuNoir);
+                    }
+                    else{
+                        gc.setFill(noir);
+                    }
+                }
+            }
             gc.fillOval(m.getX()*x, m.getY()*y,x,y);
+
+
+            gc.setFill(Color.WHITE);
+            gc.setFont(new Font(20));
+            gc.fillText(String.valueOf(m.getPv()), m.getX() * x + x / 4, m.getY() * y + y / 2);
         }
     }
     public static void DessinerCasePiège(LabyJeu game, GraphicsContext gc , int x , int y ){
