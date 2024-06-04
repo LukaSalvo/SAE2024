@@ -199,7 +199,7 @@ public class Labyrinthe {
         for(int i=0;i<nb;i++){
             poxX = rand.nextInt(this.murs.length);
             poxY = rand.nextInt(this.murs[0].length);
-            while (murs[poxX][poxY] && this.pj.etrePresent(poxX,poxY) && monstresPresent(poxX,poxY)){
+            while (murs[poxX][poxY] || pj.etrePresent(poxX,poxY) || monstresPresent(poxX,poxY)){
                 poxX = rand.nextInt(this.murs.length);
                 poxY = rand.nextInt(this.murs[0].length);
             }
