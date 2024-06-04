@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
 import moteurJeu.DessinJeu;
 import moteurJeu.Jeu;
 import javafx.scene.paint.Color;
@@ -41,9 +42,31 @@ public class LabyDessin implements DessinJeu {
 
 
         // Dessin Personnage
-        gc.setFill(Color.RED);
         Perso perso = game.getLabyrinthe().pj;
+        gc.setFill(Color.GREEN);
+
+
+        if(perso.getPv()>75){
+            gc.setFill(Color.GREEN);
+        }else{
+            if(perso.getPv()>50){
+                gc.setFill(Color.YELLOW);
+            }else{
+                if(perso.getPv() > 25){
+                    gc.setFill(Color.ORANGE);
+                }
+                else{
+                    gc.setFill(Color.RED);
+                }
+            }
+        }
         gc.fillOval(perso.getX()*x, perso.getY()*y,x,y );
+
+        gc.setFill(Color.WHITE);
+        gc.setFont(new Font(20));
+        gc.fillText(String.valueOf(perso.getPv()), perso.getX() * x + x / 4, perso.getY() * y + y / 2);
+
+
         System.out.println(game.getLabyrinthe().listMonstre.size());
         // Dessin Mosntre
         for(Monstre m: game.getLabyrinthe().listMonstre){

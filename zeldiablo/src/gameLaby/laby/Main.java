@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         // charge le labyrinthe
-        Labyrinthe laby = new Labyrinthe("labySimple/laby0.txt");
+        Labyrinthe laby = new Labyrinthe("labySimple/laby1.txt");
 
         //affiche le labyrinthe charge
         for (int y = 0; y < laby.getLengthY(); y++) {
