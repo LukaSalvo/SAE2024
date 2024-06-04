@@ -12,8 +12,9 @@ Labyrinthe -> Labyrinthe: lireFichier()
 Labyrinthe -> Monstre: Monstre(x, y)
 activate Monstre
 Monstre -> Monstre: setPositionInitiale(x, y)
+Monstre --> Labyrinthe: return Monstre
 deactivate Monstre
-Labyrinthe -> Main: return Labyrinthe
+Labyrinthe --> Main: return Labyrinthe
 deactivate Labyrinthe
 Main -> Main: afficherLabyrinthe()
 deactivate Main
