@@ -11,11 +11,12 @@ public class Perso {
      */
     int x, y;
     int pv;
-    public static final int POINTDEVIEPERSOENTIER = 100;
-    public static final int POINTDEVIEPERSO3QUART = 75;
-    public static final int POINTDEVIEPERSODEMI = 50;
-    public static final int POINTDEVIEPERSO1QUART = 25;
-    public static final int POINTDEVIEPERSODEAD = 100;
+
+    public static final int POINTDEVIEPERSOENTIER = 10;
+    public static final int POINTDEVIEPERSO3QUART = 7;
+    public static final int POINTDEVIEPERSODEMI = 5;
+    public static final int POINTDEVIEPERSO1QUART = 2;
+    public static final int POINTDEVIEPERSODEAD = 0;
 
     /**
      * constructeur
