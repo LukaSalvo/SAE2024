@@ -187,7 +187,7 @@ public class Labyrinthe {
         int[] suivantePerso = getSuivant(pj.x,pj.y,action);
 
         // si c'est pas un mur, on effectue le deplacement
-        if (!this.murs[suivante[0]][suivante[1]]  && !this.pj.etrePresent(suivante[0],suivante[1]) && this.murs[suivantePerso[0]][suivantePerso[1]] && this.monstresPresent(suivante[0],suivante[1])) {
+        if (!this.murs[suivante[0]][suivante[1]]  && !this.pj.etrePresent(suivante[0],suivante[1]) && this.monstresPresent(suivante[0],suivante[1])) {
             // on met a jour Mostre
             monstre.x = suivante[0];
             monstre.y = suivante[1];
