@@ -41,15 +41,23 @@ public class LabyDessin implements DessinJeu {
 
 
         // Dessin Personnage
+        DessinerPersonnage(gc, game, x, y);
+        // Dessin Mosntre
+        DessinerMonstre(game, gc, x, y);
+
+    }
+
+    private static void DessinerPersonnage(GraphicsContext gc, LabyJeu game, int x, int y) {
         gc.setFill(Color.RED);
         Perso perso = game.getLabyrinthe().pj;
-        gc.fillOval(perso.getX()*x, perso.getY()*y,x,y );
+        gc.fillOval(perso.getX()* x, perso.getY()* y, x, y);
         System.out.println(game.getLabyrinthe().listMonstre.size());
-        // Dessin Mosntre
+    }
+
+    private static void DessinerMonstre(LabyJeu game, GraphicsContext gc, int x, int y) {
         for(Monstre m: game.getLabyrinthe().listMonstre){
             gc.setFill(Color.PURPLE);
-            gc.fillOval(m.getX()*x, m.getY()*y,x,y);
+            gc.fillOval(m.getX()* x, m.getY()* y, x, y);
         }
-
     }
 }

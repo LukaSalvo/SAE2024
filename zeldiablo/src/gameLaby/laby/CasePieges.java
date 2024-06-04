@@ -15,4 +15,11 @@ public class CasePieges extends Cordonnées {
         super(x, y);
     }
 
+    @Override
+    public boolean etreSurMemeCase(int x, int y) {
+        return super.etreSurMemeCase(x, y);
+    }
+    public static int getDegats(){
+        return degats;
+    }
 }
