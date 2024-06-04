@@ -12,10 +12,9 @@ public class Monstre{
     int x, y;
     int pv;
 
-    private static final int POINTDEVIEMONSTREENTIER = 75;
-    public static final int POINTDEVIEMONSTREDEMI = 50;
-    public static final int POINTDEVIEMONSTREQUART = 25;
-    public static final int POINTDEVIEMONSTREDEAD = 100;
+    public static final int POINTDEVIEMONSTREENTIER = 2;
+    public static final int POINTDEVIEMONSTREDEMI = 1;
+    public static final int POINTDEVIEMONSTREDEAD = 0;
 
 
     /**

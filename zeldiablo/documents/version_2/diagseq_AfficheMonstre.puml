@@ -7,7 +7,7 @@ MainLaby -> MoteurJeu: setFPS(fps)
 MoteurJeu --> MainLaby: void
 MainLaby -> MoteurJeu: launch(LabyJeu, LabyDessin)
 activate MoteurJeu
-MoteurJeu -> LabyJeu: update()
+    MoteurJeu -> LabyJeu: update()
 activate LabyJeu
 LabyJeu --> MoteurJeu: void
 LabyJeu -> LabyDessin: dessinerJeu(jeu, canvas)

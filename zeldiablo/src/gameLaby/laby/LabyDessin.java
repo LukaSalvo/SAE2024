@@ -68,17 +68,22 @@ public class LabyDessin implements DessinJeu {
     private static void DessinerPersonnage(GraphicsContext gc, LabyJeu game, int x, int y) {
         gc.setFill(Color.RED);
         Perso perso = game.getLabyrinthe().pj;
-        if(perso.getPv()>75){
+        if(perso.getPv()>= Perso.POINTDEVIEPERSOENTIER){
             gc.setFill(vert);
         }else{
-            if(perso.getPv()>50){
+            if(perso.getPv()>Perso.POINTDEVIEPERSO3QUART){
                 gc.setFill(jaune);
             }else{
-                if(perso.getPv() > 25){
+                if(perso.getPv() > Perso.POINTDEVIEPERSODEMI){
                     gc.setFill(orange);
                 }
                 else{
-                    gc.setFill(rouge);
+                    if(perso.getPv() > Perso.POINTDEVIEPERSO1QUART){
+                        gc.setFill(rouge);
+                    }
+                    else{
+                        return;
+                    }
                 }
             }
         }
@@ -99,17 +104,17 @@ public class LabyDessin implements DessinJeu {
                     gc.setFill(bleu);
                 }else{
                     if(m.getPv() > 25){
-                       gc.setFill(bleuNoir);
+                        gc.setFill(bleuNoir);
                     }
                     else{
                         gc.setFill(noir);
-                   }
+                    }
                 }
             }
             gc.fillOval(m.getX()*x, m.getY()*y,x,y);
 
 
-            gc.setFill(Color.GREY);
+            gc.setFill(Color.WHITE);
             gc.setFont(new Font(20));
             gc.fillText(String.valueOf(m.getPv()), m.getX() * x + x / 4, m.getY() * y + y / 2);
         }
