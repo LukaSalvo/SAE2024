@@ -87,9 +87,6 @@ public class LabyDessin implements DessinJeu {
         gc.setFill(Color.WHITE);
         gc.setFont(new Font(20));
         gc.fillText(String.valueOf(perso.getPv()), perso.getX() * x + x / 4, perso.getY() * y + y / 2);
-
-
-        System.out.println(game.getLabyrinthe().listMonstre.size());
     }
 
     private static void DessinerMonstre(LabyJeu game, GraphicsContext gc, int x, int y) {
@@ -102,17 +99,17 @@ public class LabyDessin implements DessinJeu {
                     gc.setFill(bleu);
                 }else{
                     if(m.getPv() > 25){
-                        gc.setFill(bleuNoir);
+                       gc.setFill(bleuNoir);
                     }
                     else{
                         gc.setFill(noir);
-                    }
+                   }
                 }
             }
             gc.fillOval(m.getX()*x, m.getY()*y,x,y);
 
 
-            gc.setFill(Color.WHITE);
+            gc.setFill(Color.GREY);
             gc.setFont(new Font(20));
             gc.fillText(String.valueOf(m.getPv()), m.getX() * x + x / 4, m.getY() * y + y / 2);
         }
