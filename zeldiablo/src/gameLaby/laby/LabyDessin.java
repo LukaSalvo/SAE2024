@@ -50,14 +50,38 @@ public class LabyDessin implements DessinJeu {
     private static void DessinerPersonnage(GraphicsContext gc, LabyJeu game, int x, int y) {
         gc.setFill(Color.RED);
         Perso perso = game.getLabyrinthe().pj;
-        gc.fillOval(perso.getX()* x, perso.getY()* y, x, y);
+        gc.setFill(Color.GREEN);
+
+
+        if(perso.getPv()>75){
+            gc.setFill(Color.GREEN);
+        }else{
+            if(perso.getPv()>50){
+                gc.setFill(Color.YELLOW);
+            }else{
+                if(perso.getPv() > 25){
+                    gc.setFill(Color.ORANGE);
+                }
+                else{
+                    gc.setFill(Color.RED);
+                }
+            }
+        }
+        gc.fillOval(perso.getX()*x, perso.getY()*y,x,y );
+
+        gc.setFill(Color.WHITE);
+        gc.setFont(new Font(20));
+        gc.fillText(String.valueOf(perso.getPv()), perso.getX() * x + x / 4, perso.getY() * y + y / 2);
+
+
         System.out.println(game.getLabyrinthe().listMonstre.size());
     }
 
     private static void DessinerMonstre(LabyJeu game, GraphicsContext gc, int x, int y) {
         for(Monstre m: game.getLabyrinthe().listMonstre){
             gc.setFill(Color.PURPLE);
-            gc.fillOval(m.getX()* x, m.getY()* y, x, y);
+            gc.fillOval(m.getX()*x, m.getY()*y,x,y);
         }
+
     }
 }
