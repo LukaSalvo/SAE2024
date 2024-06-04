@@ -8,7 +8,7 @@ public class CasePieges extends Cordonnees {
      * Attribut qui represente les degats infliges par les pieges
      */
     public static final int degats = 5;
-    
+
     /**
      * Constructeur qui construit un objet avec les cordonnes en parametre
      *

@@ -52,7 +52,7 @@ public class Monstre{
 
     public void getVieApres2Percusion(){
         int num = 0 ;
-        num = compterPercusionPerso()
+        num = compterPercusionPerso();
     }
 
 
