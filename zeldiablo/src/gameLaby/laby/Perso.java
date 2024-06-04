@@ -11,6 +11,11 @@ public class Perso {
      */
     int x, y;
     int pv;
+    public static final int POINTDEVIEPERSOENTIER = 100;
+    public static final int POINTDEVIEPERSO3QUART = 75;
+    public static final int POINTDEVIEPERSODEMI = 50;
+    public static final int POINTDEVIEPERSO1QUART = 25;
+    public static final int POINTDEVIEPERSODEAD = 100;
 
     /**
      * constructeur
@@ -21,7 +26,7 @@ public class Perso {
     public Perso(int dx, int dy ) {
         this.x = dx;
         this.y = dy;
-        this.pv = 100;
+        this.pv = POINTDEVIEPERSOENTIER;
     }
 
     /**

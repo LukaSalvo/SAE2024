@@ -82,6 +82,10 @@ public class LabyDessin implements DessinJeu {
         for(Monstre m: game.getLabyrinthe().listMonstre){
             gc.setFill(Color.PURPLE);
             gc.fillOval(m.getX()*x, m.getY()*y,x,y);
+
+            gc.setFill(Color.WHITE);
+            gc.setFont(new Font(20));
+            gc.fillText(String.valueOf(m.getPv()), m.getX() * x + x / 4, m.getY() * y + y / 2);
         }
 
     }
