@@ -45,6 +45,8 @@ public class LabyDessin implements DessinJeu {
         DessinerPersonnage(gc, game, x, y);
         // Dessin Mosntre
         DessinerMonstre(game, gc, x, y);
+        //Dessin cases pièges
+        DessinerCasePiège(game,gc,x,y);
 
     }
 
@@ -85,6 +87,9 @@ public class LabyDessin implements DessinJeu {
         }
     }
     public static void DessinerCasePiège(LabyJeu game, GraphicsContext gc , int x , int y ){
-
+        for(CasePieges c : game.getLabyrinthe().CasesPieges){
+            gc.setFill(Color.BROWN);
+            gc.fillRect(c.getPosX()*x,c.getPosY()*y,x,y);
+        }
     }
 }

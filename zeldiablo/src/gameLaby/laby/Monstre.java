@@ -4,7 +4,7 @@ package gameLaby.laby;
 /**
  * gere un personnage situe en x,y
  */
-public class Monstre {
+public class Monstre extends Cordonnées{
 
     /**
      * position du personnage
@@ -18,8 +18,7 @@ public class Monstre {
      * @param dy position selon y
      */
     public Monstre(int dx, int dy) {
-        this.x = dx;
-        this.y = dy;
+        super(dx,dy);
     }
 
     /**

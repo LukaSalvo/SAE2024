@@ -4,7 +4,7 @@ package gameLaby.laby;
 /**
  * gere un personnage situe en x,y
  */
-public class Perso {
+public class Perso extends Cordonnées{
 
     /**
      * position du personnage
@@ -19,8 +19,7 @@ public class Perso {
      * @param dy position selon y
      */
     public Perso(int dx, int dy ) {
-        this.x = dx;
-        this.y = dy;
+        super(dx,dy);
         this.pv = 100;
     }
 
@@ -58,5 +57,9 @@ public class Perso {
 
     public int getPv(){
         return this.pv;
+    }
+
+    public void perdrePv(int degats){
+        this.pv -= degats;
     }
 }
