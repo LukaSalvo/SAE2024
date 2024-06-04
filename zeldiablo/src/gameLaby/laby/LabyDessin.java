@@ -83,6 +83,8 @@ public class LabyDessin implements DessinJeu {
             gc.setFill(Color.PURPLE);
             gc.fillOval(m.getX()*x, m.getY()*y,x,y);
         }
+    }
+    public static void DessinerCasePiège(LabyJeu game, GraphicsContext gc , int x , int y ){
 
     }
 }
