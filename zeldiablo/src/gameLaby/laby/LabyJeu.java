@@ -17,6 +17,8 @@ public class LabyJeu implements Jeu {
         this.labyrinthe = new Labyrinthe("labySimple/laby1.txt");
     }
 
+
+
     @Override
     public void update(double secondes, Clavier clavier) {
 

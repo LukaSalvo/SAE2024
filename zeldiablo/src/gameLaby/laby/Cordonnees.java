@@ -3,7 +3,7 @@ package gameLaby.laby;
 /**
  * class qui sera extends par toutes les classes auront des coordonnées
  */
-public class Cordonnées {
+public class Cordonnees {
     /**
      * Attributs qui sont les coordonnées X et Y
      */
@@ -15,7 +15,7 @@ public class Cordonnées {
      * @param x
      * @param y
      */
-    public Cordonnées(int x ,int y ){
+    public Cordonnees(int x , int y ){
         this.posX=x;
         this.posY=y;
     }

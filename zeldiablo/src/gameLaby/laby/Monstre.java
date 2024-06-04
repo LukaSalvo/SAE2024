@@ -12,10 +12,9 @@ public class Monstre {
     int x, y;
     int pv;
 
-    private static final int POINTDEVIEMONSTREENTIER = 75;
-    public static final int POINTDEVIEMONSTREDEMI = 50;
-    public static final int POINTDEVIEMONSTREQUART = 25;
-    public static final int POINTDEVIEMONSTREDEAD = 100;
+    public static final int POINTDEVIEMONSTREENTIER = 2;
+    public static final int POINTDEVIEMONSTREDEMI = 1;
+    public static final int POINTDEVIEMONSTREDEAD = 0;
 
 
     /**
@@ -38,13 +37,32 @@ public class Monstre {
      * @return true si le personnage est bien en (dx,dy)
      */
     public boolean etrePresent(int dx, int dy) {
-
         return (this.x == dx && this.y == dy);
     }
+
+    public int compterPercusionPerso(int dx, int dy){
+        int compteur = 0;
+        if (etrePresent()){
+            compteur =+ 1 ;
+            return compteur;
+        }
+        return compteur;
+    }
+
+
+    public void getVieApres2Percusion(){
+        int num = 0 ;
+        num = compterPercusionPerso();
+    }
+
 
     // ############################################
     // GETTER
     // ############################################
+
+
+
+
 
     /**
      * @return position x du personnage
