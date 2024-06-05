@@ -177,7 +177,10 @@ public class Labyrinthe {
             }
 
         }
-        listMonstre.removeIf(Monstre::estMort);
+
+
+
+
     }
 
     /**
