@@ -8,7 +8,7 @@ public class Monstre extends Personnage {
     /**
      * Constantes: PV_MONSTRE_ENTIER, PV_MONSTRE_DEMI, PV_MONSTRE_MORT
      */
-    public static final int PV_MONSTRE_ENTIER = 2;
+    public static final int PV_MONSTRE_ENTIER = 100;
     public static final int Pv_MONSTRE_DEMI = 1;
     public static final int PV_MONSTRE_MORT = 0;
 
