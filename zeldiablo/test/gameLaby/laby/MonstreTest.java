@@ -24,6 +24,13 @@ class MonstreTest {
                 res = true;
             }
             assertEquals(false,res);
+            res = false;
+            for(CasePieges c : laby.casesPieges){
+                if(c.etreSurMemeCase(x,y)){
+                    res =true;
+                }
+            }
+            assertEquals(false,res);
         }
     }
 }
