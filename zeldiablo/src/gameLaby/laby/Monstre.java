@@ -40,21 +40,6 @@ public class Monstre {
         return (this.x == dx && this.y == dy);
     }
 
-    public int compterPercusionPerso(int dx, int dy){
-        int compteur = 0;
-        if (etrePresent()){
-            compteur =+ 1 ;
-            return compteur;
-        }
-        return compteur;
-    }
-
-
-    public void getVieApres2Percusion(){
-        int num = 0 ;
-        num = compterPercusionPerso();
-    }
-
 
     // ############################################
     // GETTER
