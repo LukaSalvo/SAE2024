@@ -3,6 +3,7 @@ package GameLabyTest.laby;
 import static org.junit.jupiter.api.Assertions.*;
 
 import gameLaby.laby.Labyrinthe;
+import gameLaby.laby.Monstre;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -87,7 +88,6 @@ public class LabyrintheTest {
     }
 
 
-
     /**
      * Test deplacement aleatoire des monstres
      */
@@ -95,7 +95,6 @@ public class LabyrintheTest {
     // Test 1: a chaque evolution (temps) le monstre se deplace, que le joueur se deplace ou non
     // Test 4: A chaque evolution, tous les monstres tentent de se deplacer
     // Test 5 : L'interface graphique se met a jour en fonction des deplacements des monstres
-
     @Test
     public void testDeplacementAleatoireMonstre() {
         int monstreX = labyrinthe.listMonstre.get(0).getX();
@@ -116,7 +115,6 @@ public class LabyrintheTest {
      */
 
     //Test 3 Deux monstres ou un monstre et un joueur ne peuvent pas se trouver sur la meme case
-
     @Test
     public void testMonstreJoueurCollision() {
         int monstreX = labyrinthe.listMonstre.get(0).getX();
@@ -142,7 +140,6 @@ public class LabyrintheTest {
     //Test 2 : • Les monstres sont bloqués par les obstacles. S'ils ont choisi de se diriger vers un
     //obstacle (mur, joueur, ...), leur mouvement est alors annulé (sauf s'il s'agit de
     //fantômes).
-
     @Test
     public void testMonstreBloqueParObstacle() {
         int monstreX = labyrinthe.listMonstre.get(0).getX();
@@ -157,5 +154,17 @@ public class LabyrintheTest {
         assertEquals(monstreY, labyrinthe.listMonstre.get(0).getY());
     }
 
+    @Test
+    public void testNombreDeMonstreApresMort() {
+        int compteur = labyrinthe.listMonstre.size();
+        Monstre monstre = labyrinthe.listMonstre.get(0);
 
+        // Faire perdre tous ses PV au monstre
+        monstre.perdrePv(monstre.getPv());
+
+        labyrinthe.deplacerMonstre(monstre);
+
+        assertEquals(compteur -1, labyrinthe.listMonstre.size());
+
+    }
 }
