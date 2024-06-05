@@ -169,16 +169,20 @@ public class Labyrinthe {
         int[] suivante;
         boolean deplacementPossible = false;
 
-        while (!deplacementPossible) {
-            suivante = getSuivant(monstre.getX(), monstre.getY(), actions[rand.nextInt(actions.length)]);
-            if (deplacementPossible(suivante[0], suivante[1])) {
-                estSurCasePiege(suivante,monstre);
-                monstre.x = suivante[0];
-                monstre.y = suivante[1];
-                deplacementPossible = true;
+        if ((Math.abs(monstre.getX() - this.pj.getX()) == 1 && monstre.getY() == this.pj.getY()) ||
+        (Math.abs(monstre.getY() - this.pj.getY()) == 1 && monstre.getX() == this.pj.getX())) {
+            this.pj.perdrePv(1);
+        } else {
+            while (!deplacementPossible) {
+                suivante = getSuivant(monstre.getX(), monstre.getY(), actions[rand.nextInt(actions.length)]);
+                if (deplacementPossible(suivante[0], suivante[1])) {
+                    estSurCasePiege(suivante,monstre);
+                    monstre.x = suivante[0];
+                    monstre.y = suivante[1];
+                    deplacementPossible = true;
+                }
             }
         }
-
     }
 
     /**
