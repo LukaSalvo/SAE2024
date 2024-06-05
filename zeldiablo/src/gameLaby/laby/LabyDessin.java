@@ -23,7 +23,7 @@ public class LabyDessin implements DessinJeu {
 
     public static final Color bleuNoir = Color.DARKBLUE;
     public static final Color bleu = Color.BLUE;
-    public static final Color bleuCiel = Color.ALICEBLUE;
+    public static final Color bleuCiel = Color.SKYBLUE;
     public static final Color noir = Color.BLACK;
 
     /**
@@ -158,14 +158,12 @@ public class LabyDessin implements DessinJeu {
      * @return
      */
     private Color getMonstreColor(int pv) {
-        if (pv > 75) {
+        if (pv >= Monstre.PV_MONSTRE_ENTIER) {
             return bleuCiel;
-        } else if (pv > 50) {
+        } else if (pv >= Monstre.Pv_MONSTRE_DEMI) {
             return bleu;
-        } else if (pv > 25) {
+        } else{
             return bleuNoir;
-        } else {
-            return noir;
         }
     }
 }
