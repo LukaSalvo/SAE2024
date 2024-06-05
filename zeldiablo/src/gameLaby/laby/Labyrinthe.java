@@ -141,13 +141,17 @@ public class Labyrinthe {
     public void deplacerPerso(String action) {
         int[] suivante = getSuivant(this.pj.x, this.pj.y, action);
         if (deplacementPossible(suivante[0], suivante[1])) {
-            for (CasePieges c : casesPieges) {
-                if (c.etreSurMemeCase(suivante[0], suivante[1])) {
-                    pj.perdrePv(CasePieges.getDegats());
-                }
-            }
+            estSurCasePiege(suivante,pj);
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
+        }
+    }
+
+    private void estSurCasePiege(int[] suivante,Personnage p) {
+        for (CasePieges c : casesPieges) {
+            if (c.etreSurMemeCase(suivante[0], suivante[1])) {
+                p.perdrePv(CasePieges.getDegats());
+            }
         }
     }
 
@@ -166,21 +170,24 @@ public class Labyrinthe {
         while (!deplacementPossible) {
             suivante = getSuivant(monstre.getX(), monstre.getY(), actions[rand.nextInt(actions.length)]);
             if (deplacementPossible(suivante[0], suivante[1])) {
-                for (CasePieges c : casesPieges) {
-                    if (c.etreSurMemeCase(suivante[0], suivante[1])) {
-                        monstre.perdrePv(CasePieges.getDegats());
-                    }
-                }
+                estSurCasePiege(suivante,monstre);
                 monstre.x = suivante[0];
                 monstre.y = suivante[1];
                 deplacementPossible = true;
             }
-
         }
 
 
 
 
+    }
+
+    public void majEtatMonstre() {
+        for(Monstre m : listMonstre){
+            if(m.estMort()){
+                listMonstre.remove(m);
+            }
+        }
     }
 
     /**

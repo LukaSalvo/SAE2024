@@ -46,6 +46,7 @@ public class LabyJeu implements Jeu {
         else if(clavier.droite){
             labyrinthe.deplacerPerso(Labyrinthe.DROITE);
         }
+        labyrinthe.majEtatMonstre();
     }
 
     @Override
