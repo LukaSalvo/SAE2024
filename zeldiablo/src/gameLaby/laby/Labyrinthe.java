@@ -192,7 +192,16 @@ public class Labyrinthe {
         String[] actions = {HAUT,BAS,GAUCHE,DROITE};
         Random rand = new Random();
         int ind = rand.nextInt(actions.length);
+
         int[] suivante = getSuivant(courante[0], courante[1], actions[ind]);
+        for(Monstre m : listMonstre){
+            if(m.etrePresent(suivante[0] , suivante[1])){
+                monstre.perdrePv(CasePieges.getDegats());
+            }
+
+        }
+
+
 
         // si c'est pas un mur, on effectue le deplacement
         if (!this.murs[suivante[0]][suivante[1]]  && !this.pj.etrePresent(suivante[0],suivante[1]) && this.monstresPresent(suivante[0],suivante[1])) {

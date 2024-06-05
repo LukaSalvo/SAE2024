@@ -4,7 +4,7 @@ package gameLaby.laby;
 /**
  * gere un personnage situe en x,y
  */
-public class Monstre{
+public class Monstre {
 
     /**
      * position du personnage
@@ -24,8 +24,8 @@ public class Monstre{
      * @param dy position selon y
      */
     public Monstre(int dx, int dy) {
-        this.x=dx;
-        this.y=dy;
+        this.x = dx;
+        this.y = dy;
         this.pv = POINTDEVIEMONSTREENTIER;
     }
 
@@ -83,5 +83,10 @@ public class Monstre{
 
     public int getPv(){
         return this.pv;
+    }
+
+    public void perdrePv(int degats){
+        this.pv -= degats;
+
     }
 }
