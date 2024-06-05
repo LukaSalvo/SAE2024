@@ -6,6 +6,11 @@ import java.io.IOException;
  * charge et affiche un labyrinthe
  */
 public class Main {
+    /**
+     * methode principale, charge un labyrinthe et l'affiche
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
 
         // charge le labyrinthe

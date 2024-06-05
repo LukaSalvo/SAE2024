@@ -11,14 +11,27 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
+/**
+ * Classe de test pour la classe Labyrinthe
+ */
 public class LabyrintheTest {
+    /**
+     * Labyrinthe à tester
+     */
     private Labyrinthe labyrinthe;
 
+    /**
+     * Initialisation du labyrinthe
+     * @throws IOException
+     */
     @BeforeEach
     public void setUp() throws IOException {
         labyrinthe = new Labyrinthe("labySimple/laby1.txt");
     }
 
+    /**
+     * Test de la position initiale du Monstre
+     */
     @Test
     public void testMonstrePositionInitiale() {
         assertNotNull(labyrinthe.listMonstre.get(0));
@@ -30,6 +43,9 @@ public class LabyrintheTest {
         assertFalse(labyrinthe.pj.etrePresent(monstreX, monstreY));
     }
 
+    /**
+     * Test que le personnage ne peut pas se déplacer sur un monstre
+     */
     @Test
     public void testPersoNePeutPasSeDeplacerSurMonstre() {
         int monstreX = labyrinthe.listMonstre.get(0).getX();
@@ -49,6 +65,9 @@ public class LabyrintheTest {
         assertNotEquals(monstreY, labyrinthe.pj.getY());
     }
 
+    /**
+     * Test deplacement du monstre
+     */
     @Test
     public void testMonstreDeplacement() {
         int monstreX = labyrinthe.listMonstre.get(0).getX();
@@ -64,6 +83,9 @@ public class LabyrintheTest {
         assertFalse(labyrinthe.pj.etrePresent(nouveauMonstreX, nouveauMonstreY));
     }
 
+    /**
+     * Test si le personnage peut se deplacer
+     */
     @Test
     public void testPersoDeplacementValide() {
         int persoX = labyrinthe.pj.getX();
@@ -78,6 +100,9 @@ public class LabyrintheTest {
         assertEquals(persoY - 1, labyrinthe.pj.getY());
     }
 
+    /**
+     * Test si le personnage ne peut pas se deplacer sur un mur
+     */
     @Test
     public void testPersoNePeutPasTraverserMur() {
         int persoX = labyrinthe.pj.getX();
@@ -155,6 +180,11 @@ public class LabyrintheTest {
         assertEquals(monstreX, labyrinthe.listMonstre.get(0).getX());
         assertEquals(monstreY, labyrinthe.listMonstre.get(0).getY());
     }
+
+    /**
+     * Test de la mort d'un monstre (disparition de la liste)
+     * @throws IOException
+     */
 
     @Test
     public void testNombreDeMonstreApresMort() throws IOException {

@@ -179,11 +179,11 @@ public class Labyrinthe {
             majEtatMonstre();
         }
 
-
-
-
     }
 
+    /**
+     * Met à jour l'état des monstres (supprime les monstres morts)
+     */
     public void majEtatMonstre() {
         Iterator<Monstre> iterator = listMonstre.iterator();
         while(iterator.hasNext()){

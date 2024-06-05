@@ -2,6 +2,9 @@ package moteurJeu;
 
 import javafx.scene.input.KeyEvent;
 
+/**
+ * Classe pour les commandes du clavier
+ */
 public class Clavier {
 
     /**
