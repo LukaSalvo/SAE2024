@@ -129,7 +129,7 @@ public class Labyrinthe {
                 numeroLigne++;
             }
 
-            this.creerMonstres(NBMONSTRE,casesPieges);
+            this.creerMonstres(NBMONSTRE);
         }
     }
 
@@ -168,12 +168,10 @@ public class Labyrinthe {
         Random rand = new Random();
         int[] suivante;
         boolean deplacementPossible = false;
-        // Ajout de la fonctionnalité 5.1, si le monstre est à côté du personnage, il lui inflige 1 point de dégât
-        // Sinon, il se déplace aléatoirement
-        if ((Math.abs(monstre.getX() - this.pj.getX()) == 1 && monstre.getY() == this.pj.getY()) ||
-        (Math.abs(monstre.getY() - this.pj.getY()) == 1 && monstre.getX() == this.pj.getX())) {
-            this.pj.perdrePv(1);
-        } else {
+        // si le monstre est à côté du personnage, il lui inflige 1 point de dégât
+        if (pj.estAutour(monstre)) {
+            monstre.attaquer(pj);
+        } else { // Sinon, il se déplace aléatoirement
             while (!deplacementPossible) {
                 suivante = getSuivant(monstre.getX(), monstre.getY(), actions[rand.nextInt(actions.length)]);
                 if (deplacementPossible(suivante[0], suivante[1])) {
@@ -241,7 +239,7 @@ public class Labyrinthe {
      *
      * @param nb le nombre de monstres à créer
      */
-    public void creerMonstres(int nb,List<CasePieges> casesPieges) {
+    public void creerMonstres(int nb) {
         Random rand = new Random();
         for (int i = 0; i < nb; i++) {
             int posX = rand.nextInt(murs.length);
