@@ -1,6 +1,8 @@
 package gameLaby.laby;
 import moteurJeu.Clavier;
 import moteurJeu.Jeu;
+
+import javax.management.monitor.MonitorSettingException;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -57,16 +59,27 @@ public class LabyJeu implements Jeu {
         // Deplacement du personnage selon les touches utilisées
         if(clavier.haut){
             labyrinthe.deplacerPerso(Labyrinthe.HAUT);
+            clavier.haut = false;
         }
         else if(clavier.bas){
             labyrinthe.deplacerPerso(Labyrinthe.BAS);
+            clavier.bas = false;
         }
         else if(clavier.gauche){
             labyrinthe.deplacerPerso(Labyrinthe.GAUCHE);
+            clavier.gauche = false;
         }
         else if(clavier.droite){
             labyrinthe.deplacerPerso(Labyrinthe.DROITE);
+            clavier.droite = false;
         }
+        else if (clavier.space) {
+            for (Monstre m : labyrinthe.listMonstre){
+                labyrinthe.pj.attaquer(m);
+            }
+            clavier.space = false;
+        }
+
         labyrinthe.majEtatMonstre();
     }
 
