@@ -3,6 +3,7 @@ package gameLaby.laby;
 import moteurJeu.MoteurJeu;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 
 /**
  * classe principale pour lancer le jeu
@@ -26,6 +27,7 @@ public class MainLaby {
         MoteurJeu.setFPS(pFPS);
 
         MoteurJeu.launch(jeu,dessin);
+
     }
 
 }

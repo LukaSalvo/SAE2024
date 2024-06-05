@@ -35,4 +35,5 @@ public abstract class Personnage {
     public void perdrePv(int degats) {
         this.pv -= degats;
     }
+
 }

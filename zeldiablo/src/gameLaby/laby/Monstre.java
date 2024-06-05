@@ -8,4 +8,9 @@ public class Monstre extends Personnage {
     public Monstre(int dx, int dy) {
         super(dx, dy, PV_MONSTRE_ENTIER);
     }
+
+
+    public boolean estMort(){
+        return this.pv <= PV_MONSTRE_MORT;
+    }
 }

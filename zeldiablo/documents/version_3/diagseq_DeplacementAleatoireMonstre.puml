@@ -34,7 +34,7 @@ loop "tant que le jeu n'est pas fini"
     deactivate M
     La -> La : murs[suivante[0]][suivante[1]]
     activate La
-    La -->> La : return isWall
+    La -->> La : return estValide
     deactivate La
     La -> M : perdrePv(CasePieges.getDegats())
     activate M

@@ -31,9 +31,15 @@ public class Labyrinthe {
     public static final String GAUCHE = "Gauche";
     public static final String DROITE = "Droite";
 
+
+    public static final int NBMONSTRE = 3;
     /**
      * attribut du personnage
      */
+
+
+
+
     public Perso pj;
     public ArrayList<Monstre> listMonstre = new ArrayList<>();
 
@@ -122,7 +128,7 @@ public class Labyrinthe {
                 numeroLigne++;
             }
 
-            this.creerMonstres(3);
+            this.creerMonstres(NBMONSTRE);
         }
     }
 
@@ -134,7 +140,7 @@ public class Labyrinthe {
      */
     public void deplacerPerso(String action) {
         int[] suivante = getSuivant(this.pj.x, this.pj.y, action);
-        if (isDeplacementPossible(suivante[0], suivante[1])) {
+        if (deplacementPossible(suivante[0], suivante[1])) {
             for (CasePieges c : casesPieges) {
                 if (c.etreSurMemeCase(suivante[0], suivante[1])) {
                     pj.perdrePv(CasePieges.getDegats());
@@ -159,7 +165,7 @@ public class Labyrinthe {
 
         while (!deplacementPossible) {
             suivante = getSuivant(monstre.getX(), monstre.getY(), actions[rand.nextInt(actions.length)]);
-            if (isDeplacementPossible(suivante[0], suivante[1])) {
+            if (deplacementPossible(suivante[0], suivante[1])) {
                 for (CasePieges c : casesPieges) {
                     if (c.etreSurMemeCase(suivante[0], suivante[1])) {
                         monstre.perdrePv(CasePieges.getDegats());
@@ -169,7 +175,12 @@ public class Labyrinthe {
                 monstre.y = suivante[1];
                 deplacementPossible = true;
             }
+
         }
+
+
+
+
     }
 
     /**
@@ -179,8 +190,8 @@ public class Labyrinthe {
      * @param y coordonnée y de la case cible
      * @return true si le déplacement est possible, sinon false
      */
-    private boolean isDeplacementPossible(int x, int y) {
-        return isWithinBounds(x, y) && !murs[x][y] && !isEntityPresent(x, y);
+    private boolean deplacementPossible(int x, int y) {
+        return estValide(x, y) && !murs[x][y] && !personnagePresent(x, y);
     }
 
     /**
@@ -190,7 +201,7 @@ public class Labyrinthe {
      * @param y coordonnée y
      * @return true si les coordonnées sont valides, sinon false
      */
-    private boolean isWithinBounds(int x, int y) {
+    private boolean estValide(int x, int y) {
         return x >= 0 && x < murs.length && y >= 0 && y < murs[0].length;
     }
 
@@ -201,7 +212,7 @@ public class Labyrinthe {
      * @param y coordonnée y de la case
      * @return true si une entité est présente, sinon false
      */
-    private boolean isEntityPresent(int x, int y) {
+    private boolean personnagePresent(int x, int y) {
         if (pj.etrePresent(x, y)) return true;
         for (Monstre m : listMonstre) {
             if (m.etrePresent(x, y)) return true;
@@ -219,9 +230,9 @@ public class Labyrinthe {
         for (int i = 0; i < nb; i++) {
             int posX = rand.nextInt(murs.length);
             int posY = rand.nextInt(murs[0].length);
-            while (murs[posX][posY] || isEntityPresent(posX, posY)) {
+            while (murs[posX][posY] || personnagePresent(posX, posY)) {
                 posX = rand.nextInt(murs.length);
-                posY = rand.nextInt(murs[0].length);
+                posY =   rand.nextInt(murs[0].length);
             }
             this.listMonstre.add(new Monstre(posX, posY));
         }
