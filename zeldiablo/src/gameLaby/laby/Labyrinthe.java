@@ -176,7 +176,6 @@ public class Labyrinthe {
                 monstre.y = suivante[1];
                 deplacementPossible = true;
             }
-            majEtatMonstre();
         }
 
     }
