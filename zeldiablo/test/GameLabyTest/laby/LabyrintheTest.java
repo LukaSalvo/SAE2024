@@ -2,8 +2,10 @@ package GameLabyTest.laby;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import gameLaby.laby.LabyJeu;
 import gameLaby.laby.Labyrinthe;
 import gameLaby.laby.Monstre;
+import moteurJeu.Jeu;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -155,14 +157,17 @@ public class LabyrintheTest {
     }
 
     @Test
-    public void testNombreDeMonstreApresMort() {
+    public void testNombreDeMonstreApresMort() throws IOException {
+
         int compteur = labyrinthe.listMonstre.size();
         Monstre monstre = labyrinthe.listMonstre.get(0);
 
         // Faire perdre tous ses PV au monstre
         monstre.perdrePv(monstre.getPv());
 
+
         labyrinthe.deplacerMonstre(monstre);
+
 
         assertEquals(compteur -1, labyrinthe.listMonstre.size());
 

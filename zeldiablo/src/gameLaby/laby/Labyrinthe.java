@@ -3,6 +3,7 @@ package gameLaby.laby;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
@@ -175,6 +176,7 @@ public class Labyrinthe {
                 monstre.y = suivante[1];
                 deplacementPossible = true;
             }
+            majEtatMonstre();
         }
 
 
@@ -183,9 +185,11 @@ public class Labyrinthe {
     }
 
     public void majEtatMonstre() {
-        for(Monstre m : listMonstre){
+        Iterator<Monstre> iterator = listMonstre.iterator();
+        while(iterator.hasNext()){
+            Monstre m = iterator.next();
             if(m.estMort()){
-                listMonstre.remove(m);
+                iterator.remove(); // Supprimer l'élément actuel en utilisant l'itérateur
             }
         }
     }
