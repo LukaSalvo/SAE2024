@@ -8,6 +8,7 @@ public class CasePieges extends Cordonnees {
      * Attribut qui represente les degats infliges par les pieges
      */
     public static final int degats = 5;
+    private boolean etrePasserDessus;
 
     /**
      * Constructeur qui construit un objet avec les cordonnes en parametre
@@ -16,7 +17,7 @@ public class CasePieges extends Cordonnees {
      * @param y
      */
     public CasePieges(int x, int y) {
-        super(x, y);
+        super(x, y);this.etrePasserDessus=false;
     }
 
     /**
@@ -36,5 +37,13 @@ public class CasePieges extends Cordonnees {
      */
     public static int getDegats(){
         return degats;
+    }
+
+    public boolean getEtrePasserDessus(){
+        return this.etrePasserDessus;
+    }
+
+    public void setEtrePasserDessus(boolean n ){
+        this.etrePasserDessus = n;
     }
 }
