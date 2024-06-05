@@ -69,4 +69,9 @@ public class Monstre{
     public int getPv(){
         return this.pv;
     }
+
+    public void perdrePv(int degats){
+        this.pv -= degats;
+
+    }
 }

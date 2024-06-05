@@ -82,7 +82,7 @@ public class LabyDessin implements DessinJeu {
                         gc.setFill(rouge);
                     }
                     else{
-                        return;
+                        gc.setFill(noir);
                     }
                 }
             }
