@@ -46,15 +46,15 @@ public class LabyDessin implements DessinJeu {
 
         // Dessin du labyrinthe
         dessinerLabyrinthe(gc, game.getLabyrinthe().murs, x, y);
-
+        //Dessin cases pièges
+        dessinerCasesPieges(gc, game.getLabyrinthe().casesPieges, x, y);
         // Dessin du personnage
         dessinerPersonnage(gc, game.getLabyrinthe().pj, x, y);
 
         // Dessin des monstres
         dessinerMonstres(gc, game.getLabyrinthe().listMonstre, x, y);
 
-        // Dessin des cases pièges
-       dessinerCasesPieges(gc, game.getLabyrinthe().casesPieges, x, y);
+
     }
 
     /**
