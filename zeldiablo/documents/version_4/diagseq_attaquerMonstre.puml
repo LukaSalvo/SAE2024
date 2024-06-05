@@ -1,0 +1,74 @@
+@startuml
+participant "LabyJeu" as L
+participant "Timer" as T
+participant "Labyrinthe" as La
+participant "Monstre" as M
+participant "Random" as R
+participant "Personnage" as P
+
+L -> L : deplacerMonstre()
+activate L
+L -> T : scheduleAtFixedRate()
+activate T
+loop "tant que le jeu n'est pas fini"
+    T -> La : deplacerMonstre(monstre)
+    activate La
+    La -> M : getX()
+    activate M
+    M -->> La : return x
+    deactivate M
+    La -> M : getY()
+    activate M
+    M -->> La : return y
+    deactivate M
+    La -> P : getX()
+    activate P
+    P -->> La : return x
+    deactivate P
+    La -> P : getY()
+    activate P
+    P -->> La : return y
+    deactivate P
+    alt "si le monstre est à côté du joueur"
+        La -> P : perdrePv(1)
+        activate P
+        P -->> La : return
+        deactivate P
+    else "si le monstre n'est pas à côté du joueur"
+        La -> R : nextInt(actions.length)
+        activate R
+        R -->> La : return ind
+        deactivate R
+        La -> La : getSuivant(courante[0], courante[1], actions[ind])
+        activate La
+        La -->> La : return suivante
+        deactivate La
+        La -> M : etrePresent(suivante[0] , suivante[1])
+        activate M
+        M -->> La : return presence
+        deactivate M
+        La -> La : murs[suivante[0]][suivante[1]]
+        activate La
+        La -->> La : return estValide
+        deactivate La
+        La -> M : perdrePv(CasePieges.getDegats())
+        activate M
+        M -->> La : return
+        deactivate M
+        La -> M : setX(suivante[0])
+        activate M
+        M -->> La : return
+        deactivate M
+        La -> M : setY(suivante[1])
+        activate M
+        M -->> La : return
+        deactivate M
+    end
+    La -->> T : return
+    deactivate La
+end
+T -->> L : return
+deactivate T
+L -->> L : return
+deactivate L
+@enduml
