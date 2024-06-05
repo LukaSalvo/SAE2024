@@ -1,0 +1,34 @@
+@startuml
+participant Actor
+participant Labyrinthe
+participant CasePieges
+participant Cordonnees
+participant Personnage
+
+activate Actor
+Actor -> Labyrinthe : estSurCasePiege()
+activate Labyrinthe
+alt Si la case est piégée
+    Labyrinthe -> CasePieges : etreSurMemeCase(coordonnees)
+    activate CasePieges
+    CasePieges -> Cordonnees : etreSurMemeCase(coordonnees)
+    activate Cordonnees
+    Cordonnees --> CasePieges
+    deactivate Cordonnees
+    alt Si les coordonnées correspondent
+        CasePieges --> Labyrinthe : true
+        deactivate CasePieges
+        Labyrinthe -> Personnage : perdrePv(degats)
+        activate Personnage
+        Personnage --> Labyrinthe : pvMisAJour
+        deactivate Personnage
+    else Si les coordonnées ne correspondent pas
+        CasePieges --> Labyrinthe : false
+        deactivate CasePieges
+    end
+else Si la case n'est pas piégée
+    Labyrinthe --> Actor : false
+end
+deactivate Labyrinthe
+deactivate Actor
+@enduml
