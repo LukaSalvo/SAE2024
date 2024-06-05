@@ -1,92 +1,11 @@
 package gameLaby.laby;
 
+public class Monstre extends Personnage {
+    public static final int PV_MONSTRE_ENTIER = 2;
+    public static final int Pv_MONSTRE_DEMI = 1;
+    public static final int PV_MONSTRE_MORT = 0;
 
-/**
- * gere un personnage situe en x,y
- */
-public class Monstre {
-
-    /**
-     * position du personnage
-     */
-    int x, y;
-    int pv;
-
-    public static final int POINTDEVIEMONSTREENTIER = 2;
-    public static final int POINTDEVIEMONSTREDEMI = 1;
-    public static final int POINTDEVIEMONSTREDEAD = 0;
-
-
-    /**
-     * constructeur
-     *
-     * @param dx position selon x
-     * @param dy position selon y
-     */
     public Monstre(int dx, int dy) {
-        this.x = dx;
-        this.y = dy;
-        this.pv = POINTDEVIEMONSTREENTIER;
-    }
-
-    /**
-     * permet de savoir si le personnage est en x,y
-     *
-     * @param dx position testee
-     * @param dy position testee
-     * @return true si le personnage est bien en (dx,dy)
-     */
-    public boolean etrePresent(int dx, int dy) {
-        return (this.x == dx && this.y == dy);
-    }
-
-//    public int compterPercusionPerso(int dx, int dy){
-//        int compteur = 0;
-//        if (etrePresent()){
-//            compteur =+ 1 ;
-//            return compteur;
-//        }
-//        return compteur;
-//    }
-
-
-//    public void getVieApres2Percusion(){
-//        int num = 0 ;
-//        num = compterPercusionPerso();
-//    }
-
-
-    // ############################################
-    // GETTER
-    // ############################################
-
-
-
-
-
-    /**
-     * @return position x du personnage
-     */
-    public int getX() {
-        // getter
-        return this.x;
-    }
-
-    /**
-     * @return position y du personnage
-     */
-    public int getY() {
-        //getter
-        return this.y;
-    }
-
-
-    public int getPv(){
-        return this.pv;
-    }
-
-    public void perdrePv(int degats){
-        this.pv -= degats;
-
+        super(dx, dy, PV_MONSTRE_ENTIER);
     }
 }

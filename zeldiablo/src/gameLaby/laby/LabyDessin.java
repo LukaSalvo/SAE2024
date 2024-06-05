@@ -85,13 +85,13 @@ public class LabyDessin implements DessinJeu {
     }
 
     private Color getPersonnageColor(int pv) {
-        if (pv >= Perso.POINTDEVIEPERSOENTIER) {
+        if (pv >= Perso.PV_ENTIER) {
             return vert;
-        } else if (pv > Perso.POINTDEVIEPERSO3QUART) {
+        } else if (pv > Perso.PV_3_QUART) {
             return jaune;
-        } else if (pv > Perso.POINTDEVIEPERSODEMI) {
+        } else if (pv > Perso.PV_DEMI) {
             return orange;
-        } else if (pv > Perso.POINTDEVIEPERSO1QUART) {
+        } else if (pv > Perso.PV_1_QUART) {
             return rouge;
         } else {
             return noir;
