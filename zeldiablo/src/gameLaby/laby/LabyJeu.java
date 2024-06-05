@@ -44,7 +44,7 @@ public class LabyJeu implements Jeu {
                     for(Monstre m: labyrinthe.listMonstre)
                         labyrinthe.deplacerMonstre(m);
                 }
-            }, 0, 5000);
+            }, 5000, 5000);
         });
         monsterThread.start();
     }
