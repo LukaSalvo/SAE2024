@@ -148,7 +148,7 @@ public class Labyrinthe {
         }
     }
 
-    private void estSurCasePiege(int[] suivante,Personnage p) {
+    public void estSurCasePiege(int[] suivante, Personnage p) {
         for (CasePieges c : casesPieges) {
             if (c.etreSurMemeCase(suivante[0], suivante[1])) {
                 p.perdrePv(CasePieges.getDegats());
@@ -223,7 +223,7 @@ public class Labyrinthe {
      * @param y coordonnée y de la case
      * @return true si une entité est présente, sinon false
      */
-    private boolean personnagePresent(int x, int y) {
+    public boolean personnagePresent(int x, int y) {
         if (pj.etrePresent(x, y)) return true;
         for (Monstre m : listMonstre) {
             if (m.etrePresent(x, y)) return true;

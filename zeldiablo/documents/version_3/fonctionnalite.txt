@@ -1,0 +1,47 @@
+Idée Ryan:
+1. Génération de monstres immobiles 
+- Descriptif :
+  - Au lancement du jeu, le jeu ajoute différents monstres dans l'environnement. Les monstres restent immobiles.
+- Critères de validation :
+  - Il est possible de construire un labyrinthe par défaut contenant quelques monstres (le labyrinthe par défaut est à définir).
+  - Les monstres sont créés sur des cases vides.
+  - Il n'est pas possible de générer des monstres sur des cases non vides (position du joueur, d'autres monstres ou de murs).
+  - Les monstres doivent apparaître dans l'interface graphique sous la forme d'un cercle rouge.
+  - Les monstres ne se déplacent pas (mais attaquent éventuellement le héros s'il passe à proximité - cf taches attaque dans les parties suivantes).
+Idée Ryan :
+2. Déplacement aléatoire des monstres :
+- Descriptif :
+  - Régulièrement, le jeu demande aux monstres de se déplacer dans une direction aléatoire.
+- Critères de validation :
+  - À chaque évolution du jeu, que le joueur se déplace ou non, les monstres se déplacent.
+  - Les monstres sont bloqués par les obstacles. S'ils ont choisi de se diriger vers un obstacle (mur, joueur, ...), leur mouvement est alors annulé (sauf s'il s'agit de fantômes).
+  - Deux monstres ou un monstre et un joueur ne peuvent pas se trouver sur la même case (Si la tache Collision entre monstre est fonctionnelle).
+  - À chaque évolution, tous les monstres tentent de se déplacer.
+  - L'interface graphique se met à jour en fonction des déplacements des Monstres.
+
+Idée Amin:
+3. Cases piégées 
+- Descriptif :
+  - Lorsqu'une entité (héros ou monstre) arrive sur une case piégée, il subit des dégâts.
+- Critères de validation :
+  - Les dégâts ne se déclenchent que lorsque le joueur arrive sur la case, il peut ensuite rester sur cette case aussi longtemps qu'il le souhaite sans subir d'autres dégâts.
+  - Lorsque la case devient à nouveau vide, le piège se transforme.
+  - (Optionnel) Lorsqu'une case a été détectée comme un piège, elle s'achète différemment dans le labyrinthe (en brun) ce qui permet au joueur d'en tenir compte ensuite.
+
+Idée Louka:
+4. Mort des monstres 
+- Descriptif :
+  - Lorsqu'un monstre n'a plus de points de vie, il meurt et disparaît du jeu.
+- Critères de validation :
+  - Lorsqu'un monstre par défaut est touché deux fois, il disparaît.
+  - Le héros attaque avant le monstre, si le monstre meurt, le monstre n'a pas le temps de répliquer et disparaît avant.
+
+Idée Benjamin : 
+5. Collision avec un monstre
+- Descriptif :
+  - Lorsque le joueur demande au personnage de se déplacer vers une case contenant un monstre, le personnage ne se déplace pas.
+- Critères de validation :
+  - La collision fonctionne dans les 4 directions.
+  - Si la case est vide, le personnage avance.
+
+

@@ -55,6 +55,13 @@
         public int getY() {
             return this.y;
         }
+        public void setY(int y){
+            this.y =y;
+        }
+
+        public void setX(int x){
+            this.x = x;
+        }
 
         /**
          * Guetteur des points de vie

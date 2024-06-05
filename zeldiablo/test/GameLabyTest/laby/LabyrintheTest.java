@@ -2,6 +2,7 @@ package GameLabyTest.laby;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import gameLaby.laby.CasePieges;
 import gameLaby.laby.LabyJeu;
 import gameLaby.laby.Labyrinthe;
 import gameLaby.laby.Monstre;
@@ -81,6 +82,23 @@ public class LabyrintheTest {
         assertTrue(Math.abs(nouveauMonstreX - monstreX) <= 1 && Math.abs(nouveauMonstreY - monstreY) <= 1);
         assertFalse(labyrinthe.getMur(nouveauMonstreX, nouveauMonstreY));
         assertFalse(labyrinthe.pj.etrePresent(nouveauMonstreX, nouveauMonstreY));
+    }
+    @Test
+    public void testMonstreDeplacement2() {
+        Monstre monstre = labyrinthe.listMonstre.get(0);
+        int monstreX = monstre.getX();
+        int monstreY = monstre.getY();
+
+        labyrinthe.deplacerMonstre(monstre);
+
+        int nouveauMonstreX = monstre.getX();
+        int nouveauMonstreY = monstre.getY();
+
+        assertFalse(monstreX == nouveauMonstreX && monstreY == nouveauMonstreY);
+
+        assertFalse(labyrinthe.getMur(nouveauMonstreX, nouveauMonstreY));
+
+        assertFalse(labyrinthe.personnagePresent(nouveauMonstreX, nouveauMonstreY) && !monstre.etrePresent(nouveauMonstreX, nouveauMonstreY));
     }
 
     /**
@@ -200,6 +218,41 @@ public class LabyrintheTest {
 
 
         assertEquals(compteur -1, labyrinthe.listMonstre.size());
+    }
+    @Test
+    public void testMonstreSurCasePiege() {
 
+        assertTrue(!labyrinthe.listMonstre.isEmpty());
+        assertTrue(!labyrinthe.casesPieges.isEmpty());
+
+        Monstre monstre = labyrinthe.listMonstre.get(0);
+        CasePieges casePiege = labyrinthe.casesPieges.get(0);
+
+        int pvInitiaux = monstre.getPv();
+
+        monstre.setX(casePiege.getPosX());
+        monstre.setY(casePiege.getPosY());
+
+        labyrinthe.estSurCasePiege(new int[]{monstre.getX(), monstre.getY()}, monstre);
+
+        assertTrue(monstre.getPv() < pvInitiaux);
+    }
+
+
+    @Test
+    public void testPersonnageSurCasePiege() {
+        assertNotNull(labyrinthe.pj);
+        assertTrue(!labyrinthe.casesPieges.isEmpty());
+
+        CasePieges casePiege = labyrinthe.casesPieges.get(0);
+
+        int pvInitiaux = labyrinthe.pj.getPv();
+
+        labyrinthe.pj.setX(casePiege.getPosX());
+        labyrinthe.pj.setY(casePiege.getPosY());
+
+        labyrinthe.estSurCasePiege(new int[]{labyrinthe.pj.getX(), labyrinthe.pj.getY()}, labyrinthe.pj);
+
+        assertTrue(labyrinthe.pj.getPv() < pvInitiaux);
     }
 }
