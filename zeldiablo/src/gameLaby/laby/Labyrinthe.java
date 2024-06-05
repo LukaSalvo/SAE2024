@@ -129,7 +129,7 @@ public class Labyrinthe {
                 numeroLigne++;
             }
 
-            this.creerMonstres(NBMONSTRE);
+            this.creerMonstres(NBMONSTRE,casesPieges);
         }
     }
 
@@ -151,6 +151,7 @@ public class Labyrinthe {
     public void estSurCasePiege(int[] suivante, Personnage p) {
         for (CasePieges c : casesPieges) {
             if (c.etreSurMemeCase(suivante[0], suivante[1])) {
+                c.setEtrePasserDessus(true);
                 p.perdrePv(CasePieges.getDegats());
             }
         }
@@ -167,7 +168,8 @@ public class Labyrinthe {
         Random rand = new Random();
         int[] suivante;
         boolean deplacementPossible = false;
-
+        // Ajout de la fonctionnalité 5.1, si le monstre est à côté du personnage, il lui inflige 1 point de dégât
+        // Sinon, il se déplace aléatoirement
         if ((Math.abs(monstre.getX() - this.pj.getX()) == 1 && monstre.getY() == this.pj.getY()) ||
         (Math.abs(monstre.getY() - this.pj.getY()) == 1 && monstre.getX() == this.pj.getX())) {
             this.pj.perdrePv(1);
@@ -239,14 +241,38 @@ public class Labyrinthe {
      *
      * @param nb le nombre de monstres à créer
      */
-    public void creerMonstres(int nb) {
+    public void creerMonstres(int nb,List<CasePieges> casesPieges) {
         Random rand = new Random();
         for (int i = 0; i < nb; i++) {
             int posX = rand.nextInt(murs.length);
             int posY = rand.nextInt(murs[0].length);
-            while (murs[posX][posY] || personnagePresent(posX, posY)) {
-                posX = rand.nextInt(murs.length);
-                posY =   rand.nextInt(murs[0].length);
+            boolean arret = false;
+            while(!arret){
+                if(casesPieges != null){
+                    boolean stop = false;
+                    while(!stop){
+                        int j = 0 ;
+                        int indic = 0 ;
+                        while(j<casesPieges.size()){
+                            if(casesPieges.get(j).etreSurMemeCase(posX,posY)){
+                                indic ++;
+                            }
+                            j++;
+                        }
+                        if(indic<=0){
+                            stop=true;
+                        }else{
+                             posX = rand.nextInt(murs.length);
+                             posY = rand.nextInt(murs[0].length);
+                        }
+                    }
+                }
+                if(!murs[posX][posY] && !personnagePresent(posX,posY)){
+                    arret=true;
+                }else{
+                    posX = rand.nextInt(murs.length);
+                    posY = rand.nextInt(murs[0].length);
+                }
             }
             this.listMonstre.add(new Monstre(posX, posY));
         }
