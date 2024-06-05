@@ -54,7 +54,7 @@ public class LabyDessin implements DessinJeu {
         dessinerMonstres(gc, game.getLabyrinthe().listMonstre, x, y);
 
         // Dessin des cases pièges
-//        dessinerCasesPieges(gc, game.getLabyrinthe().casesPieges, x, y);
+       dessinerCasesPieges(gc, game.getLabyrinthe().casesPieges, x, y);
     }
 
     /**
@@ -112,8 +112,10 @@ public class LabyDessin implements DessinJeu {
      */
     private void dessinerCasesPieges(GraphicsContext gc, List<CasePieges> casesPieges, int x, int y) {
         for (CasePieges c : casesPieges) {
+            if(c.getEtrePasserDessus()){
             gc.setFill(Color.BROWN);
             gc.fillRect(c.getPosX() * x, c.getPosY() * y, x, y);
+            }
         }
     }
 
