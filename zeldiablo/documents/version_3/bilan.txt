@@ -1,4 +1,4 @@
-Bilan de l'État de l'Application et Difficultés Rencontrées 
+Version 3.0 : Bilan de l'État de l'Application et Difficultés Rencontrées 
 
 État de l'Application : 
 	L'application a atteint plusieurs objectifs fonctionnels. Notamment, la fonctionnalité de déplacement aléatoire des monstres,
