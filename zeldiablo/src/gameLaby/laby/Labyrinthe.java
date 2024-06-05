@@ -31,9 +31,15 @@ public class Labyrinthe {
     public static final String GAUCHE = "Gauche";
     public static final String DROITE = "Droite";
 
+
+    public static final int NBMONSTRE = 3;
     /**
      * attribut du personnage
      */
+
+
+
+
     public Perso pj;
     public ArrayList<Monstre> listMonstre = new ArrayList<>();
 
@@ -122,7 +128,7 @@ public class Labyrinthe {
                 numeroLigne++;
             }
 
-            this.creerMonstres(3);
+            this.creerMonstres(NBMONSTRE);
         }
     }
 
@@ -169,7 +175,12 @@ public class Labyrinthe {
                 monstre.y = suivante[1];
                 deplacementPossible = true;
             }
+
         }
+
+
+
+
     }
 
     /**

@@ -65,8 +65,10 @@ public class LabyDessin implements DessinJeu {
 
     private void dessinerMonstres(GraphicsContext gc, List<Monstre> monstres, int x, int y) {
         for (Monstre monstre : monstres) {
-            gc.setFill(getMonstreColor(monstre.getPv()));
-            dessinerEntite(gc, monstre.getX(), monstre.getY(), x, y, monstre.getPv());
+            if(!monstre.estMort()) {
+                gc.setFill(getMonstreColor(monstre.getPv()));
+                dessinerEntite(gc, monstre.getX(), monstre.getY(), x, y, monstre.getPv());
+            }
         }
     }
 
@@ -110,3 +112,6 @@ public class LabyDessin implements DessinJeu {
         }
     }
 }
+
+
+
