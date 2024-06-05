@@ -23,6 +23,8 @@ public class Labyrinthe {
     public static final char MONSTRE = 'M';
     public static final char VIDE = '.';
 
+    public static final char C = 'c';
+
     /**
      * constantes actions possibles
      */
@@ -100,6 +102,7 @@ public class Labyrinthe {
         // creation labyrinthe vide
         this.murs = new boolean[nbColonnes][nbLignes];
         this.pj = null;
+        this.CasesPieges=new ArrayList<>();
 
         // lecture des cases
         String ligne = bfRead.readLine();
@@ -120,10 +123,15 @@ public class Labyrinthe {
                     case VIDE:
                         this.murs[colonne][numeroLigne] = false;
                         break;
+                    case C:
+                        this.murs[colonne][numeroLigne]=false;
+                        this.CasesPieges.add(new CasePieges(colonne,numeroLigne));
+                        break;
                     case MONSTRE:
                         // ajoute monstre
                         this.murs[colonne][numeroLigne] = false;
                         this.listMonstre.add(new Monstre(colonne, numeroLigne));
+                        break;
                     case PJ:
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
@@ -157,15 +165,17 @@ public class Labyrinthe {
 
         // calcule case suivante
         int[] suivante = getSuivant(courante[0], courante[1], action);
+        for(CasePieges c : CasesPieges){
+            if(c.etreSurMemeCase(suivante[0],suivante[1])){
+                pj.perdrePv(CasePieges.getDegats());
+            }
+        }
 
         // si c'est pas un mur, on effectue le deplacement
         if (!this.murs[suivante[0]][suivante[1]] && this.monstresPresent(suivante[0],suivante[1])) {
             // on met a jour personnage
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
-            for (int i=0;i<listMonstre.size();i++){
-                deplacerMonstre(listMonstre.get(i));
-            }
 
 
         }
@@ -175,7 +185,7 @@ public class Labyrinthe {
      * deplace le Monstre en fonction de l'action.
      * gere la collision avec les murs
      *
-     * @param action une des actions possibles
+     * @param monstre
      */
     public void deplacerMonstre(Monstre monstre) {
         int[] courante = {monstre.getX(), monstre.getY()};

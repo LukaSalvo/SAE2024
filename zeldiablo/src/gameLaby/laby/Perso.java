@@ -25,8 +25,8 @@ public class Perso {
      * @param dy position selon y
      */
     public Perso(int dx, int dy ) {
-        this.x = dx;
-        this.y = dy;
+        this.x=dx;
+        this.y=dy;
         this.pv = POINTDEVIEPERSOENTIER;
     }
 
@@ -63,5 +63,9 @@ public class Perso {
 
     public int getPv(){
         return this.pv;
+    }
+
+    public void perdrePv(int degats){
+        this.pv -= degats;
     }
 }

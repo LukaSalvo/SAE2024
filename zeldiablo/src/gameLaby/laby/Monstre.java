@@ -4,7 +4,7 @@ package gameLaby.laby;
 /**
  * gere un personnage situe en x,y
  */
-public class Monstre {
+public class Monstre{
 
     /**
      * position du personnage
@@ -24,8 +24,8 @@ public class Monstre {
      * @param dy position selon y
      */
     public Monstre(int dx, int dy) {
-        this.x = dx;
-        this.y = dy;
+        this.x=dx;
+        this.y=dy;
         this.pv = POINTDEVIEMONSTREENTIER;
     }
 
@@ -40,20 +40,20 @@ public class Monstre {
         return (this.x == dx && this.y == dy);
     }
 
-    public int compterPercusionPerso(int dx, int dy){
-        int compteur = 0;
-        if (etrePresent()){
-            compteur =+ 1 ;
-            return compteur;
-        }
-        return compteur;
-    }
+//    public int compterPercusionPerso(int dx, int dy){
+//        int compteur = 0;
+//        if (etrePresent()){
+//            compteur =+ 1 ;
+//            return compteur;
+//        }
+//        return compteur;
+//    }
 
 
-    public void getVieApres2Percusion(){
-        int num = 0 ;
-        num = compterPercusionPerso();
-    }
+//    public void getVieApres2Percusion(){
+//        int num = 0 ;
+//        num = compterPercusionPerso();
+//    }
 
 
     // ############################################
