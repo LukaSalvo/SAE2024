@@ -254,6 +254,10 @@ public class LabyrintheTest {
         assertTrue(labyrinthe.pj.getPv() < pvInitiaux);
     }
 
+    /**
+     * Test de la perte de points de vie du personnage (infligés par un monstre)
+     * @throws IOException
+     */
 
     @Test
     public void testMonstreInfligeDegatsaPerso() throws IOException {
