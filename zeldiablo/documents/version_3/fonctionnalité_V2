@@ -1,0 +1,5 @@
+1ère Iteration
+05-06-2024
+
+On a commencé sur la base existante a implementer deux nouvelles fonctionnalités, le deplacement aleatoire des montres (fonctionnalité 2.2)
+ainsi que des cases piegès (fonctionnalité 1.5). On a aussi ajouté des tests unitaires pour ces deux nouvelles fonctionnalités.
