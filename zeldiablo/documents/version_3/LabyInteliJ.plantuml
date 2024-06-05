@@ -81,8 +81,8 @@ class Labyrinthe {
   + creerMonstres(int): void
   + getMur(int, int): boolean
   - deplacementPossible(int, int): boolean
-  - personnagePresent(int, int): boolean
-  - estSurCasePiege(int[], Personnage): void
+  + personnagePresent(int, int): boolean
+  + estSurCasePiege(int[], Personnage): void
   + getLength(): int
   + deplacerMonstre(Monstre): void
   + deplacerPerso(String): void
@@ -126,8 +126,10 @@ class Personnage {
   + PV_ENTIER: int
   + PV_3_QUART: int
   + etrePresent(int, int): boolean
-  + getPv(): int
+  + setY(int): void
   + getY(): int
+  + getPv(): int
+  + setX(int): void
   + perdrePv(int): void
   + getX(): int
 }
