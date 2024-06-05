@@ -1,0 +1,28 @@
+@startuml
+participant Actor
+Actor -> Labyrinthe : creerMonstres
+activate Labyrinthe
+Labyrinthe -> Labyrinthe : personnagePresent
+activate Labyrinthe
+Labyrinthe -> Personnage : etrePresent
+activate Personnage
+Personnage --> Labyrinthe
+deactivate Personnage
+Labyrinthe -> Personnage : etrePresent
+activate Personnage
+Personnage --> Labyrinthe
+deactivate Personnage
+Labyrinthe --> Labyrinthe
+deactivate Labyrinthe
+create Monstre
+Labyrinthe -> Monstre : new
+activate Monstre
+create Personnage
+Monstre -> Personnage : new
+activate Personnage
+Personnage --> Monstre
+deactivate Personnage
+Monstre --> Labyrinthe
+deactivate Monstre
+return
+@enduml
