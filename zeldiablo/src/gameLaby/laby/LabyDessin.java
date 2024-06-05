@@ -60,6 +60,8 @@ public class LabyDessin implements DessinJeu {
         DessinerPersonnage(gc, game, x, y);
         // Dessin Mosntre
         DessinerMonstre(game, gc, x, y);
+        //Dessin cases pièges
+        DessinerCasePiège(game,gc,x,y);
 
     }
 
@@ -90,21 +92,23 @@ public class LabyDessin implements DessinJeu {
         gc.setFill(Color.WHITE);
         gc.setFont(new Font(20));
         gc.fillText(String.valueOf(perso.getPv()), perso.getX() * x + x / 4, perso.getY() * y + y / 2);
-
-
-        System.out.println(game.getLabyrinthe().listMonstre.size());
     }
 
     private static void DessinerMonstre(LabyJeu game, GraphicsContext gc, int x, int y) {
 
         for(Monstre m: game.getLabyrinthe().listMonstre){
-            if(m.getPv()>Monstre.POINTDEVIEMONSTREENTIER){
-                gc.setFill(bleu);
+            if(m.getPv()>75){
+                gc.setFill(bleuCiel);
             }else{
-                if(m.getPv()>Monstre.POINTDEVIEMONSTREDEMI){
-                    gc.setFill(bleuNoir);
+                if(m.getPv()>50){
+                    gc.setFill(bleu);
                 }else{
-                    return;
+                    if(m.getPv() > 25){
+                        gc.setFill(bleuNoir);
+                    }
+                    else{
+                        gc.setFill(noir);
+                    }
                 }
             }
             gc.fillOval(m.getX()*x, m.getY()*y,x,y);
@@ -114,7 +118,11 @@ public class LabyDessin implements DessinJeu {
             gc.setFont(new Font(20));
             gc.fillText(String.valueOf(m.getPv()), m.getX() * x + x / 4, m.getY() * y + y / 2);
         }
-
-
+    }
+    public static void DessinerCasePiège(LabyJeu game, GraphicsContext gc , int x , int y ){
+        for(CasePieges c : game.getLabyrinthe().CasesPieges){
+            gc.setFill(Color.BROWN);
+            gc.fillRect(c.getPosX()*x,c.getPosY()*y,x,y);
+        }
     }
 }

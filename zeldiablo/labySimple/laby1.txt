@@ -2,8 +2,8 @@
 10
 XXXXXXXXXX
 X.....XX.X
-X.XM.....X
-X......X.X
-X........X
+X.XM.c...X
+X..c...X.X
+X...c....X
 X..XXP...X
 XXXXXXXXXX
