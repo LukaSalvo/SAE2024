@@ -41,7 +41,7 @@ public class LabyDessin implements DessinJeu {
         dessinerPersonnage(gc, game.getLabyrinthe().pj, x, y);
 
         // Dessin des monstres
-        dessinerMonstres(gc, game.getLabyrinthe().listMonstre, x, y, this::getMonstreColor);
+        dessinerMonstres(gc, game.getLabyrinthe().listMonstre, x, y);
 
         // Dessin des cases pièges
         dessinerCasesPieges(gc, game.getLabyrinthe().casesPieges, x, y);
@@ -60,13 +60,13 @@ public class LabyDessin implements DessinJeu {
 
     private void dessinerPersonnage(GraphicsContext gc, Perso perso, int x, int y) {
         gc.setFill(getPersonnageColor(perso.getPv()));
-        dessinerMonstre(gc, perso.getX(), perso.getY(), x, y, perso.getPv());
+        dessinerEntite(gc, perso.getX(), perso.getY(), x, y, perso.getPv());
     }
 
-    private void dessinerMonstres(GraphicsContext gc, List<Monstre> monstres, int x, int y, ColorProvider colorProvider) {
+    private void dessinerMonstres(GraphicsContext gc, List<Monstre> monstres, int x, int y) {
         for (Monstre monstre : monstres) {
-            gc.setFill(colorProvider.getColor(monstre.getPv()));
-            dessinerMonstre(gc, monstre.getX(), monstre.getY(), x, y, monstre.getPv());
+            gc.setFill(getMonstreColor(monstre.getPv()));
+            dessinerEntite(gc, monstre.getX(), monstre.getY(), x, y, monstre.getPv());
         }
     }
 
@@ -77,7 +77,7 @@ public class LabyDessin implements DessinJeu {
         }
     }
 
-    private void dessinerMonstre(GraphicsContext gc, int x, int y, int cellWidth, int cellHeight, int pv) {
+    private void dessinerEntite(GraphicsContext gc, int x, int y, int cellWidth, int cellHeight, int pv) {
         gc.fillOval(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
         gc.setFill(Color.WHITE);
         gc.setFont(new Font(20));
@@ -108,10 +108,5 @@ public class LabyDessin implements DessinJeu {
         } else {
             return noir;
         }
-    }
-
-    @FunctionalInterface
-    interface ColorProvider {
-        Color getColor(int pv);
     }
 }
