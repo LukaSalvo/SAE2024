@@ -2,15 +2,13 @@ package GameLabyTest.laby;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import gameLaby.laby.CasePieges;
-import gameLaby.laby.LabyJeu;
-import gameLaby.laby.Labyrinthe;
-import gameLaby.laby.Monstre;
+import gameLaby.laby.*;
 import moteurJeu.Jeu;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Classe de test pour la classe Labyrinthe
@@ -254,5 +252,24 @@ public class LabyrintheTest {
         labyrinthe.estSurCasePiege(new int[]{labyrinthe.pj.getX(), labyrinthe.pj.getY()}, labyrinthe.pj);
 
         assertTrue(labyrinthe.pj.getPv() < pvInitiaux);
+    }
+
+
+    @Test
+    public void testMonstreInfligeDegatsaPerso() throws IOException {
+        Perso perso = new Perso(5, 5);
+        Monstre monstre = new Monstre(4, 5);
+        labyrinthe.pj = perso;
+        labyrinthe.listMonstre = new ArrayList<>();
+        labyrinthe.listMonstre.add(monstre);
+
+        int pvBase = perso.getPv();
+        labyrinthe.deplacerMonstre(monstre);
+
+        // Vérifier que le joueur a perdu 1 point de vie
+        assertEquals(pvBase - 1, perso.getPv());
+
+
+
     }
 }

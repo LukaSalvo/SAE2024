@@ -168,7 +168,8 @@ public class Labyrinthe {
         Random rand = new Random();
         int[] suivante;
         boolean deplacementPossible = false;
-
+        // Ajout de la fonctionnalité 5.1, si le monstre est à côté du personnage, il lui inflige 1 point de dégât
+        // Sinon, il se déplace aléatoirement
         if ((Math.abs(monstre.getX() - this.pj.getX()) == 1 && monstre.getY() == this.pj.getY()) ||
         (Math.abs(monstre.getY() - this.pj.getY()) == 1 && monstre.getX() == this.pj.getX())) {
             this.pj.perdrePv(1);
