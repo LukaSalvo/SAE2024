@@ -1,0 +1,155 @@
+@startuml
+title Labyrinthe de Jeu
+
+'''classes'''
+class CasePieges #pink {
+  + CasePieges(int, int): 
+  + degats: int
+  + etreSurMemeCase(int, int): boolean
+  + getDegats(): int
+}
+
+class Cordonnees #pink {
+  + Cordonnees(int, int): 
+  ~ posX: int
+  ~ posY: int
+  + setPosX(int): void
+  + setPosY(int): void
+  + getPosX(): int
+  + getPosY(): int
+  + etreSurMemeCase(int, int): boolean
+}
+
+interface DessinJeu << interface >> {
+  + dessinerJeu(Jeu, Canvas): void
+}
+
+interface Jeu << interface >> {
+  + etreFini(): boolean
+  + update(double, Clavier): void
+  + init(): void
+}
+
+class LabyDessin {
+  + LabyDessin(): 
+  + vert: Color
+  + noir: Color
+  + rouge: Color
+  + bleuNoir: Color
+  + orange: Color
+  + bleuCiel: Color
+  + jaune: Color
+  + bleu: Color
+  - getMonstreColor(int): Color
+  - dessinerMonstres(GraphicsContext, List<Monstre>, int, int): void
+  - dessinerCasesPieges(GraphicsContext, List<CasePieges>, int, int): void
+  + dessinerJeu(Jeu, Canvas): void
+  - dessinerEntite(GraphicsContext, int, int, int, int, int): void
+  - dessinerPersonnage(GraphicsContext, Perso, int, int): void
+  - dessinerLabyrinthe(GraphicsContext, boolean[][], int, int): void
+  - getPersonnageColor(int): Color
+}
+
+class LabyJeu {
+  + LabyJeu(): 
+  + WIDTH: int
+  + HEIGHT: int
+  - timer: Timer
+  - labyrinthe: Labyrinthe
+  + etreFini(): boolean
+  + update(double, Clavier): void
+  - deplacerMonstre(): void
+  + init(): void
+  + getLabyrinthe(): Labyrinthe
+}
+
+class Labyrinthe {
+  + Labyrinthe(String): 
+  + NBMONSTRE: int
+  + PJ: char
+  + BAS: String
+  + C: char
+  + MONSTRE: char
+  + murs: boolean[][]
+  + listMonstre: ArrayList<Monstre>
+  + VIDE: char
+  + MUR: char
+  + HAUT: String
+  + pj: Perso
+  + casesPieges: List<CasePieges>
+  + GAUCHE: String
+  + DROITE: String
+  + getLengthY(): int
+  + majEtatMonstre(): void
+  ~ getSuivant(int, int, String): int[]
+  + creerMonstres(int): void
+  + getMur(int, int): boolean
+  - deplacementPossible(int, int): boolean
+  - personnagePresent(int, int): boolean
+  - estSurCasePiege(int[], Personnage): void
+  + getLength(): int
+  + deplacerMonstre(Monstre): void
+  + deplacerPerso(String): void
+  - estValide(int, int): boolean
+  + etreFini(): boolean
+}
+
+class Monstre #pink {
+  + Monstre(int, int): 
+  + PV_MONSTRE_ENTIER: int
+  + PV_MONSTRE_MORT: int
+  + Pv_MONSTRE_DEMI: int
+  + estMort(): boolean
+}
+
+class MoteurJeu {
+  + MoteurJeu(): 
+  - frameStats: FrameStats
+  - jeu: Jeu
+  ~ controle: Clavier
+  - HEIGHT: double
+  - FPS: double
+  - WIDTH: double
+  - dessin: DessinJeu
+  - dureeFPS: double
+  + launch(Jeu, DessinJeu): void
+  + setTaille(double, double): void
+  - startAnimation(Canvas): void
+  + setFPS(int): void
+  + start(Stage): void
+}
+
+class Perso {
+  + Perso(int, int): 
+}
+
+class Personnage #pink {
+  + Personnage(int, int, int): 
+  # y: int
+  + PV_DEMI: int
+  + PV_MORT: int
+  # pv: int
+  + PV_1_QUART: int
+  # x: int
+  + PV_ENTIER: int
+  + PV_3_QUART: int
+  + etrePresent(int, int): boolean
+  + getPv(): int
+  + getY(): int
+  + perdrePv(int): void
+  + getX(): int
+}
+
+'''relations'''
+CasePieges  -[#000082,plain]-^  Cordonnees 
+LabyDessin  -[#008200,dashed]-^  DessinJeu  
+LabyJeu     -[#008200,dashed]-^  Jeu        
+LabyJeu    "1" *-[#595959,plain]-> "labyrinthe\n1" Labyrinthe 
+Labyrinthe "1" *-[#595959,plain]-> "casesPieges\n*" CasePieges 
+Labyrinthe "1" *-[#595959,plain]-> "listMonstre\n*" Monstre    
+Labyrinthe "1" *-[#595959,plain]-> "pj\n1" Perso      
+Monstre     -[#000082,plain]-^  Personnage 
+MoteurJeu  "1" *-[#595959,plain]-> "dessin\n1" DessinJeu  
+MoteurJeu  "1" *-[#595959,plain]-> "jeu\n1" Jeu        
+Perso       -[#000082,plain]-^  Personnage 
+@enduml
