@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -22,7 +21,6 @@ public class Labyrinthe {
     public static final char PJ = 'P';
     public static final char MONSTRE = 'M';
     public static final char VIDE = '.';
-
     public static final char C = 'c';
 
     /**
@@ -45,11 +43,12 @@ public class Labyrinthe {
     public boolean[][] murs;
 
     /**
-     *Liste de case pieges
+     * Liste de case pieges
      */
-    public List<CasePieges> CasesPieges ;
+    public List<CasePieges> casesPieges;
+
     /**
-     * retourne la case suivante selon une actions
+     * retourne la case suivante selon une action
      *
      * @param x      case depart
      * @param y      case depart
@@ -59,185 +58,174 @@ public class Labyrinthe {
     static int[] getSuivant(int x, int y, String action) {
         switch (action) {
             case HAUT:
-                // on monte une ligne
                 y--;
                 break;
             case BAS:
-                // on descend une ligne
                 y++;
                 break;
             case DROITE:
-                // on augmente colonne
                 x++;
                 break;
             case GAUCHE:
-                // on augmente colonne
                 x--;
                 break;
             default:
                 throw new Error("action inconnue");
         }
-        int[] res = {x, y};
-        return res;
+        return new int[]{x, y};
     }
 
     /**
      * charge le labyrinthe
      *
      * @param nom nom du fichier de labyrinthe
-     * @return labyrinthe cree
      * @throws IOException probleme a la lecture / ouverture
      */
     public Labyrinthe(String nom) throws IOException {
-        // ouvrir fichier
-        FileReader fichier = new FileReader(nom);
-        BufferedReader bfRead = new BufferedReader(fichier);
+        try (BufferedReader bfRead = new BufferedReader(new FileReader(nom))) {
+            int nbLignes = Integer.parseInt(bfRead.readLine());
+            int nbColonnes = Integer.parseInt(bfRead.readLine());
 
-        int nbLignes, nbColonnes;
-        // lecture nblignes
-        nbLignes = Integer.parseInt(bfRead.readLine());
-        // lecture nbcolonnes
-        nbColonnes = Integer.parseInt(bfRead.readLine());
+            this.murs = new boolean[nbColonnes][nbLignes];
+            this.pj = null;
+            this.casesPieges = new ArrayList<>();
 
-        // creation labyrinthe vide
-        this.murs = new boolean[nbColonnes][nbLignes];
-        this.pj = null;
-        this.CasesPieges=new ArrayList<>();
+            String ligne;
+            int numeroLigne = 0;
 
-        // lecture des cases
-        String ligne = bfRead.readLine();
-
-        // stocke les indices courants
-        int numeroLigne = 0;
-
-        // parcours le fichier
-        while (ligne != null) {
-
-            // parcours de la ligne
-            for (int colonne = 0; colonne < ligne.length(); colonne++) {
-                char c = ligne.charAt(colonne);
-                switch (c) {
-                    case MUR:
-                        this.murs[colonne][numeroLigne] = true;
-                        break;
-                    case VIDE:
-                        this.murs[colonne][numeroLigne] = false;
-                        break;
-                    case C:
-                        this.murs[colonne][numeroLigne]=false;
-                        this.CasesPieges.add(new CasePieges(colonne,numeroLigne));
-                        break;
-                    case MONSTRE:
-                        // ajoute monstre
-                        this.murs[colonne][numeroLigne] = false;
-                        this.listMonstre.add(new Monstre(colonne, numeroLigne));
-                        break;
-                    case PJ:
-                        // pas de mur
-                        this.murs[colonne][numeroLigne] = false;
-                        // ajoute PJ
-                        this.pj = new Perso(colonne, numeroLigne);
-                        break;
-                    default:
-                        throw new Error("caractere inconnu " + c);
+            while ((ligne = bfRead.readLine()) != null) {
+                for (int colonne = 0; colonne < ligne.length(); colonne++) {
+                    char c = ligne.charAt(colonne);
+                    switch (c) {
+                        case MUR:
+                            this.murs[colonne][numeroLigne] = true;
+                            break;
+                        case VIDE:
+                            this.murs[colonne][numeroLigne] = false;
+                            break;
+                        case C:
+                            this.murs[colonne][numeroLigne] = false;
+                            this.casesPieges.add(new CasePieges(colonne, numeroLigne));
+                            break;
+                        case MONSTRE:
+                            this.murs[colonne][numeroLigne] = false;
+                            this.listMonstre.add(new Monstre(colonne, numeroLigne));
+                            break;
+                        case PJ:
+                            this.murs[colonne][numeroLigne] = false;
+                            this.pj = new Perso(colonne, numeroLigne);
+                            break;
+                        default:
+                            throw new Error("caractere inconnu " + c);
+                    }
                 }
+                numeroLigne++;
             }
-            // lecture
-            ligne = bfRead.readLine();
-            numeroLigne++;
-        }
-        // Creation des monstre
-        this.creerMonstre(3);
-        // ferme fichier
-        bfRead.close();
-    }
 
+            this.creerMonstres(3);
+        }
+    }
 
     /**
      * deplace le personnage en fonction de l'action.
-     * gere la collision avec les murs
+     * gere la collision avec les murs et pieges
      *
      * @param action une des actions possibles
      */
     public void deplacerPerso(String action) {
-        // case courante
-        int[] courante = {this.pj.x, this.pj.y};
-
-        // calcule case suivante
-        int[] suivante = getSuivant(courante[0], courante[1], action);
-        for(CasePieges c : CasesPieges){
-            if(c.etreSurMemeCase(suivante[0],suivante[1])){
-                pj.perdrePv(CasePieges.getDegats());
+        int[] suivante = getSuivant(this.pj.x, this.pj.y, action);
+        if (isDeplacementPossible(suivante[0], suivante[1])) {
+            for (CasePieges c : casesPieges) {
+                if (c.etreSurMemeCase(suivante[0], suivante[1])) {
+                    pj.perdrePv(CasePieges.getDegats());
+                }
             }
-        }
-
-        // si c'est pas un mur, on effectue le deplacement
-        if (!this.murs[suivante[0]][suivante[1]] && this.monstresPresent(suivante[0],suivante[1])) {
-            // on met a jour personnage
             this.pj.x = suivante[0];
             this.pj.y = suivante[1];
-
-
         }
     }
 
     /**
-     * deplace le Monstre en fonction de l'action.
-     * gere la collision avec les murs
+     * deplace le Monstre de façon aléatoire.
+     * gere la collision avec les murs et les pieges
      *
-     * @param monstre
+     * @param monstre le monstre à déplacer
      */
     public void deplacerMonstre(Monstre monstre) {
-        int[] courante = {monstre.getX(), monstre.getY()};
-        String[] actions = {HAUT,BAS,GAUCHE,DROITE};
+        String[] actions = {HAUT, BAS, GAUCHE, DROITE};
         Random rand = new Random();
-        int ind = rand.nextInt(actions.length);
+        int[] suivante;
+        boolean deplacementPossible = false;
 
-        int[] suivante = getSuivant(courante[0], courante[1], actions[ind]);
-        for(Monstre m : listMonstre){
-            if(m.etrePresent(suivante[0] , suivante[1])){
-                monstre.perdrePv(CasePieges.getDegats());
+        while (!deplacementPossible) {
+            suivante = getSuivant(monstre.getX(), monstre.getY(), actions[rand.nextInt(actions.length)]);
+            if (isDeplacementPossible(suivante[0], suivante[1])) {
+                for (CasePieges c : casesPieges) {
+                    if (c.etreSurMemeCase(suivante[0], suivante[1])) {
+                        monstre.perdrePv(CasePieges.getDegats());
+                    }
+                }
+                monstre.x = suivante[0];
+                monstre.y = suivante[1];
+                deplacementPossible = true;
             }
-
-        }
-
-
-
-        // si c'est pas un mur, on effectue le deplacement
-        if (!this.murs[suivante[0]][suivante[1]]  && !this.pj.etrePresent(suivante[0],suivante[1]) && this.monstresPresent(suivante[0],suivante[1])) {
-            // on met a jour Mostre
-            monstre.x = suivante[0];
-            monstre.y = suivante[1];
         }
     }
 
-    public void creerMonstre(int nb){
+    /**
+     * Vérifie si le déplacement est possible (pas de mur et pas d'entité déjà présente)
+     *
+     * @param x coordonnée x de la case cible
+     * @param y coordonnée y de la case cible
+     * @return true si le déplacement est possible, sinon false
+     */
+    private boolean isDeplacementPossible(int x, int y) {
+        return isWithinBounds(x, y) && !murs[x][y] && !isEntityPresent(x, y);
+    }
+
+    /**
+     * Vérifie si les coordonnées sont dans les limites du labyrinthe
+     *
+     * @param x coordonnée x
+     * @param y coordonnée y
+     * @return true si les coordonnées sont valides, sinon false
+     */
+    private boolean isWithinBounds(int x, int y) {
+        return x >= 0 && x < murs.length && y >= 0 && y < murs[0].length;
+    }
+
+    /**
+     * Vérifie si une entité (personnage ou monstre) est présente à la case donnée
+     *
+     * @param x coordonnée x de la case
+     * @param y coordonnée y de la case
+     * @return true si une entité est présente, sinon false
+     */
+    private boolean isEntityPresent(int x, int y) {
+        if (pj.etrePresent(x, y)) return true;
+        for (Monstre m : listMonstre) {
+            if (m.etrePresent(x, y)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * Crée un nombre donné de monstres à des positions valides
+     *
+     * @param nb le nombre de monstres à créer
+     */
+    public void creerMonstres(int nb) {
         Random rand = new Random();
-        int poxX;
-        int poxY;
-        for(int i=0;i<nb;i++){
-            poxX = rand.nextInt(this.murs.length);
-            poxY = rand.nextInt(this.murs[0].length);
-            while (murs[poxX][poxY] || pj.etrePresent(poxX,poxY) || !monstresPresent(poxX,poxY)){
-                poxX = rand.nextInt(this.murs.length);
-                poxY = rand.nextInt(this.murs[0].length);
+        for (int i = 0; i < nb; i++) {
+            int posX = rand.nextInt(murs.length);
+            int posY = rand.nextInt(murs[0].length);
+            while (murs[posX][posY] || isEntityPresent(posX, posY)) {
+                posX = rand.nextInt(murs.length);
+                posY = rand.nextInt(murs[0].length);
             }
-            this.listMonstre.add(new Monstre(poxX,poxY));
+            this.listMonstre.add(new Monstre(posX, posY));
         }
     }
-
-    public boolean monstresPresent(int dx,int dy){
-        boolean res = true;
-        int ind =0;
-        int size = this.listMonstre.size();
-
-        while (ind<size && !this.listMonstre.get(ind).etrePresent(dx,dy)){
-            ind++;
-        }
-        return ind==size;
-    }
-
-
 
     /**
      * jamais fini
@@ -255,7 +243,7 @@ public class Labyrinthe {
     /**
      * return taille selon Y
      *
-     * @return
+     * @return taille selon Y
      */
     public int getLengthY() {
         return murs[0].length;
@@ -264,21 +252,20 @@ public class Labyrinthe {
     /**
      * return taille selon X
      *
-     * @return
+     * @return taille selon X
      */
     public int getLength() {
         return murs.length;
     }
 
     /**
-     * return mur en (i,j)
+     * return mur en (x,y)
      *
-     * @param x
-     * @param y
-     * @return
+     * @param x coordonnée x
+     * @param y coordonnée y
+     * @return true si mur, sinon false
      */
     public boolean getMur(int x, int y) {
-        // utilise le tableau de boolean
         return this.murs[x][y];
     }
 }
