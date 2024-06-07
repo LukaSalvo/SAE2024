@@ -137,6 +137,9 @@ public class Labyrinthe {
                 p.attaquer(pj, new AttaqueAlentour());
             }
         }
+        if(p instanceof Perso){
+            recupererAmulette();
+        }
     }
 
     /**
@@ -252,7 +255,7 @@ public class Labyrinthe {
 
 
     public void recupererAmulette(){
-        if(pj.etreSurMemeCase(1,1)){
+        if(pj.etreSurMemeCase(amu.getX(),amu.getY())){
             pj.setPossedeAmulette(true);
             amu = null;
         }
@@ -335,6 +338,10 @@ public class Labyrinthe {
      */
     public List<CasePieges> getCasesPieges() {
         return this.casesPieges;
+    }
+
+    public Amulette getAmulette(){
+        return this.amu;
     }
 
 }
