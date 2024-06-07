@@ -59,7 +59,7 @@ public class LabyDessin implements DessinJeu {
         // Dessin des monstres
         dessinerMonstres(gc, game.getLabyrinthe().getListMonstre(), x, y);
         //Dessin amulette
-        dessinerAmulette(gc,game.getLabyrinthe().getAmulette(),x,y);
+        dessinerAmulette(gc,game.getLabyrinthe().getAmulette(),game.getLabyrinthe().getPj(),x,y);
 
     }
 
@@ -126,8 +126,8 @@ public class LabyDessin implements DessinJeu {
         }
     }
 
-    public void dessinerAmulette(GraphicsContext gc, Amulette a , int x , int y ){
-        if(a!=null){
+    public void dessinerAmulette(GraphicsContext gc, Amulette a,Perso pj , int x , int y ){
+        if(!pj.getPossedeAmulette()){
             gc.setFill(Color.YELLOW);
             gc.fillOval(a.getX()*x,a.getY()*y,x,y);
         }
