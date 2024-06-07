@@ -9,15 +9,21 @@ MainLaby -> MoteurJeu: launch(LabyJeu, LabyDessin)
 activate MoteurJeu
     MoteurJeu -> LabyJeu: update()
 activate LabyJeu
-LabyJeu --> MoteurJeu: void
 LabyJeu -> LabyDessin: dessinerJeu(jeu, canvas)
 activate LabyDessin
 LabyDessin -> Canvas: getGraphicsContext2D()
+activate Canvas
 Canvas --> LabyDessin: GraphicsContext
+deactivate Canvas
 LabyDessin -> Canvas: fillOval(monstre.getX(), monstre.getY(), size, size)
+activate Canvas
 Canvas --> LabyDessin: void
+deactivate Canvas
+LabyDessin--> LabyJeu: void
 deactivate LabyDessin
+LabyJeu --> MoteurJeu: void
 deactivate LabyJeu
+MoteurJeu --> MainLaby : void
 deactivate MoteurJeu
 deactivate MainLaby
 @enduml
