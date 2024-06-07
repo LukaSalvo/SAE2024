@@ -59,7 +59,12 @@ public abstract class Personnage extends Coordonnees {
      * @param degats degats subis
      */
     public void perdrePv(int degats) {
-        this.pv -= degats;
+        if(!estMort()) {
+            this.pv -= degats;
+            if(this.pv < PV_MORT){
+                this.pv = PV_MORT;
+            }
+        }
     }
 
 
@@ -70,7 +75,9 @@ public abstract class Personnage extends Coordonnees {
      * @param typeAttaque type d'attaque
      */
     public void attaquer(Personnage p, TypeAttaque typeAttaque) {
-        typeAttaque.attaquer(this, p);
+        if (!estMort()){
+            typeAttaque.attaquer(this, p);
+        }
     }
 
 
@@ -132,6 +139,15 @@ public abstract class Personnage extends Coordonnees {
      */
     public String getAction() {
         return this.action;
+    }
+
+    /**
+     * Vérifie si le monstre est mort.
+     *
+     * @return true si le monstre est mort, false sinon.
+     */
+    public boolean estMort() {
+        return this.pv <= PV_MORT;
     }
 
 }
