@@ -1,0 +1,19 @@
+@startuml
+participant Actor
+participant Personnage
+participant Monstre
+Actor -> Personnage : appuie sur espace
+activate Personnage
+Personnage -> Personnage : estAutour(Monstre)
+activate Personnage
+Personnage --> Personnage : true
+deactivate Personnage
+Personnage -> Monstre : attaquer(Monstre)
+activate Monstre
+Monstre -> Monstre : perdrePv(1)
+deactivate Monstre
+Personnage -> Personnage : majEtatMonstre()
+activate Personnage
+Personnage --> Personnage : retourner
+deactivate Personnage
+@enduml

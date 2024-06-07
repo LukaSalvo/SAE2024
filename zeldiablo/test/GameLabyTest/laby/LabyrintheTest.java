@@ -211,8 +211,7 @@ public class LabyrintheTest {
         // Faire perdre tous ses PV au monstre
         monstre.perdrePv(monstre.getPv());
 
-
-        labyrinthe.deplacerMonstre(monstre);
+        labyrinthe.majEtatMonstre();
 
 
         assertEquals(compteur -1, labyrinthe.listMonstre.size());
@@ -254,6 +253,10 @@ public class LabyrintheTest {
         assertTrue(labyrinthe.pj.getPv() < pvInitiaux);
     }
 
+    /**
+     * Test de la perte de points de vie du personnage (infligés par un monstre)
+     * @throws IOException
+     */
 
     @Test
     public void testMonstreInfligeDegatsaPerso() throws IOException {
@@ -268,8 +271,68 @@ public class LabyrintheTest {
 
         // Vérifier que le joueur a perdu 1 point de vie
         assertEquals(pvBase - 1, perso.getPv());
+    }
+    @Test
+    public void testMonstreAttaqueBougePas() throws IOException {
+        Perso perso = new Perso(5, 5);
+        Monstre monstre = new Monstre(4, 5);
+        labyrinthe.pj = perso;
+        labyrinthe.listMonstre = new ArrayList<>();
+        labyrinthe.listMonstre.add(monstre);
 
 
+        int pvBase = perso.getPv();
+        labyrinthe.deplacerMonstre(monstre);
 
+        // Vérifier que le joueur a perdu 1 point de vie
+        assertEquals(pvBase - 1, perso.getPv());
+    }
+    @Test
+    public void testAttaquerMonstrePasAlentour() {
+        Monstre monstre = labyrinthe.listMonstre.get(0);
+        Perso perso = labyrinthe.pj;
+
+        int pvMonstre = monstre.getPv();
+        perso.attaquer(monstre);
+
+        assertEquals(pvMonstre, monstre.getPv());
+    }
+    @Test
+    public void testAttaquerMonstre1Alentour() {
+        Monstre monstre = labyrinthe.listMonstre.get(0);
+
+        Perso perso = labyrinthe.pj;
+
+        monstre.setX(perso.getX()+1);
+        monstre.setY(perso.getY());
+
+        int pvMonstre = monstre.getPv();
+        perso.attaquer(monstre);
+
+        assertEquals(pvMonstre-1, monstre.getPv());
+    }
+    @Test
+    public void testAttaquerMonstre2Alentour() {
+        labyrinthe.creerMonstres(1);
+
+
+        Perso perso = labyrinthe.pj;
+        Monstre monstre = labyrinthe.listMonstre.get(0);
+        Monstre monstre2 = labyrinthe.listMonstre.get(1);
+
+        monstre.setX(perso.getX()+1);
+        monstre.setY(perso.getY());
+
+        monstre2.setX(perso.getX());
+        monstre2.setY(perso.getY()+1);
+
+        int pvMonstre = monstre.getPv();
+        int pvMonstre2 = monstre2.getPv();
+
+        perso.attaquer(monstre);
+        perso.attaquer(monstre2);
+
+        assertEquals(pvMonstre-1, monstre.getPv());
+        assertEquals(pvMonstre2-1, monstre2.getPv());
     }
 }

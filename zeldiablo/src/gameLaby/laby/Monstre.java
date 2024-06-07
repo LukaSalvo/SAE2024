@@ -1,31 +1,46 @@
 package gameLaby.laby;
 
 /**
- * Classe Monstre qui herite de la classe Personnage, representant le monstre du jeu
-
+ * Classe représentant un monstre du jeu, héritant de la classe Personnage.
  */
 public class Monstre extends Personnage {
+
     /**
-     * Constantes: PV_MONSTRE_ENTIER, PV_MONSTRE_DEMI, PV_MONSTRE_MORT
+     * Constantes représentant les points de vie du monstre.
      */
-    public static final int PV_MONSTRE_ENTIER = 2;
-    public static final int Pv_MONSTRE_DEMI = 1;
+    public static final int PV_MONSTRE_ENTIER = 100;
+    public static final int PV_MONSTRE_DEMI = PV_MONSTRE_ENTIER / 2;
     public static final int PV_MONSTRE_MORT = 0;
 
     /**
-     * Constructeur de la classe Monstre
-     * @param dx parametres de position x
-     * @param dy parametres de position y
+     * Constructeur de la classe Monstre.
+     *
+     * @param dx Coordonnée x de la position initiale du monstre.
+     * @param dy Coordonnée y de la position initiale du monstre.
      */
     public Monstre(int dx, int dy) {
         super(dx, dy, PV_MONSTRE_ENTIER);
+        this.setTypeDeplacement(new DeplacementAleatoire());
     }
 
     /**
-     * Methode pour voir si le monstre est mort
-     * @return true si le monstre est mort, false sinon
+     * Vérifie si le monstre est mort.
+     *
+     * @return true si le monstre est mort, false sinon.
      */
-    public boolean estMort(){
+    public boolean estMort() {
         return this.pv <= PV_MONSTRE_MORT;
+    }
+
+    /**
+     * Vérifie si le monstre peut bouger vers une position donnée.
+     *
+     * @param l  Le labyrinthe dans lequel se déplace le monstre.
+     * @param dx Coordonnée x de la position vers laquelle le monstre souhaite se déplacer.
+     * @param dy Coordonnée y de la position vers laquelle le monstre souhaite se déplacer.
+     * @return true si le monstre peut bouger vers la position donnée, false sinon.
+     */
+    public boolean peutBouger(Labyrinthe l, int dx, int dy) {
+        return l.deplacementPossible(dx, dy) && !l.getPj().estAutour(this);
     }
 }

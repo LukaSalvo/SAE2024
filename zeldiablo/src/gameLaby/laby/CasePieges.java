@@ -1,49 +1,50 @@
 package gameLaby.laby;
 
 /**
- * Classe qui gere les cases pieges, ces cases infligent des degats au joueur
+ * Classe qui gère les cases pièges, ces cases infligent des dégâts au joueur.
  */
-public class CasePieges extends Cordonnees {
+public class CasePieges extends Coordonnees {
     /**
-     * Attribut qui represente les degats infliges par les pieges
+     * Attribut qui représente les dégâts infligés par les pièges.
      */
     public static final int degats = 5;
     private boolean etrePasserDessus;
 
     /**
-     * Constructeur qui construit un objet avec les cordonnes en parametre
+     * Constructeur qui construit un objet avec les coordonnées en paramètre.
      *
-     * @param x
-     * @param y
+     * @param x coordonnée x de la case piège
+     * @param y coordonnée y de la case piège
      */
     public CasePieges(int x, int y) {
-        super(x, y);this.etrePasserDessus=false;
+        super(x, y);
+        this.etrePasserDessus = false;
     }
 
     /**
-     * Methode qui dit si on est sur la meme case que les parametres;
-     * @param x
-     * @param y
-     * @return
+     * Getter des dégâts infligés par les pièges.
+     *
+     * @return les dégâts infligés par les pièges
      */
-    @Override
-    public boolean etreSurMemeCase(int x, int y) {
-        return super.etreSurMemeCase(x, y);
-    }
-
-    /**
-     * Getter des degats
-     * @return
-     */
-    public static int getDegats(){
+    public static int getDegats() {
         return degats;
     }
 
-    public boolean getEtrePasserDessus(){
+    /**
+     * Getter pour vérifier si la case piège a été traversée.
+     *
+     * @return true si la case piège a été traversée, sinon false
+     */
+    public boolean getEtrePasserDessus() {
         return this.etrePasserDessus;
     }
 
-    public void setEtrePasserDessus(boolean n ){
+    /**
+     * Setter pour indiquer si la case piège a été traversée ou non.
+     *
+     * @param n true si la case piège a été traversée, sinon false
+     */
+    public void setEtrePasserDessus(boolean n) {
         this.etrePasserDessus = n;
     }
 }

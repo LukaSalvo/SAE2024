@@ -1,21 +1,21 @@
-Version 3.0 : Bilan de l'État de l'Application et Difficultés Rencontrées 
+Version 3.0 : Bilan de l'etat de l'application et difficultés rencontrées
 
-État de l'Application : 
+État de l'application :
 	L'application a atteint plusieurs objectifs fonctionnels. Notamment, la fonctionnalité de déplacement aléatoire des monstres,
 	l'implémentation de la mort des monstres, et l'affichage des points de vie (PV) des monstres et du personnage principal.
 
-Objectifs Atteints : 
+Objectifs atteints :
  - Déplacement aléatoire des monstres : Les monstres peuvent se déplacer de manière aléatoire dans le labyrinthe.
  - Gestion de la mort des monstres : Lorsqu'un monstre n'a plus de PV, il meurt correctement, ce qui inclut sa suppression de la liste des monstres.
  - Affichage des PV : Les points de vie des monstres et du personnage principal sont affichés. Une barre de vie fonctionnelle au-dessus de chaque entité est envisagée si le temps le permet.
  - Implémentation de cases pièges : Les cases pièges ont été ajoutées au labyrinthe, infligeant des dégâts de 5 PV aux personnages qui les traversent.
 
-Difficultés Rencontrées : 
+Difficultés rencontrées :
 
-Déplacement Aléatoire des Monstres
+Déplacement aléatoire des monstres
 Lors des tests, le déplacement aléatoire des monstres pose des problèmes, vu que ils sont aléatoire et parfois ils tombent sur des cases piégés et meurt ce qui fausse les tests.
 
-Mise en Place du Timer
+Mise en place du timer
 La mise en place d'un timer pour que les monstres se déplacent toutes les 5 secondes a été difficile :
 
 Documentation limitée : La documentation disponible en ligne était difficile a trouver et soit pas assez clair, soit difficile à comprendre.
