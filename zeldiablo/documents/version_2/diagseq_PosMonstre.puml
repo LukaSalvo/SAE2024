@@ -9,11 +9,14 @@ activate Main
 Main -> Labyrinthe: Labyrinthe("labySimple/laby0.txt")
 activate Labyrinthe
 Labyrinthe -> Labyrinthe: lireFichier()
+activate Labyrinthe
 Labyrinthe -> Monstre: Monstre(x, y)
 activate Monstre
 Monstre -> Monstre: setPositionInitiale(x, y)
 Monstre --> Labyrinthe: return Monstre
 deactivate Monstre
+Labyrinthe--> Labyrinthe
+deactivate Labyrinthe
 Labyrinthe --> Main: return Labyrinthe
 deactivate Labyrinthe
 Main -> Main: afficherLabyrinthe()
