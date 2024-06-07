@@ -4,7 +4,7 @@ participant Main
 participant Labyrinthe
 participant Perso
 participant Monstre
-
+title : Deplacement d'un perso
 User -> Main: deplacerPerso(action)
 activate Main
 Main -> Labyrinthe: deplacerPerso(action)
@@ -23,5 +23,9 @@ alt Si nouvellePosition != positionMonstre
 end
 Labyrinthe --> Main : void
 deactivate Labyrinthe
+Main -->User:void
 deactivate Main
+note across
+Le personnage ce deplace si la prochaine position n'est ni un monstre ni un mur
+end note
 @enduml
