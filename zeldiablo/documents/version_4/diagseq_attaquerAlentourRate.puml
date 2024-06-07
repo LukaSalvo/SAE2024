@@ -1,0 +1,29 @@
+@startuml
+participant LabyJeu
+participant Personnage
+participant Monstre
+LabyJeu -> Personnage : appuie sur espace
+activate Personnage
+loop Pour tout les monstres "victime"
+    Personnage -> Monstre : attaquer(victime,AttaqueAlentour)
+
+    activate Monstre
+    Monstre -> "AttaqueAlentour" : attaquer(Personnage attaquant, victime)
+    activate "AttaqueAlentour"
+    "AttaqueAlentour" -> Personnage : estAutour(victime)
+    Personnage --> "AttaqueAlentour" : false
+    "AttaqueAlentour" --> Monstre : void
+    deactivate "AttaqueAlentour"
+    Monstre --> Personnage : void
+    deactivate Monstre
+end
+Personnage -> "Labyrinthe" : majEtatMonstre()
+activate "Labyrinthe"
+"Labyrinthe" --> "Labyrinthe" : majEtatMonstre()
+
+"Labyrinthe" --> "Personnage" : void
+deactivate "Labyrinthe"
+Personnage --> LabyJeu : void
+deactivate Personnage
+@enduml
+

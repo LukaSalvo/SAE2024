@@ -1,0 +1,179 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AttaqueAlentour {
+  + AttaqueAlentour(): 
+  + attaquer(Personnage, Personnage): void
+}
+class CasePieges {
+  + CasePieges(int, int): 
+  + degats: int
+  - etrePasserDessus: boolean
+  + getDegats(): int
+  + getEtrePasserDessus(): boolean
+  + setEtrePasserDessus(boolean): void
+}
+class Coordonnees {
+  + Coordonnees(int, int): 
+  ~ x: int
+  ~ y: int
+  + etreSurMemeCase(int, int): boolean
+  + setX(int): void
+  + getSuivant(String): int[]
+  + getCoordonnees(): int[]
+  + setY(int): void
+  ~ getSuivant(int, int, String): int[]
+  + deplacer(int[]): void
+  + deplacer(int, int): void
+  + getX(): int
+  + getY(): int
+}
+class DeplacementAleatoire {
+  + DeplacementAleatoire(): 
+  + deplacer(Personnage, Labyrinthe): void
+}
+class DeplacementClavier {
+  + DeplacementClavier(): 
+  + deplacer(Personnage, Labyrinthe): void
+}
+interface DessinJeu << interface >> {
+  + dessinerJeu(Jeu, Canvas): void
+}
+interface Jeu << interface >> {
+  + etreFini(): boolean
+  + update(double, Clavier): void
+  + init(): void
+}
+class LabyDessin {
+  + LabyDessin(): 
+  + vert: Color
+  + noir: Color
+  + rouge: Color
+  + bleuNoir: Color
+  + orange: Color
+  + bleuCiel: Color
+  + jaune: Color
+  + bleu: Color
+  - getMonstreColor(int): Color
+  - dessinerMonstres(GraphicsContext, List<Monstre>, int, int): void
+  - dessinerCasesPieges(GraphicsContext, List<CasePieges>, int, int): void
+  + dessinerJeu(Jeu, Canvas): void
+  - dessinerEntite(GraphicsContext, int, int, int, int, int): void
+  - dessinerPersonnage(GraphicsContext, Perso, int, int): void
+  - dessinerLabyrinthe(GraphicsContext, boolean[][], int, int): void
+  - getPersonnageColor(int): Color
+}
+class LabyJeu {
+  + LabyJeu(): 
+  - pj: Perso
+  + WIDTH: int
+  + HEIGHT: int
+  - timer: Timer
+  - labyrinthe: Labyrinthe
+  + update(double, Clavier): void
+  + etreFini(): boolean
+  - deplacerMonstre(): void
+  + getLabyrinthe(): Labyrinthe
+  + init(): void
+}
+class Labyrinthe {
+  + Labyrinthe(String): 
+  + VIDE: char
+  + DROITE: String
+  - pj: Perso
+  - murs: boolean[][]
+  + BAS: String
+  + PJ: char
+  + MUR: char
+  + MONSTRE: char
+  + casesPieges: List<CasePieges>
+  + NBMONSTRE: int
+  + HAUT: String
+  + GAUCHE: String
+  + C: char
+  - listMonstre: ArrayList<Monstre>
+  - generationPositionValide(int, int): boolean
+  + getListMonstre(): List<Monstre>
+  + getMurs(): boolean[][]
+  + deplacerPersonnage(Personnage): void
+  - estValide(int, int): boolean
+  + estSurCasePiege(int[], Personnage): void
+  + deplacementPossible(int, int): boolean
+  + getLengthY(): int
+  + getPj(): Perso
+  + personnagePresent(int, int): boolean
+  + creerMonstres(int): void
+  + getLength(): int
+  + majEtatMonstre(): void
+  + getCasesPieges(): List<CasePieges>
+  + repercution(Personnage): void
+  + getMur(int, int): boolean
+  + etreFini(): boolean
+}
+class Monstre {
+  + Monstre(int, int): 
+  + PV_MONSTRE_ENTIER: int
+  + PV_MONSTRE_MORT: int
+  + PV_MONSTRE_DEMI: int
+  + estMort(): boolean
+  + peutBouger(Labyrinthe, int, int): boolean
+}
+class Perso {
+  + Perso(int, int): 
+  + peutBouger(Labyrinthe, int, int): boolean
+}
+class Personnage {
+  + Personnage(int, int, int): 
+  ~ action: String
+  + PV_DEMI: int
+  + PV_MORT: int
+  + PV_1_QUART: int
+  # pv: int
+  - typeDeplacement: TypeDeplacement
+  + PV_ENTIER: int
+  + PV_3_QUART: int
+  + etrePresent(int, int): boolean
+  + getAction(): String
+  + getPv(): int
+  + estAutour(Personnage): boolean
+  + action(String): void
+  + getType(): TypeDeplacement
+  + peutBouger(Labyrinthe, int, int): boolean
+  + setTypeDeplacement(TypeDeplacement): void
+  + perdrePv(int): void
+  + attaquer(Personnage, TypeAttaque): void
+}
+interface TypeAttaque << interface >> {
+  + attaquer(Personnage, Personnage): void
+}
+interface TypeDeplacement << interface >> {
+  + deplacer(Personnage, Labyrinthe): void
+}
+
+AttaqueAlentour       -[#008200,dashed]-^  TypeAttaque          
+CasePieges            -[#000082,plain]-^  Coordonnees          
+DeplacementAleatoire  -[#008200,dashed]-^  TypeDeplacement      
+DeplacementClavier    -[#008200,dashed]-^  TypeDeplacement      
+LabyDessin            -[#008200,dashed]-^  DessinJeu            
+LabyJeu               -[#595959,dashed]->  AttaqueAlentour      : "«create»"
+LabyJeu               -[#008200,dashed]-^  Jeu                  
+LabyJeu               -[#595959,dashed]->  Labyrinthe           : "«create»"
+LabyJeu              "1" *-[#595959,plain]-> "labyrinthe\n1" Labyrinthe           
+LabyJeu              "1" *-[#595959,plain]-> "pj\n1" Perso                
+Labyrinthe            -[#595959,dashed]->  AttaqueAlentour      : "«create»"
+Labyrinthe           "1" *-[#595959,plain]-> "casesPieges\n*" CasePieges           
+Labyrinthe            -[#595959,dashed]->  CasePieges           : "«create»"
+Labyrinthe            -[#595959,dashed]->  Monstre              : "«create»"
+Labyrinthe           "1" *-[#595959,plain]-> "listMonstre\n*" Monstre              
+Labyrinthe           "1" *-[#595959,plain]-> "pj\n1" Perso                
+Labyrinthe            -[#595959,dashed]->  Perso                : "«create»"
+Monstre               -[#595959,dashed]->  DeplacementAleatoire : "«create»"
+Monstre               -[#000082,plain]-^  Personnage           
+Perso                 -[#595959,dashed]->  DeplacementClavier   : "«create»"
+Perso                 -[#000082,plain]-^  Personnage           
+Personnage            -[#000082,plain]-^  Coordonnees          
+Personnage           "1" *-[#595959,plain]-> "typeDeplacement\n1" TypeDeplacement      
+@enduml
