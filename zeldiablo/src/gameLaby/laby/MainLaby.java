@@ -1,5 +1,6 @@
 package gameLaby.laby;
 
+import javafx.application.Platform;
 import moteurJeu.MoteurJeu;
 
 import java.io.IOException;
