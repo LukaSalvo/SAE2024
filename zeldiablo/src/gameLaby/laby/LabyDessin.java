@@ -121,8 +121,10 @@ public class LabyDessin implements DessinJeu {
     }
 
     public void dessinerAmulette(GraphicsContext gc, Amulette a , int x , int y ){
-        gc.setFill(Color.YELLOW);
-        gc.fillOval(a.getX()*x,a.getY()*y,x,y);
+        if(a!=null){
+            gc.setFill(Color.YELLOW);
+            gc.fillOval(a.getX()*x,a.getY()*y,x,y);
+        }
     }
 
     /**
