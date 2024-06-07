@@ -138,4 +138,47 @@ class PersoTest {
         assertEquals(initialX, perso.getX());
         assertEquals(initialY, perso.getY());
     }
+
+
+
+    @Test
+    public void testPersoNePeutPasAttquerLorsquilEstMort() {
+        Monstre monstre = listMonstre.get(0);
+        perso.perdrePv(Perso.PV_ENTIER);
+        perso.attaquer(monstre, new AttaqueAlentour());
+
+        assertEquals(Monstre.PV_MONSTRE_ENTIER, monstre.getPv());
+    }
+
+
+    @Test
+    public void testMethodeEstMort(){
+        perso.perdrePv(Perso.PV_ENTIER);
+        assertTrue(perso.estMort());
+    }
+
+
+    @Test
+    public void testPersoPeutPasBougerLorsquilEstMort() {
+
+        perso.perdrePv(Perso.PV_ENTIER);
+        assertTrue(perso.estMort());
+
+
+        int X = perso.getX();
+        int Y = perso.getY();
+
+
+        perso.setTypeDeplacement(new DeplacementClavier());
+        perso.action(Labyrinthe.HAUT);
+        labyrinthe.deplacerPersonnage(perso);
+
+        assertEquals(X, perso.getX());
+        assertEquals(Y, perso.getY());
+    }
+
+
+
+
+
 }
