@@ -1,0 +1,16 @@
+Version 4.0: Bilan de l'etat de l'application et problèmes reencontrés
+
+Etat de l'application:
+
+    Maintenant dans le jeu les monstres font des degats aux joueurs lorsqu'ils sont autour d'eux, ainsi ils bougent pas pendnt l'attaque.
+    Ainsi le joueur via la touche "Espace" peut attaquer les monstres autour de lui.
+    De plus dans la map on peut maintenant voir les cases pieges lorsqu'on passe sur elles.
+
+Problèmes rencontrés:
+
+    A cause de l’intervalle la methode de deplacement aleatoire etait utilisé directement donc on pensait ne pas avoir réussi, on a donc
+    essayé plusieurs algos différents jusqu’a nous rendre compte de cela.
+    Pour les attaques des joueurs on reencontre pour l'instant un probleme car au momment ou on touche espace on inflige un degat sur le monstre, mais
+    aussi on ajoute un degat lorsqu'on arrete d'appuyer infligeant au total deux degats au monstre.
+    Pour les classes de test aussi on a eu des problemes car ils etaient pas tres bien structurés depuis le debut, on a reussi a ameliorer cela mais il
+    reste un peu de travail a faire.

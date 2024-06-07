@@ -1,4 +1,5 @@
     package gameLaby.laby;
+    import javafx.scene.input.KeyEvent;
     import moteurJeu.Clavier;
     import moteurJeu.Jeu;
 
