@@ -53,7 +53,8 @@ public class LabyDessin implements DessinJeu {
 
         // Dessin des monstres
         dessinerMonstres(gc, game.getLabyrinthe().getListMonstre(), x, y);
-
+        //Dessin amulette
+        dessinerAmulette(gc,game.getLabyrinthe().getAmulette(),x,y);
 
     }
 
@@ -117,6 +118,11 @@ public class LabyDessin implements DessinJeu {
                 gc.fillRect(c.getX() * x, c.getY() * y, x, y);
             }
         }
+    }
+
+    public void dessinerAmulette(GraphicsContext gc, Amulette a , int x , int y ){
+        gc.setFill(Color.YELLOW);
+        gc.fillOval(a.getX()*x,a.getY()*y,x,y);
     }
 
     /**
