@@ -41,6 +41,7 @@ public class Labyrinthe {
      */
     private Perso pj;
     private ArrayList<Monstre> listMonstre = new ArrayList<>();
+    private Coordonnees depart;
 
     /**
      * les murs du labyrinthe
@@ -99,8 +100,8 @@ public class Labyrinthe {
                 }
                 numeroLigne++;
             }
-
             this.creerMonstres(NBMONSTRE);
+            this.depart = new Coordonnees(pj.getX(), pj.getY());
         }
     }
 
@@ -126,6 +127,9 @@ public class Labyrinthe {
             if (pj.estAutour(p)) {
                 p.attaquer(pj, new AttaqueAlentour());
             }
+        }
+        if(p instanceof Perso){
+            recupererAmulette();
         }
     }
 
@@ -242,9 +246,7 @@ public class Labyrinthe {
     public void recupererAmulette(){
         if(pj.etreSurMemeCase(1,1)){
             pj.setPossedeAmulette(true);
-            System.out.println(true);
-        } else {
-            System.out.println(false);
+            amu = null;
         }
     }
 
