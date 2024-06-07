@@ -234,7 +234,9 @@ public class Labyrinthe {
         if (murs[posX][posY] || personnagePresent(posX, posY)) {
             return false;
         }
-
+        if(amu.etreSurMemeCase(posX,posY)){
+            return false;
+        }
         // Vérifie si la position est sur une case piège
         if (casesPieges != null) {
             for (CasePieges piege : casesPieges) {
