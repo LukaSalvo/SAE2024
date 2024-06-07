@@ -7,6 +7,7 @@ import javafx.scene.text.Font;
 import moteurJeu.DessinJeu;
 import moteurJeu.Jeu;
 
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -25,6 +26,10 @@ public class LabyDessin implements DessinJeu {
     public static final Color bleu = Color.BLUE;
     public static final Color bleuCiel = Color.SKYBLUE;
     public static final Color noir = Color.BLACK;
+
+
+    private Image imagePerso;
+
 
     /**
      * Methode pour dessiner le jeu
@@ -84,6 +89,7 @@ public class LabyDessin implements DessinJeu {
      * @param y position y
      */
     private void dessinerPersonnage(GraphicsContext gc, Perso perso, int x, int y) {
+
         gc.setFill(getPersonnageColor(perso.getPv()));
         dessinerEntite(gc, perso.getX(), perso.getY(), x, y, perso.getPv());
     }
