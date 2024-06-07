@@ -329,4 +329,8 @@ public class Labyrinthe {
         return this.casesPieges;
     }
 
+    public Coordonnees getDepart() {
+        return this.depart;
+    }
+
 }
