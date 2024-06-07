@@ -6,11 +6,8 @@ Labyrinthe -> Labyrinthe : personnagePresent
 activate Labyrinthe
 Labyrinthe -> Personnage : etrePresent
 activate Personnage
-Personnage --> Labyrinthe
+Personnage --> Labyrinthe:boolean
 deactivate Personnage
-Labyrinthe -> Personnage : etrePresent
-activate Personnage
-Personnage --> Labyrinthe
 deactivate Personnage
 Labyrinthe --> Labyrinthe
 deactivate Labyrinthe
@@ -20,9 +17,9 @@ activate Monstre
 create Personnage
 Monstre -> Personnage : new
 activate Personnage
-Personnage --> Monstre
+Personnage --> Monstre: Monstre
 deactivate Personnage
-Monstre --> Labyrinthe
+Monstre --> Labyrinthe:Monstre
 deactivate Monstre
 return
 @enduml

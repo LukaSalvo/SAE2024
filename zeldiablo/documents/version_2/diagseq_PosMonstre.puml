@@ -20,5 +20,4 @@ deactivate Labyrinthe
 Labyrinthe --> Main: return Labyrinthe
 deactivate Labyrinthe
 Main -> Main: afficherLabyrinthe()
-deactivate Main
 @enduml
