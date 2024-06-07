@@ -4,7 +4,7 @@ participant "Timer" as T
 participant "Labyrinthe" as La
 participant "Monstre" as M
 participant "Random" as R
-
+title : Deplacement aléatoire des monstres
 L -> L : deplacerMonstre()
 activate L
 L -> T : scheduleAtFixedRate()
@@ -55,4 +55,7 @@ T -->> L : return
 deactivate T
 L -->> L : return
 deactivate L
+note across
+On loop sur la liste de monstre on choisit de maniere aleatoire des coordonnes on test que ce n'est ni le personnage ni un mur et si c'est le cas on créé le mosntre
+end note
 @enduml

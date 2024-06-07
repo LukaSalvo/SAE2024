@@ -1,4 +1,5 @@
 @startuml
+Title : Affichage des monstre
 User -> MainLaby: main()
 activate MainLaby
 MainLaby -> MoteurJeu: setTaille(width, height)
@@ -26,4 +27,7 @@ deactivate LabyJeu
 MoteurJeu --> MainLaby : void
 deactivate MoteurJeu
 deactivate MainLaby
+note across
+Lors du lancement de launch,il appelle update qui lui dessine a partir de l'objet de la liste des monstres
+end note
 @enduml
