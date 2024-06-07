@@ -24,6 +24,7 @@ public class TestAmulette {
         pj.deplacer(8,1);
         jeu.getLabyrinthe().recupererAmulette();
         assertEquals(pj.getPossedeAmulette(),true);
+        a = jeu.getLabyrinthe().getAmulette();
         assertNull(a);
 
     }
