@@ -101,6 +101,7 @@ public class Labyrinthe {
                         case A:
                             this.murs[colonne][numeroLigne]=false;
                             this.amu = new Amulette(colonne,numeroLigne);
+                            break;
                         default:
                             throw new Error("caractere inconnu " + c);
                     }
@@ -327,4 +328,7 @@ public class Labyrinthe {
         return this.casesPieges;
     }
 
+    public Amulette getAmulette() {
+    return this.amu;
+    }
 }
