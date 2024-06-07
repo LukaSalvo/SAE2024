@@ -1,0 +1,29 @@
+@startuml
+participant LabyJeu
+participant Labyrinthe
+participant Personnage
+
+LabyJeu -> Labyrinthe : getDepart()
+activate Labyrinthe
+Labyrinthe --> LabyJeu : depart
+deactivate Labyrinthe
+
+LabyJeu -> Personnage : etreSurMemeCase(depart.getX(), depart.getY())
+activate Personnage
+Personnage --> LabyJeu : surCaseDepart
+deactivate Personnage
+
+alt surCaseDepart est vrai
+    LabyJeu -> Personnage : getPossedeAmulette()
+    activate Personnage
+    Personnage --> LabyJeu : possedeAmulette
+    deactivate Personnage
+
+    alt possedeAmulette est vrai
+        LabyJeu -> LabyJeu : Victoire()
+        activate LabyJeu
+        LabyJeu --> LabyJeu : void
+        deactivate LabyJeu
+    end
+end
+@enduml
