@@ -138,7 +138,8 @@ public class Labyrinthe {
             }
         }
         if(p instanceof Perso){
-            recupererAmulette();
+            if(!pj.getPossedeAmulette())
+                recupererAmulette();
         }
     }
 
