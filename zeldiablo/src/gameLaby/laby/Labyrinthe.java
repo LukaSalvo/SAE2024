@@ -24,6 +24,8 @@ public class Labyrinthe {
     public static final char VIDE = '.';
     public static final char C = 'c';
 
+    public static final char A='a';
+
     /**
      * constantes actions possibles
      */
@@ -53,6 +55,8 @@ public class Labyrinthe {
      */
     public List<CasePieges> casesPieges;
 
+    private Amulette amu;
+
 
     /**
      * charge le labyrinthe
@@ -68,6 +72,7 @@ public class Labyrinthe {
             this.murs = new boolean[nbColonnes][nbLignes];
             this.pj = null;
             this.casesPieges = new ArrayList<>();
+            this.amu=null;
 
             String ligne;
             int numeroLigne = 0;
@@ -94,14 +99,18 @@ public class Labyrinthe {
                             this.murs[colonne][numeroLigne] = false;
                             this.pj = new Perso(colonne, numeroLigne);
                             break;
+                        case A:
+                            this.murs[colonne][numeroLigne]=false;
+                            this.amu = new Amulette(colonne,numeroLigne);
+                            break;
                         default:
                             throw new Error("caractere inconnu " + c);
                     }
                 }
                 numeroLigne++;
             }
+
             this.creerMonstres(NBMONSTRE);
-            this.depart = new Coordonnees(pj.getX(), pj.getY());
         }
     }
 
@@ -127,9 +136,6 @@ public class Labyrinthe {
             if (pj.estAutour(p)) {
                 p.attaquer(pj, new AttaqueAlentour());
             }
-        }
-        if(p instanceof Perso){
-            recupererAmulette();
         }
     }
 
@@ -210,7 +216,7 @@ public class Labyrinthe {
         for (int i = 0; i < nb; i++) {
             int posX = rand.nextInt(murs.length);
             int posY = rand.nextInt(murs[0].length);
-            while (!generationPositionValide(posX, posY)) {
+            while (!VerfiPositonValide(posX, posY)) {
                 posX = rand.nextInt(murs.length);
                 posY = rand.nextInt(murs[0].length);
             }
@@ -225,12 +231,14 @@ public class Labyrinthe {
      * @param posY La coordonnée Y de la position à vérifier.
      * @return true si la position est valide pour la génération d'un monstre, sinon false.
      */
-    private boolean generationPositionValide(int posX, int posY) {
+    private boolean VerfiPositonValide(int posX, int posY) {
         // Vérifie si la position est un mur ou si un personnage est présent
         if (murs[posX][posY] || personnagePresent(posX, posY)) {
             return false;
         }
-
+        if(amu.etreSurMemeCase(posX,posY)){
+            return false;
+        }
         // Vérifie si la position est sur une case piège
         if (casesPieges != null) {
             for (CasePieges piege : casesPieges) {
@@ -327,10 +335,6 @@ public class Labyrinthe {
      */
     public List<CasePieges> getCasesPieges() {
         return this.casesPieges;
-    }
-
-    public Coordonnees getDepart() {
-        return this.depart;
     }
 
 }

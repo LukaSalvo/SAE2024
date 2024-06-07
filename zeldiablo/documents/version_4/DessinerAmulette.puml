@@ -1,0 +1,13 @@
+@startuml
+LabyDessin -> LabyDessin:dessinerAmulette(gc,amu,x,y)
+activate LabyDessin
+LabyDessin -> GraphicContext:gc.setFill(Color.YELLOW)
+activate GraphicContext
+GraphicContext --> LabyDessin:void
+deactivate GraphicContext
+LabyDessin -> GraphicContext:gc.fillOval()
+activate GraphicContext
+GraphicContext --> LabyDessin:void
+deactivate GraphicContext
+deactivate LabyDessin
+@enduml
