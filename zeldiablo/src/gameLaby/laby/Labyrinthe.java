@@ -250,6 +250,16 @@ public class Labyrinthe {
     }
 
 
+    public void recupererAmulette(){
+        if(pj.etreSurMemeCase(1,1)){
+            pj.setPossedeAmulette(true);
+            System.out.println(true);
+        } else {
+            System.out.println(false);
+        }
+    }
+
+
     /**
      * jamais fini
      *

@@ -23,14 +23,7 @@ public class Monstre extends Personnage {
         this.setTypeDeplacement(new DeplacementAleatoire());
     }
 
-    /**
-     * Vérifie si le monstre est mort.
-     *
-     * @return true si le monstre est mort, false sinon.
-     */
-    public boolean estMort() {
-        return this.pv <= PV_MONSTRE_MORT;
-    }
+
 
     /**
      * Vérifie si le monstre peut bouger vers une position donnée.

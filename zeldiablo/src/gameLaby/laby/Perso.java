@@ -11,15 +11,27 @@ public class Perso extends Personnage {
      * @param dx position x
      * @param dy position y
      */
+    private boolean possedeAmulette;
 
     public Perso(int dx, int dy) {
         super(dx, dy, PV_ENTIER);
         this.setTypeDeplacement(new DeplacementClavier());
+        this.possedeAmulette = false;
     }
 
     @Override
     public boolean peutBouger(Labyrinthe l, int dx, int dy) {
-        return l.deplacementPossible(dx, dy);
+            return l.deplacementPossible(dx, dy) && !estMort();
+
+
     }
+
+    public boolean getPossedeAmulette() {
+        return possedeAmulette;
+    }
+    public void setPossedeAmulette(boolean possede) {
+        this.possedeAmulette = possede;
+    }
+
 
 }

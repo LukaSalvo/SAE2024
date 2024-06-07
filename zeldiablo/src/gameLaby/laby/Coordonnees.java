@@ -71,6 +71,10 @@ public class Coordonnees {
         return this.y;
     }
 
+    public int[] getPos(){
+        return new int[]{this.x, this.y};
+    }
+
     /**
      * Setter de la position X.
      *
