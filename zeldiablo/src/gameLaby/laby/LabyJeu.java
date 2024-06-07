@@ -79,7 +79,7 @@ public class LabyJeu implements Jeu {
             } else if (clavier.droite) {
                 pj.action(Labyrinthe.DROITE);
                 labyrinthe.deplacerPersonnage(pj);
-                clavier.droite = false;
+                clavier. droite = false;
             } else if (clavier.space) {
                 clavier.space = false;
                 for (Monstre m : labyrinthe.getListMonstre()) {

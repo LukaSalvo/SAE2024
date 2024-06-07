@@ -1,8 +1,11 @@
 @startuml
+Participant Main
 participant LabyJeu
 participant Labyrinthe
 participant Personnage
+activate Main
 
+Main -> LabyJeu : estFini()
 activate LabyJeu
 LabyJeu -> Labyrinthe : getDepart()
 activate Labyrinthe
@@ -17,9 +20,9 @@ LabyJeu -> Personnage : getPossedeAmulette()
 activate Personnage
 Personnage --> LabyJeu : false
 deactivate Personnage
-LabyJeu -> LabyJeu : Victoire()
-activate LabyJeu
 LabyJeu --> LabyJeu : void
+
+LabyJeu --> Main : void
 deactivate LabyJeu
 
 @enduml

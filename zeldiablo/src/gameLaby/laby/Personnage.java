@@ -71,12 +71,12 @@ public abstract class Personnage extends Coordonnees {
     /**
      * Methode pour attaquer un personnage
      *
-     * @param p       personnage attaqué
+     * @param victime       personnage attaqué
      * @param typeAttaque type d'attaque
      */
-    public void attaquer(Personnage p, TypeAttaque typeAttaque) {
+    public void attaquer(Personnage victime, TypeAttaque typeAttaque) {
         if (!estMort()){
-            typeAttaque.attaquer(this, p);
+            typeAttaque.attaquer(this, victime);
         }
     }
 
