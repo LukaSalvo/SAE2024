@@ -1,16 +1,44 @@
 Version 4.0: Bilan de l'etat de l'application et problèmes reencontrés
 
-Etat de l'application:
+État de l'application :
 
-    Maintenant dans le jeu les monstres font des degats aux joueurs lorsqu'ils sont autour d'eux, ainsi ils bougent pas pendnt l'attaque.
-    Ainsi le joueur via la touche "Espace" peut attaquer les monstres autour de lui.
-    De plus dans la map on peut maintenant voir les cases pieges lorsqu'on passe sur elles.
+    L'application a intégré de nouvelles fonctionnalités et à été optimiser. Par exemple, les monstres peuvent désormais infliger des dégâts aux joueurs
+    lorsqu'ils sont proches, et les joueurs peuvent attaquer les monstres. De plus, les cases pièges deviennent visibles
+    lorsqu'un personnage les traverse.
 
-Problèmes rencontrés:
+Objectifs atteints :
+  - Attaque des monstres : Les monstres peuvent attaquer les joueurs lorsqu'ils sont autour d'eux, et ne bougent pas pendant l'attaque.
+  - Attaque des joueurs : Le joueur peut attaquer les monstres autour de lui en appuyant sur la touche "Espace".
+  - Visibilité des cases pièges : Les cases pièges sont visibles lorsqu'un personnage passe dessus.
+  - Debugage de l'affichage des personnages : Les personnages apparaissent correctement au-dessus des cases pièges lorsqu'ils les découvrent.
+  - Empêchement des spawns sur cases pièges : Les monstres ne peuvent plus apparaître sur les cases pièges.
+  - Refactorisation du code : Le code a été réorganisé pour être plus maintenable et modulaire.
 
-    A cause de l’intervalle la methode de deplacement aleatoire etait utilisé directement donc on pensait ne pas avoir réussi, on a donc
-    essayé plusieurs algos différents jusqu’a nous rendre compte de cela.
-    Pour les attaques des joueurs on reencontre pour l'instant un probleme car au momment ou on touche espace on inflige un degat sur le monstre, mais
-    aussi on ajoute un degat lorsqu'on arrete d'appuyer infligeant au total deux degats au monstre.
-    Pour les classes de test aussi on a eu des problemes car ils etaient pas tres bien structurés depuis le debut, on a reussi a ameliorer cela mais il
-    reste un peu de travail a faire.
+Difficultés rencontrées :
+Déplacement aléatoire des monstres :
+ - Problème : La méthode de déplacement aléatoire était directement utilisée quand le jeu se lançait à cause de l'intervalle de lancement qui était à 0,
+   donc pour les test les mostre se déplaçais imédiatement faussant les test.
+ - Solution : On a changer plusieurs fois le code avant de s'appercevoir qu'il fallait juste mettre l'intervale de lancement du timer a 5000.
+
+Attaques des joueurs :
+Problème : Quand on appuit sur la touche Espace, le joueur doit infliger un dégât au monstre aux alentours, sauf que il inflige 2 degats on ne sait pas pourquoi (les test marche c'est que en jeu que ça marche pas)
+Recherche de solution en cours...
+
+Refactorisation du code :
+Problème : 
+Le code de base n'etait pas modulaire on a donc penser a le refactorier. Ansi, La refactorisation pour rendre
+le code plus maintenable a nécessité de refaire des méthodes/classes et une restructuration significative du code existant.
+
+Introduction de classes et interfaces modulaires : Les nouvelles classes et interfaces  (AttaqueAlentour, DeplacementAleatoire,
+   DeplacementClavier, TypeAttaque, et TypeDeplacement) introduisent des comportements modulaires pour les attaques et les déplacements,
+   ce qui organise plus notre code.
+Amélioration de la clarté et de l'encapsulation : Les attributs et méthodes ont été renommés et/ou modifiés pour améliorer la clarté et
+   l'encapsulation (e.g., Cordonnees à Coordonnees, posX à x).
+
+Le code a donc été repensé pour permettre un lancement plus fluide des différentes méthodes et améliorer la maintenabilité à long terme.
+Par exemple, Personnage implemente maintenant Coordonnees (ce qui n'était pas le cas avant) et les deplacement et attaques nécéssite que 1 
+méthode alors que avant par exemple ils y avait plusieurs méthodes pour deplacer un personnage (deplacerPerso et deplacerMonstre).
+Les différences s'observent bien entre avec la difference entre le diagramme de classe de la v3 et celle de la v4
+
+
+

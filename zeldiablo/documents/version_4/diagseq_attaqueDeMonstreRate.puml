@@ -1,0 +1,20 @@
+@startuml
+activate LabyJeu
+LabyJeu -> Labyrinthe : deplacerPersonnage(Monstre)
+activate Labyrinthe
+Labyrinthe -> TypeDeplacement : deplacer(Monstre,Labyrinte)
+activate TypeDeplacement
+TypeDeplacement --> Labyrinthe
+deactivate TypeDeplacement
+Labyrinthe -> Labyrinthe : repercution
+activate Labyrinthe
+
+Labyrinthe -> Personnage : estAutour(Personnage)
+activate Personnage
+Personnage --> Labyrinthe : false
+deactivate Personnage
+Labyrinthe --> Labyrinthe
+
+deactivate Labyrinthe
+return
+@enduml

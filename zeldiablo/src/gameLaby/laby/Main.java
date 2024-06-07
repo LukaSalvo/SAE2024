@@ -8,6 +8,7 @@ import java.io.IOException;
 public class Main {
     /**
      * methode principale, charge un labyrinthe et l'affiche
+     *
      * @param args
      * @throws IOException
      */

@@ -12,21 +12,22 @@ import java.sql.SQLOutput;
 public class MainLaby {
     /**
      * methode principale, cree le jeu et lance le moteur de jeu
+     *
      * @param args
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        int width = 800;
-        int height = 600;
+        int width = LabyJeu.WIDTH;
+        int height = LabyJeu.HEIGHT;
         int pFPS = 60;
 
         LabyJeu jeu = new LabyJeu();
         LabyDessin dessin = new LabyDessin();
 
-        MoteurJeu.setTaille(width,height);
+        MoteurJeu.setTaille(width, height);
         MoteurJeu.setFPS(pFPS);
 
-        MoteurJeu.launch(jeu,dessin);
+        MoteurJeu.launch(jeu, dessin);
 
     }
 

@@ -1,0 +1,24 @@
+@startuml
+participant Clavier
+Clavier -> Main : Apuyer sur une touche dirrectionelle
+activate Main
+Main -> Personnage : action(direction)
+activate Personnage
+Personnage --> Main
+deactivate Personnage
+Main -> Labyrinthe : deplacerPersonnage(Personnage)
+activate Labyrinthe
+Labyrinthe -> DeplacementClavier : deplacer(Personnage,Labyrinthe)
+activate DeplacementClavier
+DeplacementClavier --> Labyrinthe
+deactivate DeplacementClavier
+Labyrinthe -> Labyrinthe : repercution
+activate Labyrinthe
+Labyrinthe --> Labyrinthe
+deactivate Labyrinthe
+Labyrinthe --> Labyrinthe
+deactivate Labyrinthe
+Labyrinthe --> Main
+deactivate Labyrinthe
+return
+@enduml

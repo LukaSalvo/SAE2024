@@ -1,26 +1,23 @@
+1. Attaque des monstres {Amin(Diagramme de séquence,Code),Luka(Diagramme de séquence,Tests)}
+- Descriptif :
+   - Lorsqu'un monstre doit agir, si le monstre se trouve à coté du héros, alors il ne se déplace pas mais il attaque celui-ci.
+- Critères de validation :
+   - Lorsque le monstre est à côté du joueur, il attaque et ne se déplace pas. Par défaut, le Héros perd 1 point de vie.
+   - Lorsque le monstre est loin du joueur, il n'attaque pas mais se déplace.
 
-5 Gestion des attaques
+2. Attaque du joueur {Benjamin(Diagramme de séquence,Test),Ryan(Digamme de séquence,Code)}
 
-5.1 Attaque des monstres
+- Descriptif :
+Lorsque le joueur appuie sur une touche donnée (par défaut la touche espace), il eectue une attaque contre les monstres qui se trouvent à côté de lui.
+- Critères de validation :
+  - L'attaque a eectivement lieu quand le joueur appuie sur la touche.
+  - TOUS les monstres à côté du joueur prennent un point de dégât. • TOUS les monstres éloignés du joueur ne subissent pas de dégâts.
+  - S'il n'y a aucun monstre autour du joueur, l'attaque à quand même lieu et empêche le déplacement du joueur, mais les monstres ne prennent pas de dégâts.
 
-Lorsqu'un monstre doit agir, si le monstre se trouve à coté du héros, alors il ne se déplace pas mais il attaque celui-ci.
-Critères de validation
-• Lorsque le monstre est à côté du joueur, il attaque et ne se déplace pas. Par défaut, le Héros perd 1 point de vie.
-• Lorsque le monstre est loin du joueur, il n'attaque pas mais se déplace.
+3. Refactorisation du code {Ryan,Amin,Benjamin,Luka}
 
-5.2 Attaque du joueur
 
- Lorsque le joueur appuie sur une touche donnée (par défaut la touche espace), il eectue une attaque contre les monstres qui se trouvent à côté de lui. Critères de validation
- • L'attaque a eectivement lieu quand le joueur appuie sur la touche.
- • TOUS les monstres à côté du joueur prennent un point de dégât. • TOUS les monstres éloignés du joueur ne subissent pas de dégâts.
-• S'il n'y a aucun monstre autour du joueur, l'attaque à quand même lieu et empêche le déplacement du joueur, mais les monstres ne prennent pas de dégâts.
-
-Repartition des tâches:
-
-Amin doit faire la fonctionnalité 5.1 ainsi que son diagramme de sequence et son code
-Luka eventuellement l'affichage ou les tests
-Benjamin doit terminer completement les cases pieges de l'iteration 1 (affichage) et que les monstres ne puissent pas se spawn sur les cases pieges
-Ryan doit faire la fonctionnalité 5.2 ainsi que son diagramme de sequence et son code
+4. Finalisation de la fonctionalité piège {Benjamin}
 
 
 
