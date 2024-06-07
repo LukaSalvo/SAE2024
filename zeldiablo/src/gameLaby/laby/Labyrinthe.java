@@ -258,7 +258,6 @@ public class Labyrinthe {
     public void recupererAmulette(){
         if(pj.etreSurMemeCase(amu.getX(),amu.getY())){
             pj.setPossedeAmulette(true);
-            amu = null;
         }
     }
 
