@@ -12,17 +12,26 @@ activate Labyrinthe
 Labyrinthe -> Monstre: getPosition()
 activate Monstre
 Monstre -> Monstre: choisirDirectionAleatoire()
+activate Monstre
+deactivate Monstre
 Monstre -> Random: randomDirection()
 activate Random
 Random --> Monstre: return direction
 deactivate Random
 Monstre -> Labyrinthe: getSuivant(x, y, direction)
+activate Labyrinthe
+Labyrinthe --> Monstre : int []
+deactivate Labyrinthe
 Monstre -> Labyrinthe: getMur(nouvellePosition)
-Labyrinthe --> Monstre: return mur
+activate Labyrinthe
+Labyrinthe --> Monstre : boolean
+deactivate Labyrinthe
 alt Si nouvellePosition n'est pas un mur
     Monstre -> Monstre: setPosition(nouvellePosition)
 end
+Monstre --> Labyrinthe : void
 deactivate Monstre
+Labyrinthe --> Main : void
 deactivate Labyrinthe
 deactivate Main
 @enduml

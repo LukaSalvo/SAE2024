@@ -19,7 +19,9 @@ Monstre --> Labyrinthe: return positionMonstre
 deactivate Monstre
 alt Si nouvellePosition != positionMonstre
     Labyrinthe -> Perso: setPosition(nouvellePosition)
+    Perso --> Labyrinthe:void
 end
+Labyrinthe --> Main : void
 deactivate Labyrinthe
 deactivate Main
 @enduml
