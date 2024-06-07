@@ -21,7 +21,9 @@ public class Perso extends Personnage {
 
     @Override
     public boolean peutBouger(Labyrinthe l, int dx, int dy) {
-        return l.deplacementPossible(dx, dy);
+            return l.deplacementPossible(dx, dy) && !estMort();
+
+
     }
 
     public boolean getPossedeAmulette() {
