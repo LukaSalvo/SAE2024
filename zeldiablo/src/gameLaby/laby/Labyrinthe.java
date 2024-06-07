@@ -73,6 +73,7 @@ public class Labyrinthe {
             this.pj = null;
             this.casesPieges = new ArrayList<>();
             this.amu=null;
+            this.depart = null;
 
             String ligne;
             int numeroLigne = 0;
@@ -98,6 +99,7 @@ public class Labyrinthe {
                         case PJ:
                             this.murs[colonne][numeroLigne] = false;
                             this.pj = new Perso(colonne, numeroLigne);
+                            this.depart = new Coordonnees(colonne,numeroLigne);
                             break;
                         case A:
                             this.murs[colonne][numeroLigne]=false;
