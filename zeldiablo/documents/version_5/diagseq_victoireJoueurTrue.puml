@@ -1,0 +1,43 @@
+@startuml
+title "XXXX"
+
+Participant Main
+participant LabyJeu
+participant "lab:Labyrinthe"  as Labyrinthe
+
+participant "p:Personnage" as Personnage
+activate Main
+Main -> LabyJeu : etreFini()
+activate LabyJeu
+LabyJeu -> Labyrinthe : getDepart()
+activate Labyrinthe
+Labyrinthe --> LabyJeu : depart
+deactivate Labyrinthe
+
+LabyJeu -> Personnage : etreSurMemeCase(depart.getX(), depart.getY())
+activate Personnage
+Personnage --> LabyJeu : true
+deactivate Personnage
+LabyJeu -> Personnage : getPossedeAmulette()
+activate Personnage
+Personnage --> LabyJeu : true
+deactivate Personnage
+LabyJeu -> LabyJeu : Victoire()
+activate LabyJeu
+LabyJeu --> LabyJeu : Print(Victoire)
+
+LabyJeu --> LabyJeu : true
+deactivate LabyJeu
+LabyJeu --> LabyJeu : Fermer Jeu
+LabyJeu --> Main : void
+
+
+deactivate LabyJeu
+note across
+ceci est une note
+hh
+end note
+
+
+
+@enduml
