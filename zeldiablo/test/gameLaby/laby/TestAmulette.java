@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestAmulette {
     @Test
@@ -25,6 +24,7 @@ public class TestAmulette {
         pj.deplacer(8,1);
         jeu.getLabyrinthe().recupererAmulette();
         assertEquals(pj.getPossedeAmulette(),true);
+        assertNull(a);
 
     }
 }
