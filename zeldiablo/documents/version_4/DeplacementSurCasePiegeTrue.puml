@@ -1,5 +1,6 @@
 @startuml
 participant Clavier
+activate Clavier
 Clavier -> Main : Apuyer sur une touche dirrectionelle
 activate Main
 Main -> Personnage : action(direction)
