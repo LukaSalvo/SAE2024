@@ -1,4 +1,5 @@
 @startuml
+title : dessiner amulette
 LabyDessin -> LabyDessin:dessinerAmulette(gc,amu,x,y)
 activate LabyDessin
 LabyDessin -> GraphicContext:gc.setFill(Color.YELLOW)
@@ -10,4 +11,7 @@ activate GraphicContext
 GraphicContext --> LabyDessin:void
 deactivate GraphicContext
 deactivate LabyDessin
+note across
+Une fois l'amulette créé on la dessine d'un rond jaune a la place qu'on recupere
+end note
 @enduml

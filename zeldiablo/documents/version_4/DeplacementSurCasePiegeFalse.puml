@@ -1,4 +1,5 @@
 @startuml
+title : Cas ou quand on est sur la case piege est Faux
 participant Clavier
 Clavier -> Main : Apuyer sur une touche dirrectionelle
 activate Clavier

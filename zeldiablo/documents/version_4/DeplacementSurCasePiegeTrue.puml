@@ -1,5 +1,6 @@
 @startuml
 participant Clavier
+title : Cas ou quand on est sur la case piege est Vrai
 activate Clavier
 Clavier -> Main : Apuyer sur une touche dirrectionelle
 activate Main

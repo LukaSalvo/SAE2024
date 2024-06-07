@@ -2,6 +2,7 @@
 participant LabyJeu
 participant Personnage
 participant Monstre
+title : Personnage qui attaque cas true
 LabyJeu -> Personnage : appuie sur espace
 activate Personnage
 loop Pour tout les monstres "victime"
@@ -27,4 +28,7 @@ activate "Labyrinthe"
 deactivate "Labyrinthe"
 Personnage --> LabyJeu : void
 deactivate Personnage
+note across
+Lorsqu'un personnage veut attaquer l'utilisateur appuie sur espace et si il y a un monstre autour alors il prend des degats et on met a jour l'état du monstre
+end note
 @enduml

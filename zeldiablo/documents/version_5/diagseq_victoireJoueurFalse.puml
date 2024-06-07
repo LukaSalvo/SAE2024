@@ -1,5 +1,6 @@
 @startuml
 Participant Main
+title : Cas ou il a pas encore gagner(manque amulette)
 participant LabyJeu
 participant Labyrinthe
 participant Personnage
@@ -24,5 +25,7 @@ LabyJeu --> LabyJeu : void
 
 LabyJeu --> Main : void
 deactivate LabyJeu
-
+note across
+Lorsque le personnage n'a plus de pv il perd, lorsque il possede l'amulette et qu'il est sur la case de depart qui est genere lors de la creation du personnage car il s'agit de la meme case
+end note
 @enduml
