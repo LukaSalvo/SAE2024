@@ -342,8 +342,19 @@ public class Labyrinthe {
         return this.casesPieges;
     }
 
+    /**
+     * Renvoie l'amulette du labyrinthe.
+     * @return
+     */
     public Amulette getAmulette(){
         return this.amu;
+    }
+
+    /**
+     * Renvoie les coordonnées de départ du labyrinthe.
+     */
+    public Coordonnees getDepart() {
+        return this.depart;
     }
 
 }

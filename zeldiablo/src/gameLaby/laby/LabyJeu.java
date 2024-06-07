@@ -45,21 +45,9 @@ public class LabyJeu implements Jeu {
         Thread monsterThread = new Thread(() -> {
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
-
-
-
                 public void run() {
                     for (Monstre m : labyrinthe.getListMonstre())
                         labyrinthe.deplacerPersonnage(m);
-                        if (pj.estMort()) {
-                            Platform.runLater(()->{
-                            System.out.println("FIn du jeu , le personnage principal est mort ...");
-                            Platform.exit();
-                        });
-                            timer.cancel();
-
-                        }
-
                     }
                 }, 5000, 5000);
         });
@@ -75,9 +63,7 @@ public class LabyJeu implements Jeu {
     @Override
     public void update(double secondes, Clavier clavier) {
         // Deplacement du personnage selon les touches utilisées
-
-
-        if( !pj.estMort()){
+        if(!etreFini()){
             if (clavier.haut) {
                 pj.action(Labyrinthe.HAUT);
                 labyrinthe.deplacerPersonnage(pj);
@@ -99,15 +85,12 @@ public class LabyJeu implements Jeu {
                 for (Monstre m : labyrinthe.getListMonstre()) {
                     pj.attaquer(m, new AttaqueAlentour());
                 }
-
             }
-
-
-
             labyrinthe.majEtatMonstre();
+        } else {
+            System.out.println("Fermerture du jeu");
+            Platform.exit();
         }
-
-
     }
 
     /**
@@ -115,18 +98,25 @@ public class LabyJeu implements Jeu {
      */
     @Override
     public void init() {
-
-
     }
 
     /**
-     * Methode pour savoir si le jeu est fini
+     * Methode pour savoir si le jeu est fini, si il est mort ou si il a gagné (etre sur la case de départ et posséder l'amulette)
      *
      * @return false
      */
     @Override
     public boolean etreFini() {
-        return false;
+
+        if (pj.getPossedeAmulette() && pj.etreSurMemeCase(labyrinthe.getDepart().getX(), labyrinthe.getDepart().getY())) {
+            System.out.println("Victoire");
+            return true;
+            } else if (pj.estMort()) {
+                System.out.println("Defaite");
+                return true;
+            } else {
+                return false;
+        }
     }
 
     /**
@@ -137,6 +127,4 @@ public class LabyJeu implements Jeu {
     public Labyrinthe getLabyrinthe() {
         return this.labyrinthe;
     }
-
-
 }
