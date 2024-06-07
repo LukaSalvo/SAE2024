@@ -22,4 +22,7 @@ public class Perso extends Personnage {
         return l.deplacementPossible(dx, dy);
     }
 
+
+
+
 }
