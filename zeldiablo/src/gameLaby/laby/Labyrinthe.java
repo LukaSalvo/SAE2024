@@ -141,7 +141,7 @@ public class Labyrinthe {
         }
         if(p instanceof Perso){
             if(!pj.getPossedeAmulette())
-                recupererAmulette();
+                amu = ((Perso) p).recupererAmulette(amu);
         }
     }
 
@@ -254,14 +254,6 @@ public class Labyrinthe {
             }
         }
         return true;
-    }
-
-
-    public void recupererAmulette(){
-        if(pj.etreSurMemeCase(amu.getX(),amu.getY())){
-            pj.setPossedeAmulette(true);
-            this.amu=null;
-        }
     }
 
 
