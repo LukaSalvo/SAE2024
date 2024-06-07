@@ -4,7 +4,7 @@ participant Labyrinthe
 participant CasePieges
 participant Cordonnees
 participant Personnage
-
+title : Fonction etre sur case Pieges
 activate Actor
 Actor -> Labyrinthe : estSurCasePiege()
 activate Labyrinthe
@@ -31,4 +31,7 @@ else Si la case n'est pas piégée
 end
 deactivate Labyrinthe
 deactivate Actor
+note across
+Lorsqu'un monstre ou un personnage et sur une case piege il doit perdre des pV, donc on test si le personnage et sur le case et si c'est le cas il perd des pv et on affiche la case piege
+end note
 @enduml
