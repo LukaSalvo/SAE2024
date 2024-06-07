@@ -34,53 +34,24 @@ public class Labyrinthe {
 
 
     public static final int NBMONSTRE = 3;
+
+
     /**
-     * attribut du personnage
+     * attribut des personnages
      */
-
-
-
-
-    public Perso pj;
-    public ArrayList<Monstre> listMonstre = new ArrayList<>();
+    private Perso pj;
+    private ArrayList<Monstre> listMonstre = new ArrayList<>();
 
     /**
      * les murs du labyrinthe
      */
-    public boolean[][] murs;
+    private boolean[][] murs;
 
     /**
      * Liste de case pieges
      */
     public List<CasePieges> casesPieges;
 
-    /**
-     * retourne la case suivante selon une action
-     *
-     * @param x      case depart
-     * @param y      case depart
-     * @param action action effectuee
-     * @return case suivante
-     */
-    static int[] getSuivant(int x, int y, String action) {
-        switch (action) {
-            case HAUT:
-                y--;
-                break;
-            case BAS:
-                y++;
-                break;
-            case DROITE:
-                x++;
-                break;
-            case GAUCHE:
-                x--;
-                break;
-            default:
-                throw new Error("action inconnue");
-        }
-        return new int[]{x, y};
-    }
 
     /**
      * charge le labyrinthe
@@ -134,20 +105,36 @@ public class Labyrinthe {
     }
 
     /**
-     * deplace le personnage en fonction de l'action.
-     * gere la collision avec les murs et pieges
+     * Déplace un personnage selon son type de déplacement et gère les répercussions.
      *
-     * @param action une des actions possibles
+     * @param p Le personnage à déplacer.
      */
-    public void deplacerPerso(String action) {
-        int[] suivante = getSuivant(this.pj.x, this.pj.y, action);
-        if (deplacementPossible(suivante[0], suivante[1])) {
-            estSurCasePiege(suivante,pj);
-            this.pj.x = suivante[0];
-            this.pj.y = suivante[1];
+    public void deplacerPersonnage(Personnage p) {
+        TypeDeplacement t = p.getType();
+        t.deplacer(p, this);
+        repercution(p);
+    }
+
+    /**
+     * Gère les répercussions du déplacement d'un personnage, telles que les pièges et les attaques.
+     *
+     * @param p Le personnage pour lequel les répercussions doivent être gérées.
+     */
+    public void repercution(Personnage p) {
+        estSurCasePiege(p.getCoordonnees(), p);
+        if (p instanceof Monstre) {
+            if (pj.estAutour(p)) {
+                p.attaquer(pj, new AttaqueAlentour());
+            }
         }
     }
 
+    /**
+     * Vérifie si le personnage est sur une case piège et applique les effets le cas échéant.
+     *
+     * @param suivante Les coordonnées de la case suivante où le personnage se déplace.
+     * @param p        Le personnage en déplacement.
+     */
     public void estSurCasePiege(int[] suivante, Personnage p) {
         for (CasePieges c : casesPieges) {
             if (c.etreSurMemeCase(suivante[0], suivante[1])) {
@@ -157,41 +144,15 @@ public class Labyrinthe {
         }
     }
 
-    /**
-     * deplace le Monstre de façon aléatoire.
-     * gere la collision avec les murs et les pieges
-     *
-     * @param monstre le monstre à déplacer
-     */
-    public void deplacerMonstre(Monstre monstre) {
-        String[] actions = {HAUT, BAS, GAUCHE, DROITE};
-        Random rand = new Random();
-        int[] suivante;
-        boolean deplacementPossible = false;
-        // si le monstre est à côté du personnage, il lui inflige 1 point de dégât
-        if (pj.estAutour(monstre)) {
-            monstre.attaquer(pj);
-        } else { // Sinon, il se déplace aléatoirement
-            while (!deplacementPossible) {
-                suivante = getSuivant(monstre.getX(), monstre.getY(), actions[rand.nextInt(actions.length)]);
-                if (deplacementPossible(suivante[0], suivante[1])) {
-                    estSurCasePiege(suivante,monstre);
-                    monstre.x = suivante[0];
-                    monstre.y = suivante[1];
-                    deplacementPossible = true;
-                }
-            }
-        }
-    }
 
     /**
      * Met à jour l'état des monstres (supprime les monstres morts)
      */
     public void majEtatMonstre() {
         Iterator<Monstre> iterator = listMonstre.iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             Monstre m = iterator.next();
-            if(m.estMort()){
+            if (m.estMort()) {
                 iterator.remove(); // Supprimer l'élément actuel en utilisant l'itérateur
             }
         }
@@ -204,7 +165,7 @@ public class Labyrinthe {
      * @param y coordonnée y de la case cible
      * @return true si le déplacement est possible, sinon false
      */
-    private boolean deplacementPossible(int x, int y) {
+    public boolean deplacementPossible(int x, int y) {
         return estValide(x, y) && !murs[x][y] && !personnagePresent(x, y);
     }
 
@@ -234,6 +195,7 @@ public class Labyrinthe {
         return false;
     }
 
+
     /**
      * Crée un nombre donné de monstres à des positions valides
      *
@@ -244,37 +206,38 @@ public class Labyrinthe {
         for (int i = 0; i < nb; i++) {
             int posX = rand.nextInt(murs.length);
             int posY = rand.nextInt(murs[0].length);
-            boolean arret = false;
-            while(!arret){
-                if(casesPieges != null){
-                    boolean stop = false;
-                    while(!stop){
-                        int j = 0 ;
-                        int indic = 0 ;
-                        while(j<casesPieges.size()){
-                            if(casesPieges.get(j).etreSurMemeCase(posX,posY)){
-                                indic ++;
-                            }
-                            j++;
-                        }
-                        if(indic<=0){
-                            stop=true;
-                        }else{
-                             posX = rand.nextInt(murs.length);
-                             posY = rand.nextInt(murs[0].length);
-                        }
-                    }
-                }
-                if(!murs[posX][posY] && !personnagePresent(posX,posY)){
-                    arret=true;
-                }else{
-                    posX = rand.nextInt(murs.length);
-                    posY = rand.nextInt(murs[0].length);
-                }
+            while (!generationPositionValide(posX, posY)) {
+                posX = rand.nextInt(murs.length);
+                posY = rand.nextInt(murs[0].length);
             }
             this.listMonstre.add(new Monstre(posX, posY));
         }
     }
+
+    /**
+     * Vérifie si une position de génération pour un monstre est valide.
+     *
+     * @param posX La coordonnée X de la position à vérifier.
+     * @param posY La coordonnée Y de la position à vérifier.
+     * @return true si la position est valide pour la génération d'un monstre, sinon false.
+     */
+    private boolean generationPositionValide(int posX, int posY) {
+        // Vérifie si la position est un mur ou si un personnage est présent
+        if (murs[posX][posY] || personnagePresent(posX, posY)) {
+            return false;
+        }
+
+        // Vérifie si la position est sur une case piège
+        if (casesPieges != null) {
+            for (CasePieges piege : casesPieges) {
+                if (piege.etreSurMemeCase(posX, posY)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
     /**
      * jamais fini
@@ -317,4 +280,41 @@ public class Labyrinthe {
     public boolean getMur(int x, int y) {
         return this.murs[x][y];
     }
+
+    /**
+     * Renvoie la matrice représentant l'état des murs dans le labyrinthe.
+     *
+     * @return La matrice des murs.
+     */
+    public boolean[][] getMurs() {
+        return this.murs;
+    }
+
+    /**
+     * Renvoie le Perso pj du labyrinthe.
+     *
+     * @return pj.
+     */
+    public Perso getPj() {
+        return this.pj;
+    }
+
+    /**
+     * Renvoie la liste des monstres présents dans le labyrinthe.
+     *
+     * @return La liste des monstres.
+     */
+    public List<Monstre> getListMonstre() {
+        return this.listMonstre;
+    }
+
+    /**
+     * Renvoie la liste des cases pièges dans le labyrinthe.
+     *
+     * @return La liste des cases pièges.
+     */
+    public List<CasePieges> getCasesPieges() {
+        return this.casesPieges;
+    }
+
 }
