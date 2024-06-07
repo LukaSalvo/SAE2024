@@ -1,0 +1,45 @@
+@startuml
+participant Clavier
+participant Main
+Participant Labyrinthe
+Participant DeplacementClavier
+activate Clavier
+Clavier -> Main : Apuyer sur une touche dirrectionelle
+activate Main
+Main -> Personnage : action(direction)
+activate Personnage
+Personnage --> Main
+deactivate Personnage
+Main -> Labyrinthe : deplacerPersonnage(Personnage)
+activate Labyrinthe
+
+Labyrinthe -> DeplacementClavier : deplacer(Personnage,Labyrinthe)
+activate DeplacementClavier
+DeplacementClavier -> Personnage : getSuivant(action)
+activate Personnage
+Personnage --> DeplacementClavier : suivant
+
+DeplacementClavier -> Personnage : peutBouger(laby,suivant[0],suivant[1])
+Personnage --> DeplacementClavier : true
+DeplacementClavier -> Personnage : deplacer(suivant)
+Personnage --> DeplacementClavier : void
+
+deactivate Personnage
+
+deactivate Personnage
+
+DeplacementClavier --> Labyrinthe
+deactivate DeplacementClavier
+Labyrinthe -> Labyrinthe : repercution
+activate Labyrinthe
+Labyrinthe --> Labyrinthe
+deactivate Labyrinthe
+
+
+Labyrinthe --> Main
+deactivate Labyrinthe
+Main --> Clavier
+deactivate Labyrinthe
+deactivate Main
+deactivate Clavier
+@enduml
