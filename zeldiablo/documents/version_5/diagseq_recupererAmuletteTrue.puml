@@ -1,0 +1,27 @@
+@startuml
+participant Main
+Main -> Labyrinthe : deplacerPersonnage(Perso,DeplacementClavier)
+activate Labyrinthe
+Labyrinthe -> TypeDeplacement : deplacer(labyrinthe,Perso)
+activate TypeDeplacement
+TypeDeplacement --> Labyrinthe
+deactivate TypeDeplacement
+Labyrinthe -> Labyrinthe : repercution()
+activate Labyrinthe
+Labyrinthe -> Labyrinthe : recupererAmulette()
+activate Labyrinthe
+
+Labyrinthe -> Amulette : etreSurMemeCase(Perso)
+activate Amulette
+Amulette --> Labyrinthe : true
+deactivate Amulette
+Labyrinthe -> Personnage : setPossedeAmulette(true);
+activate Personnage
+Personnage --> Labyrinthe
+deactivate Personnage
+Labyrinthe --> Labyrinthe
+deactivate Labyrinthe
+Labyrinthe --> Labyrinthe
+deactivate Labyrinthe
+return
+@enduml

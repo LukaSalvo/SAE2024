@@ -1,0 +1,23 @@
+@startuml
+participant Actor
+Actor -> Labyrinthe : deplacerPersonnage(Perso,DeplacementClavier)
+activate Labyrinthe
+Labyrinthe -> TypeDeplacement : deplacer()
+activate TypeDeplacement
+TypeDeplacement --> Labyrinthe
+deactivate TypeDeplacement
+Labyrinthe -> Labyrinthe : repercution
+activate Labyrinthe
+Labyrinthe -> Labyrinthe : recupererAmulette
+activate Labyrinthe
+
+Labyrinthe -> Amulette : etreSurMemeCase(Perso)
+activate Amulette
+Amulette --> Labyrinthe : false
+deactivate Amulette
+Labyrinthe --> Labyrinthe
+deactivate Labyrinthe
+Labyrinthe --> Labyrinthe
+deactivate Labyrinthe
+return
+@enduml
