@@ -3,6 +3,7 @@ participant Clavier
 participant Main
 Participant Labyrinthe
 Participant DeplacementClavier
+activate Clavier
 Clavier -> Main : Apuyer sur une touche dirrectionelle
 activate Main
 Main -> Personnage : action(direction)
@@ -14,8 +15,14 @@ activate Labyrinthe
 
 Labyrinthe -> DeplacementClavier : deplacer(Personnage,Labyrinthe)
 activate DeplacementClavier
-Labyrinthe -> Personnage : peutBouger(laby,PersoX,PersoY)
+DeplacementClavier -> Personnage : getSuivant(action)
 activate Personnage
+Personnage --> DeplacementClavier : suivant
+
+DeplacementClavier -> Personnage : peutBouger(laby,suivant[0],suivant[1])
+Personnage --> DeplacementClavier : false
+
+deactivate Personnage
 
 deactivate Personnage
 
@@ -25,9 +32,12 @@ Labyrinthe -> Labyrinthe : repercution
 activate Labyrinthe
 Labyrinthe --> Labyrinthe
 deactivate Labyrinthe
-Labyrinthe --> Labyrinthe
-deactivate Labyrinthe
+
+
 Labyrinthe --> Main
 deactivate Labyrinthe
-return
+Main --> Clavier
+deactivate Labyrinthe
+deactivate Main
+deactivate Clavier
 @enduml
