@@ -41,20 +41,20 @@ public class LabyDessin implements DessinJeu {
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         // Calcul des tailles des cellules
-        int x = game.WIDTH / game.getLabyrinthe().murs.length;
-        int y = game.HEIGHT / game.getLabyrinthe().murs[0].length;
+        int x = game.WIDTH / game.getLabyrinthe().getMurs().length;
+        int y = game.HEIGHT / game.getLabyrinthe().getMurs()[0].length;
 
         // Dessin du labyrinthe
-        dessinerLabyrinthe(gc, game.getLabyrinthe().murs, x, y);
-
+        dessinerLabyrinthe(gc, game.getLabyrinthe().getMurs(), x, y);
+        //Dessin cases pièges
+        dessinerCasesPieges(gc, game.getLabyrinthe().casesPieges, x, y);
         // Dessin du personnage
-        dessinerPersonnage(gc, game.getLabyrinthe().pj, x, y);
+        dessinerPersonnage(gc, game.getLabyrinthe().getPj(), x, y);
 
         // Dessin des monstres
-        dessinerMonstres(gc, game.getLabyrinthe().listMonstre, x, y);
+        dessinerMonstres(gc, game.getLabyrinthe().getListMonstre(), x, y);
 
-        // Dessin des cases pièges
-       dessinerCasesPieges(gc, game.getLabyrinthe().casesPieges, x, y);
+
     }
 
     /**
@@ -113,8 +113,8 @@ public class LabyDessin implements DessinJeu {
     private void dessinerCasesPieges(GraphicsContext gc, List<CasePieges> casesPieges, int x, int y) {
         for (CasePieges c : casesPieges) {
             if(c.getEtrePasserDessus()){
-            gc.setFill(Color.BROWN);
-            gc.fillRect(c.getPosX() * x, c.getPosY() * y, x, y);
+                gc.setFill(Color.BROWN);
+                gc.fillRect(c.getX() * x, c.getY() * y, x, y);
             }
         }
     }
@@ -162,7 +162,7 @@ public class LabyDessin implements DessinJeu {
     private Color getMonstreColor(int pv) {
         if (pv >= Monstre.PV_MONSTRE_ENTIER) {
             return bleuCiel;
-        } else if (pv >= Monstre.Pv_MONSTRE_DEMI) {
+        } else if (pv >= Monstre.PV_MONSTRE_DEMI) {
             return bleu;
         } else{
             return bleuNoir;
