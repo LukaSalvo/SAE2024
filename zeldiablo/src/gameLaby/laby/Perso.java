@@ -90,13 +90,6 @@ public class Perso extends Personnage {
         this.possedeAmulette = possede;
     }
 
-    public Amulette recupererAmulette(Amulette amu){
-        if(etreSurMemeCase(amu.getX(),amu.getY())){
-            possedeAmulette=true;
-            amu=null;
-        }
-        return amu;
-    }
 
 
 
