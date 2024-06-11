@@ -1,0 +1,74 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AdapterLaby
+interface Algorithme << interface >>
+class Amulette
+class Arc
+class Arcs
+class AttaqueAlentour
+class CasePieges
+class Coordonnees
+class DeplacementAleatoire
+class DeplacementClavier
+class DeplacementIntelligent
+class Dijkstra
+interface Graphe << interface >>
+class LabyDessin
+class LabyJeu
+class Labyrinthe
+class LabyrintheLoader
+class Main
+class MainLaby
+class Monstre
+class Perso
+class Personnage
+interface TypeAttaque << interface >>
+interface TypeDeplacement << interface >>
+class Valeur
+
+AdapterLaby             -[#595959,dashed]->  Arc                    : "«create»"
+AdapterLaby             -[#008200,dashed]-^  Graphe                 
+AdapterLaby            "1" *-[#595959,plain]-> "laby\n1" Labyrinthe             
+Amulette                -[#000082,plain]-^  Coordonnees            
+Arcs                   "1" *-[#595959,plain]-> "arcs\n*" Arc                    
+AttaqueAlentour         -[#008200,dashed]-^  TypeAttaque            
+CasePieges              -[#000082,plain]-^  Coordonnees            
+DeplacementAleatoire    -[#008200,dashed]-^  TypeDeplacement        
+DeplacementClavier      -[#008200,dashed]-^  TypeDeplacement        
+DeplacementIntelligent  -[#595959,dashed]->  AdapterLaby            : "«create»"
+DeplacementIntelligent  -[#595959,dashed]->  Dijkstra               : "«create»"
+DeplacementIntelligent  -[#008200,dashed]-^  TypeDeplacement        
+Dijkstra                -[#008200,dashed]-^  Algorithme             
+Dijkstra                -[#595959,dashed]->  Valeur                 : "«create»"
+LabyJeu                 -[#595959,dashed]->  AttaqueAlentour        : "«create»"
+LabyJeu                "1" *-[#595959,plain]-> "labyrinthe\n1" Labyrinthe             
+LabyJeu                 -[#595959,dashed]->  Labyrinthe             : "«create»"
+LabyJeu                "1" *-[#595959,plain]-> "pj\n1" Perso                  
+Labyrinthe             "1" *-[#595959,plain]-> "amu\n1" Amulette               
+Labyrinthe             "1" *-[#595959,plain]-> "casesPieges\n*" CasePieges             
+Labyrinthe              -[#595959,dashed]->  CasePieges             : "«create»"
+Labyrinthe             "1" *-[#595959,plain]-> "depart\n1" Coordonnees            
+Labyrinthe             "1" *-[#595959,plain]-> "listMonstre\n*" Monstre                
+Labyrinthe              -[#595959,dashed]->  Monstre                : "«create»"
+Labyrinthe             "1" *-[#595959,plain]-> "pj\n1" Perso                  
+LabyrintheLoader        -[#595959,dashed]->  Amulette               : "«create»"
+LabyrintheLoader        -[#595959,dashed]->  CasePieges             : "«create»"
+LabyrintheLoader        -[#595959,dashed]->  Coordonnees            : "«create»"
+LabyrintheLoader        -[#595959,dashed]->  Labyrinthe             : "«create»"
+LabyrintheLoader        -[#595959,dashed]->  Monstre                : "«create»"
+LabyrintheLoader        -[#595959,dashed]->  Perso                  : "«create»"
+Main                    -[#595959,dashed]->  Labyrinthe             : "«create»"
+MainLaby                -[#595959,dashed]->  LabyDessin             : "«create»"
+MainLaby                -[#595959,dashed]->  LabyJeu                : "«create»"
+Monstre                 -[#595959,dashed]->  AttaqueAlentour        : "«create»"
+Monstre                 -[#595959,dashed]->  DeplacementIntelligent : "«create»"
+Monstre                 -[#000082,plain]-^  Personnage             
+Perso                   -[#595959,dashed]->  DeplacementClavier     : "«create»"
+Perso                   -[#000082,plain]-^  Personnage             
+Personnage              -[#000082,plain]-^  Coordonnees            
+Personnage             "1" *-[#595959,plain]-> "typeDeplacement\n1" TypeDeplacement        
+@enduml
