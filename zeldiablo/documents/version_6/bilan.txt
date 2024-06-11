@@ -21,9 +21,8 @@ Problème : La génération automatique du labyrinthe a demandé de nombreuses i
 Solution : Des tests exhaustifs et des ajustements de l'algorithme ont été nécessaires. Ryan a travaillé sur le codage et la conception, tandis que Benjamin s'est concentré sur les tests et la validation.
 Monstres au comportement intelligent :
 
-Problème : Un labyrinthe n'est pas un graphe de base, il faut donc adapter le labyrinthe en graphe pour pouvoir utiliser Dijsktra
-Solution : Amine a conçu et codé l'adaptateur ainsi que son code de la SAE dijstra, tandis que Luka a effectué des tests rigoureux et participé à la conception pour s'assurer de l'efficacité des monstre.
-Travail simultané et coordination :
+Problème : Un labyrinthe n'est pas un graphe de base, il faut donc adapter le labyrinthe en graphe pour pouvoir utiliser Dijsktra,les autres difficultés rencontrées ont été principalement sur le test du comportement intelligent car comme il utilise l’algorithme de Dijkstra, l’emplacement futur est inconnu et peut changer en fonction de l’endroit du perso.
+Solution : Amine a conçu et codé l'adaptateur ainsi que son code de la SAE dijstra, tandis que Luka a effectué des tests et participé à la conception pour s'assurer de l'efficacité des monstre.
 
 
 
