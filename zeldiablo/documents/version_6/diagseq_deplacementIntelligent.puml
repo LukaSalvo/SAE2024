@@ -1,0 +1,25 @@
+@startuml
+title : Deplacement Intelligent
+participant Main
+participant "DeplacementIntelligent : a" as DeplacementIntelligent
+participant "AdapterLaby : labyrinthe" as AdapterLaby
+participant "Algorithme : algo" as Algorithme
+activate Main
+Main -> DeplacementIntelligent : deplacer(p,labyrinthe)
+activate DeplacementIntelligent
+create AdapterLaby
+DeplacementIntelligent -> AdapterLaby : new
+activate AdapterLaby
+AdapterLaby --> DeplacementIntelligent : labyrinthe
+deactivate AdapterLaby
+DeplacementIntelligent -> Algorithme : resoudre(labyrinthe,p)
+activate Algorithme
+Algorithme --> DeplacementIntelligent : valeur
+deactivate Algorithme
+DeplacementIntelligent --> Main
+note across
+Le diagramme décrit comment le déplacement intelligent est calculé dans le labyrinthe
+en adaptant celui-ci en graphe puis en utilisant l'algorithme de Dijkstra qui donera
+un ArrayList de Valeur décrivant le plus cours chemin.
+end note
+@enduml

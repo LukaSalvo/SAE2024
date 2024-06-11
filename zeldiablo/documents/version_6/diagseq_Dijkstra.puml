@@ -1,0 +1,64 @@
+@startuml
+title : Fonctionnement de Dijkstra
+participant "DeplacementIntelligent : depInteligent" as DeplacementIntelligent
+participant "Dijkstra : d" as Dijkstra
+participant "Graphe : g" as Graphe
+
+participant "Valeur : v" as Valeur
+activate DeplacementIntelligent
+DeplacementIntelligent -> Dijkstra : resoudre(labyrinthe,p)
+activate Dijkstra
+Dijkstra -> Graphe : listeNoeuds()
+activate Graphe
+Graphe --> Dijkstra
+deactivate Graphe
+create Valeur
+Dijkstra -> Valeur : new
+activate Valeur
+Valeur --> Dijkstra
+deactivate Valeur
+loop pour tout les noeuds de listeNoeuds
+    Dijkstra -> Valeur : setValeur(listeNoeuds[i], Double.MAX_VALUE)
+    activate Valeur
+    Valeur --> Dijkstra
+    deactivate Valeur
+    Dijkstra -> Valeur : setValeur(p, 0)
+    activate Valeur
+    Valeur --> Dijkstra
+end
+deactivate Valeur
+loop tant que listeNoeuds n'est pas vide
+    Dijkstra -> Valeur : minimun
+    activate Valeur
+    Valeur --> Dijkstra : min
+    deactivate Valeur
+    Dijkstra -> Graphe : suivants(min)
+    activate Graphe
+    Graphe --> Dijkstra
+    deactivate Graphe
+    loop pour chaque arc suivants
+        Dijkstra -> Valeur : getValeur(min)
+        activate Valeur
+        Valeur --> Dijkstra
+        deactivate Valeur
+        Dijkstra -> Valeur : getValeur(arc.getDest())
+        activate Valeur
+        Valeur --> Dijkstra
+        deactivate Valeur
+        Dijkstra -> Valeur : ajout de la valeur (si possible)
+        activate Valeur
+        Valeur --> Dijkstra
+        deactivate Valeur
+    end
+end
+Dijkstra --> DeplacementIntelligent : valeur
+deactivate Dijkstra
+deactivate DeplacementIntelligent
+note across
+Le diagramme nous monsre comment l'algorithme de Dijkstra est résolut
+Dijkstra obtient la liste des noeuds du graphe, initialise les valeurs de distance,
+et itère pour trouver les chemins les plus courts en mettant à jour les valeurs de
+distance minimales jusqu'à ce que tous les nœuds soient traités. Enfin, les valeurs
+calculées sont renvoyées à DeplacementIntelligent.
+end note
+@enduml
