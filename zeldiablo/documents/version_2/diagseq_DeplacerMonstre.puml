@@ -4,7 +4,7 @@ participant Main
 participant Labyrinthe
 participant Monstre
 participant Random
-
+title : Deplacement des monstre
 User -> Main: update()
 activate Main
 Main -> Labyrinthe: deplacerMonstre()
@@ -34,4 +34,8 @@ deactivate Monstre
 Labyrinthe --> Main : void
 deactivate Labyrinthe
 deactivate Main
+note across
+Lorsqu'un monstre veut se déplacer on recupere ça position on verifie que la prochaine position n'est pas un mur
+si c'est le cas il bouge
+end note
 @enduml

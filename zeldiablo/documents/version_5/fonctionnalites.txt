@@ -1,0 +1,44 @@
+6.1 Fin de jeu: mort du héros // Conception, code et test par Luka
+
+Au lancement du jeu, une amulette est placée sur une case vide du labyrinthe. Le
+placement de l'amulette est toujours le même et dépend du niveau.
+
+Critères de validation
+
+• L'amulette ne peut être placée que sur une case vide.
+• Les monstres et le héros peuvent se situer sur la case de l'amulette.
+• L'amulette est achée dans le jeu sous la forme d'un cercle jaune sur la case vide
+
+6.2 Mise en place de l'amulette // Conception, code et test par Benjamin
+
+Au lancement du jeu, une amulette est placée sur une case vide du labyrinthe. Le
+placement de l'amulette est toujours le même et dépend du niveau.
+
+Critères de validation
+
+• L'amulette ne peut être placée que sur une case vide.
+• Les monstres et le héros peuvent se situer sur la case de l'amulette.
+• L'amulette est achée dans le jeu sous la forme d'un cercle jaune sur la case vide
+
+6.3 Acquisition de l'amulette // Conception, code et test par Ryan
+
+Dés que le joueur demande à déplacer le héros sur l'amulette, le héros se déplace et
+prend l'amulette.
+
+Critères de validation
+
+• L'amulette n'est plus sur le plateau (et n'est plus achée).
+• Le Héros possède l'amulette.
+• Un monstre ne récupère pas l'amulette
+
+6.4 Fin de jeu: victoire du héros // Conception, code et test par Amin
+
+Une fois que le héros a pris l'amulette, il peut retourner à l'entrée du labyrinthe et
+remporter le jeu.
+
+Critères de validation
+• Lorsque le héros possède l'amulette et qu'il retourne à l'entrée du labyrinthe, le
+jeu s'arrête et un message est aché dans la console.
+• Lorsque le héros ne possède pas l'amulette, le jeu ne s'arrête pas même si le héros
+retourne à l'entrée.
+

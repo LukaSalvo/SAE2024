@@ -79,7 +79,7 @@ public class Clavier {
                 break;
 
             case SPACE:
-                this.space = true;
+                this.space = false;
                 break;
 
         }

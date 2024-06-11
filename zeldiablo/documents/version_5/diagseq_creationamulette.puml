@@ -1,4 +1,5 @@
 @startuml
+title : Creation d'une amulette
 Labyrinthe -> Labyrinthe: Labyrinthe()
 activate Labyrinthe
 alt Si la lettre est a
@@ -9,5 +10,8 @@ alt Si la lettre est a
 else
 end
 deactivate Labyrinthe
+note across
+Lorsque dans le fichier on lit a on creer l'objet amulette a cette position
+end note
 
 @enduml

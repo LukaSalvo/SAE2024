@@ -1,5 +1,6 @@
 @startuml
 participant Actor
+title : Creation de monstre
 Actor -> Labyrinthe : creerMonstres
 activate Labyrinthe
 Labyrinthe -> Labyrinthe : personnagePresent
@@ -21,5 +22,7 @@ Personnage --> Monstre: Monstre
 deactivate Personnage
 Monstre --> Labyrinthe:Monstre
 deactivate Monstre
-
+note across
+Maitenant quand on créé un personnage il passe par le constructeur de la classe Personnage
+end note
 @enduml
