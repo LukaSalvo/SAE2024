@@ -2,12 +2,17 @@ package gameLaby.laby;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import moteurJeu.DessinJeu;
 import moteurJeu.Jeu;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -28,7 +33,6 @@ public class LabyDessin implements DessinJeu {
     public static final Color noir = Color.BLACK;
 
 
-    private Image imagePerso;
 
 
     /**
@@ -91,7 +95,7 @@ public class LabyDessin implements DessinJeu {
     private void dessinerPersonnage(GraphicsContext gc, Perso perso, int x, int y) {
 
         gc.setFill(getPersonnageColor(perso.getPv()));
-        dessinerEntite(gc, perso.getX(), perso.getY(), x, y, perso.getPv());
+        dessinerEntite(gc, perso.getX(), perso.getY(), x, y, perso.getPv(),new Image("file:img/Hero.png"));
     }
 
     /**
@@ -105,12 +109,12 @@ public class LabyDessin implements DessinJeu {
         for (Monstre monstre : monstres) {
             if(!monstre.estMort()) {
                 gc.setFill(getMonstreColor(monstre.getPv()));
-                dessinerEntite(gc, monstre.getX(), monstre.getY(), x, y, monstre.getPv());
+                dessinerEntite(gc, monstre.getX(), monstre.getY(), x, y, monstre.getPv(),new Image("file:img/skeletonlord_up_2.png"));
             }
         }
     }
 
-    /**
+    /**qq
      * Methode pour dessiner les cases pièges
      * @param gc objet GraphicsContext
      * @param casesPieges liste des cases pièges
@@ -150,11 +154,11 @@ public class LabyDessin implements DessinJeu {
      * @param cellHeight    hauteur de la cellule
      * @param pv    points de vie
      */
-    private void dessinerEntite(GraphicsContext gc, int x, int y, int cellWidth, int cellHeight, int pv) {
-        gc.fillOval(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
-        gc.setFill(Color.WHITE);
+    private void dessinerEntite(GraphicsContext gc, int x, int y, int cellWidth, int cellHeight, int pv,Image i ) {
+        gc.setFill(getPersonnageColor(pv));
         gc.setFont(new Font(20));
-        gc.fillText(String.valueOf(pv), x * cellWidth + cellWidth / 4, y * cellHeight + cellHeight / 2);
+        gc.fillRect(x*cellWidth,y*cellHeight-10,getPersonnage(pv),10);
+        gc.drawImage(i,x*cellWidth,y*cellHeight,20,20);
     }
 
     /**
@@ -174,6 +178,19 @@ public class LabyDessin implements DessinJeu {
         } else {
             return noir;
         }
+    }
+    private int getPersonnage(int pv){
+        Color c = getPersonnageColor(pv);
+        if (c.equals(vert)) {
+            return 35;
+        } else if (c.equals(jaune)) {
+            return 25;
+        } else if (c.equals(orange)) {
+            return 15;
+        } else if (c.equals(rouge)) {
+            return 5;
+        }
+        return 0;
     }
 
     /**
