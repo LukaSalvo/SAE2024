@@ -16,3 +16,8 @@
       chemin.
     - lorsqu'il se déplace, le monstre suit effectivement le meilleur chemin et parvient
       jusqu'au héros même s'il y a des obstacles.
+
+3.Barre de vie (Benjamin)
+Une barre de vie ce situe sur le dessus des monstres et du héro. Elle diminue et change de couleur en fonction des pv du personnage
+
+4. Affichage des monstres et du héros par des sprites

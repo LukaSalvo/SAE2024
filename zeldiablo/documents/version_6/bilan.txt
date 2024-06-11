@@ -12,6 +12,11 @@ Monstres au comportement intelligent :
     - Avant chaque déplacement, le monstre détermine le meilleur chemin pour atteindre le héros.
     - Les obstacles sont pris en compte pour le calcul du chemin.
     - Les monstres suivent effectivement le meilleur chemin pour atteindre le héros malgré les obstacles.
+Barre de vie :
+    - Une barre de vie se situe sur chaque personnage
+    - Elle change de couleur en fonction des points de vie , elle change de taille aussi
+Sprites :
+    -Les monstres et le héros son afficher par des sprites
 
 Difficultés rencontrées :
 
@@ -24,7 +29,12 @@ Monstres au comportement intelligent :
 Problème : Un labyrinthe n'est pas un graphe de base, il faut donc adapter le labyrinthe en graphe pour pouvoir utiliser Dijsktra,les autres difficultés rencontrées ont été principalement sur le test du comportement intelligent car comme il utilise l’algorithme de Dijkstra, l’emplacement futur est inconnu et peut changer en fonction de l’endroit du perso.
 Solution : Amine a conçu et codé l'adaptateur ainsi que son code de la SAE dijstra, tandis que Luka a effectué des tests et participé à la conception pour s'assurer de l'efficacité des monstre.
 
+Barre de vie :
+Problème : La gestion de la taille qui soit d'adapter en fonction du labyrinthe
+Solution : Passer par des variables et des valeurs en fonction de la taille de la fenetre
 
+Sprites
+Problème + Solution : Meme problème rencontré que pour la barre de vie et la solution est la meme aussi
 
 
 
