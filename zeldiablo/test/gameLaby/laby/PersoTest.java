@@ -36,7 +36,7 @@ class PersoTest {
     void deplacerVersHaut() {
         int initialX = perso.getX();
         int initialY = perso.getY();
-        perso.deplacer(initialX, initialY - 1);
+        perso.setPosition(initialX, initialY - 1);
 
         assertEquals(initialX, perso.getX());
         assertEquals(initialY - 1, perso.getY());
@@ -49,7 +49,7 @@ class PersoTest {
     void deplacerVersBas() {
         int initialX = perso.getX();
         int initialY = perso.getY();
-        perso.deplacer(initialX, initialY + 1);
+        perso.setPosition(initialX, initialY + 1);
 
         assertEquals(initialX, perso.getX());
         assertEquals(initialY + 1, perso.getY());
@@ -62,7 +62,7 @@ class PersoTest {
     void deplacerVersGauche() {
         int initialX = perso.getX();
         int initialY = perso.getY();
-        perso.deplacer(initialX - 1, initialY);
+        perso.setPosition(initialX - 1, initialY);
 
         assertEquals(initialX - 1, perso.getX());
         assertEquals(initialY, perso.getY());
@@ -75,7 +75,7 @@ class PersoTest {
     void deplacerVersDroite() {
         int initialX = perso.getX();
         int initialY = perso.getY();
-        perso.deplacer(initialX + 1, initialY);
+        perso.setPosition(initialX + 1, initialY);
 
         assertEquals(initialX + 1, perso.getX());
         assertEquals(initialY, perso.getY());
@@ -88,13 +88,13 @@ class PersoTest {
     public void testPersoDeplacementValide() {
         // Déplacement vers la droite
         perso.action(Labyrinthe.DROITE);
-        labyrinthe.deplacerPersonnage(perso);
+        perso.deplacerPersonnage(labyrinthe);
         assertEquals(initialX + 1, perso.getX());
         assertEquals(initialY, perso.getY());
 
         // Déplacement vers le haut
         perso.action(Labyrinthe.HAUT);
-        labyrinthe.deplacerPersonnage(perso);
+        perso.deplacerPersonnage(labyrinthe);
         assertEquals(initialX +1, perso.getX());
         assertEquals(initialY - 1, perso.getY());
     }
@@ -116,7 +116,7 @@ class PersoTest {
 
         // Tenter de deplacer le personnage à droite
         perso.action(Labyrinthe.DROITE);
-        labyrinthe.deplacerPersonnage(perso);
+        perso.deplacerPersonnage(labyrinthe);
 
         assertNotEquals(monstreX, perso.getX());
         assertNotEquals(monstreY, perso.getY());
@@ -132,7 +132,7 @@ class PersoTest {
 
         // Déplacez le personnage vers un mur
         perso.action(Labyrinthe.GAUCHE);
-        labyrinthe.deplacerPersonnage(perso);
+        perso.deplacerPersonnage(labyrinthe);
 
         // Le personnage ne doit pas traverser le mur
         assertEquals(initialX, perso.getX());
@@ -171,7 +171,7 @@ class PersoTest {
 
         perso.setTypeDeplacement(new DeplacementClavier());
         perso.action(Labyrinthe.HAUT);
-        labyrinthe.deplacerPersonnage(perso);
+        perso.deplacerPersonnage(labyrinthe);
 
         assertEquals(X, perso.getX());
         assertEquals(Y, perso.getY());

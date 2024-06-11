@@ -81,17 +81,17 @@ public class MonstreTest {
     public void testMonstreDeplacementValide() {
         monstre.setTypeDeplacement(new DeplacementClavier());
         monstre.action(Labyrinthe.DROITE);
-        labyrinthe.deplacerPersonnage(monstre);
+        monstre.deplacerPersonnage(labyrinthe);
         assertEquals(initialX + 1, monstre.getX());
         assertEquals(initialY, monstre.getY());
 
         monstre.action(Labyrinthe.HAUT);
-        labyrinthe.deplacerPersonnage(monstre);
+        monstre.deplacerPersonnage(labyrinthe);
         assertEquals(initialX +1, monstre.getX());
         assertEquals(initialY - 1, monstre.getY());
 
         monstre.action(Labyrinthe.HAUT);
-        labyrinthe.deplacerPersonnage(monstre);
+        monstre.deplacerPersonnage(labyrinthe);
         assertEquals(initialX+1 , monstre.getX());
         assertEquals(initialY-1, monstre.getY());
     }
@@ -107,7 +107,7 @@ public class MonstreTest {
 
         // Effectuer plusieurs déplacements
         for (int i = 0; i < 100; i++) {
-            labyrinthe.deplacerPersonnage(monstre);
+            monstre.deplacerPersonnage(labyrinthe);
 
             int nouveauMonstreX = monstre.getX();
             int nouveauMonstreY = monstre.getY();
@@ -158,7 +158,7 @@ public class MonstreTest {
 
         // Tenter de déplacer monstre1 sur le personnage
         monstre1.action(Labyrinthe.GAUCHE);
-        labyrinthe.deplacerPersonnage(monstre1);
+        monstre1.deplacerPersonnage(labyrinthe);
 
         // Vérifier que monstre1 n'a pas bougé
         assertEquals(initialXMonstre1, monstre1.getX());
@@ -166,7 +166,7 @@ public class MonstreTest {
 
         // Tenter de déplacer monstre2 sur monstre1
         monstre2.action(Labyrinthe.GAUCHE);
-        labyrinthe.deplacerPersonnage(monstre2);
+        monstre2.deplacerPersonnage(labyrinthe);
 
         // Vérifier que monstre2 n'a pas bougé
         assertEquals(initialXMonstre2, monstre2.getX());
