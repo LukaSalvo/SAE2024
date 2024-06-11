@@ -13,9 +13,6 @@ public class DeplacementIntelligentTest {
 
 
     private Labyrinthe labyrinthe;
-    private Personnage personnage;
-    private List<Monstre> listMonstre;
-
 
 
     @Test
@@ -23,24 +20,22 @@ public class DeplacementIntelligentTest {
 
         labyrinthe = new Labyrinthe("LabySimple/laby1.txt");
         Perso perso = new Perso(1,1);
-        Monstre monstre = new Monstre(4,4);
+        Monstre monstre = new Monstre(4,1);
         DeplacementIntelligent dI = new DeplacementIntelligent();
 
 
         assertEquals(4, monstre.getX());
-        assertEquals(4, monstre.getY());
+        assertEquals(1, monstre.getY());
 
         dI.deplacer(monstre, labyrinthe);
-        int expectedX = monstre.getX();
-        int expectedY = monstre.getY();
-        assertTrue((expectedX == 3 && expectedY == 4) || (expectedX == 4 && expectedY == 3));
+        int X = monstre.getX();
+        int Y = monstre.getY();
+        assertTrue((X == 3 && Y == 1)|| (X == 4 && Y == 0) || (X == 4 && Y == 2));
     }
 
     
     @Test
     public void testDeplacementIntelligentPasDeDeplacementPourHeroMort() throws IOException {
-
-
 
         labyrinthe = new Labyrinthe("LabySimple/laby1.txt");
         Perso perso = new Perso(1,1);
