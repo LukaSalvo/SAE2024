@@ -33,7 +33,22 @@ public class Monstre extends Personnage {
      * @param dy Coordonnée y de la position vers laquelle le monstre souhaite se déplacer.
      * @return true si le monstre peut bouger vers la position donnée, false sinon.
      */
+    @Override
     public boolean peutBouger(Labyrinthe l, int dx, int dy) {
-        return l.deplacementPossible(dx, dy) && !l.getPj().estAutour(this);
+        return l.estDansLimiteLaby(dx, dy) && !l.getMur(dx,dy) && !l.personnagesPresent(dx, dy) && !estMort();
+    }
+
+
+    /**
+     * Applique les répercussions du déplacement du monstre dans le labyrinthe.
+     *
+     * @param labyrinthe Le labyrinthe dans lequel se déplace le monstre.
+     */
+    @Override
+    public void appliquerRepercussion(Labyrinthe labyrinthe) {
+        labyrinthe.estSurCasePiege(this.getCoordonnees(),this);
+        if (labyrinthe.getPj().estAutour(this)) {
+            attaquer(labyrinthe.getPj(), new AttaqueAlentour());
+        }
     }
 }

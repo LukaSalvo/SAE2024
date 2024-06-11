@@ -39,7 +39,7 @@ class EtreFiniTest {
     public void testPersonnageSurCaseDepartAvecAmulette() {
         Perso pj = jeu.getLabyrinthe().getPj();
         pj.setPossedeAmulette(true);
-        pj.deplacer(jeu.getLabyrinthe().getDepart().getX(), jeu.getLabyrinthe().getDepart().getY());
+        pj.setPosition(jeu.getLabyrinthe().getDepart().getX(), jeu.getLabyrinthe().getDepart().getY());
         assertTrue(jeu.etreFini());
     }
 
@@ -49,7 +49,7 @@ class EtreFiniTest {
     @Test
     public void testPersonnageSurCaseDepartSansAmulette() {
         Perso pj = jeu.getLabyrinthe().getPj();
-        pj.deplacer(jeu.getLabyrinthe().getDepart().getX(), jeu.getLabyrinthe().getDepart().getY());
+        pj.setPosition(jeu.getLabyrinthe().getDepart().getX(), jeu.getLabyrinthe().getDepart().getY());
         assertFalse(jeu.etreFini());
     }
 
@@ -59,7 +59,7 @@ class EtreFiniTest {
     @Test
     public void testPersonnageAvecAmulettePasSurCaseDepart() {
         Perso pj = jeu.getLabyrinthe().getPj();
-        pj.deplacer(1, 1);
+        pj.setPosition(1, 1);
         pj.setPossedeAmulette(true);
         assertFalse(jeu.etreFini());
     }

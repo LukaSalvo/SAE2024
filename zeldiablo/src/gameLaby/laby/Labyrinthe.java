@@ -1,7 +1,5 @@
 package gameLaby.laby;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +22,7 @@ public class Labyrinthe {
     public static final char VIDE = '.';
     public static final char C = 'c';
 
-    public static final char A='a';
+    public static final char A = 'a';
 
     /**
      * constantes actions possibles
@@ -59,91 +57,40 @@ public class Labyrinthe {
 
 
     /**
-     * charge le labyrinthe
+     * Constructeur de la classe Labyrinthe
+     *
+     * @param murs        les murs du labyrinthe
+     * @param pj          le personnage
+     * @param casesPieges les cases pièges
+     * @param listMonstre la liste des monstres
+     * @param amu         l'amulette
+     * @param depart      les coordonnées de départ
+     */
+    public Labyrinthe(boolean[][] murs, Perso pj, List<CasePieges> casesPieges, List<Monstre> listMonstre, Amulette amu, Coordonnees depart) {
+        this.murs = murs;
+        this.pj = pj;
+        this.casesPieges = casesPieges;
+        this.listMonstre = new ArrayList<>(listMonstre);
+        this.amu = amu;
+        this.depart = depart;
+    }
+
+    /**
+     * Constructeur qui charge le labyrinthe avec un fichier
      *
      * @param nom nom du fichier de labyrinthe
      * @throws IOException probleme a la lecture / ouverture
      */
     public Labyrinthe(String nom) throws IOException {
-        try (BufferedReader bfRead = new BufferedReader(new FileReader(nom))) {
-            int nbLignes = Integer.parseInt(bfRead.readLine());
-            int nbColonnes = Integer.parseInt(bfRead.readLine());
-
-            this.murs = new boolean[nbColonnes][nbLignes];
-            this.pj = null;
-            this.casesPieges = new ArrayList<>();
-            this.amu=null;
-            this.depart = null;
-
-            String ligne;
-            int numeroLigne = 0;
-
-            while ((ligne = bfRead.readLine()) != null) {
-                for (int colonne = 0; colonne < ligne.length(); colonne++) {
-                    char c = ligne.charAt(colonne);
-                    switch (c) {
-                        case MUR:
-                            this.murs[colonne][numeroLigne] = true;
-                            break;
-                        case VIDE:
-                            this.murs[colonne][numeroLigne] = false;
-                            break;
-                        case C:
-                            this.murs[colonne][numeroLigne] = false;
-                            this.casesPieges.add(new CasePieges(colonne, numeroLigne));
-                            break;
-                        case MONSTRE:
-                            this.murs[colonne][numeroLigne] = false;
-                            this.listMonstre.add(new Monstre(colonne, numeroLigne));
-                            break;
-                        case PJ:
-                            this.murs[colonne][numeroLigne] = false;
-                            this.pj = new Perso(colonne, numeroLigne);
-                            this.depart = new Coordonnees(colonne,numeroLigne);
-                            break;
-                        case A:
-                            this.murs[colonne][numeroLigne]=false;
-                            this.amu = new Amulette(colonne,numeroLigne);
-                            break;
-                        default:
-                            throw new Error("caractere inconnu " + c);
-                    }
-                }
-                numeroLigne++;
-            }
-
-            this.creerMonstres(NBMONSTRE);
-        }
+        Labyrinthe loadedLabyrinthe = LabyrintheLoader.chargerLabyrinthe(nom);
+        this.murs = loadedLabyrinthe.murs;
+        this.pj = loadedLabyrinthe.pj;
+        this.casesPieges = loadedLabyrinthe.casesPieges;
+        this.listMonstre = loadedLabyrinthe.listMonstre;
+        this.amu = loadedLabyrinthe.amu;
+        this.depart = loadedLabyrinthe.depart;
     }
 
-    /**
-     * Déplace un personnage selon son type de déplacement et gère les répercussions.
-     *
-     * @param p Le personnage à déplacer.
-     */
-    public void deplacerPersonnage(Personnage p) {
-        TypeDeplacement t = p.getType();
-        t.deplacer(p, this);
-        repercution(p);
-    }
-
-    /**
-     * Gère les répercussions du déplacement d'un personnage, telles que les pièges et les attaques.
-     *
-     * @param p Le personnage pour lequel les répercussions doivent être gérées.
-     */
-    public void repercution(Personnage p) {
-        estSurCasePiege(p.getCoordonnees(), p);
-        if (p instanceof Monstre) {
-            if (pj.estAutour(p)) {
-                p.attaquer(pj, new AttaqueAlentour());
-            }
-        }
-        if(p instanceof Perso){
-            if(!pj.getPossedeAmulette())
-                amu = ((Perso) p).recupererAmulette(amu);
-        }
-    }
 
     /**
      * Vérifie si le personnage est sur une case piège et applique les effets le cas échéant.
@@ -174,16 +121,6 @@ public class Labyrinthe {
         }
     }
 
-    /**
-     * Vérifie si le déplacement est possible (pas de mur et pas d'entité déjà présente)
-     *
-     * @param x coordonnée x de la case cible
-     * @param y coordonnée y de la case cible
-     * @return true si le déplacement est possible, sinon false
-     */
-    public boolean deplacementPossible(int x, int y) {
-        return estValide(x, y) && !murs[x][y] && !personnagePresent(x, y);
-    }
 
     /**
      * Vérifie si les coordonnées sont dans les limites du labyrinthe
@@ -192,7 +129,7 @@ public class Labyrinthe {
      * @param y coordonnée y
      * @return true si les coordonnées sont valides, sinon false
      */
-    private boolean estValide(int x, int y) {
+    public boolean estDansLimiteLaby(int x, int y) {
         return x >= 0 && x < murs.length && y >= 0 && y < murs[0].length;
     }
 
@@ -203,7 +140,7 @@ public class Labyrinthe {
      * @param y coordonnée y de la case
      * @return true si une entité est présente, sinon false
      */
-    public boolean personnagePresent(int x, int y) {
+    public boolean personnagesPresent(int x, int y) {
         if (pj.etrePresent(x, y)) return true;
         for (Monstre m : listMonstre) {
             if (m.etrePresent(x, y)) return true;
@@ -239,10 +176,10 @@ public class Labyrinthe {
      */
     private boolean VerfiPositonValide(int posX, int posY) {
         // Vérifie si la position est un mur ou si un personnage est présent
-        if (murs[posX][posY] || personnagePresent(posX, posY)) {
+        if (murs[posX][posY] || personnagesPresent(posX, posY)) {
             return false;
         }
-        if(amu.etreSurMemeCase(posX,posY)){
+        if (amu.etreSurMemeCase(posX, posY)) {
             return false;
         }
         // Vérifie si la position est sur une case piège
@@ -256,15 +193,6 @@ public class Labyrinthe {
         return true;
     }
 
-
-    /**
-     * jamais fini
-     *
-     * @return fin du jeu
-     */
-    public boolean etreFini() {
-        return false;
-    }
 
     // ##################################
     // GETTER
@@ -337,10 +265,14 @@ public class Labyrinthe {
 
     /**
      * Renvoie l'amulette du labyrinthe.
+     *
      * @return
      */
-    public Amulette getAmulette(){
+    public Amulette getAmulette() {
         return this.amu;
+    }
+    public void setAmulette(Amulette amu) {
+        this.amu = amu;
     }
 
     /**
