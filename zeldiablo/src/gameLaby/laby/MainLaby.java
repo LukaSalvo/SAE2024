@@ -20,7 +20,7 @@ public class MainLaby {
     public static void main(String[] args) throws IOException {
         int width = LabyJeu.WIDTH;
         int height = LabyJeu.HEIGHT;
-        int pFPS = 60;
+        int pFPS = 30;
 
         LabyJeu jeu = new LabyJeu();
         LabyDessin dessin = new LabyDessin();

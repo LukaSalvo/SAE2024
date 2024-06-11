@@ -74,6 +74,9 @@ public class LabyrintheLoader {
     }
 
 
+    /**
+     * Charge un labyrinthe Aléatoirement
+     */
     public static Labyrinthe chargerLabyrintheAleatoire() {
         int nbLignes = NB_LIGNES;
         int nbColonnes = NB_COLONNES;

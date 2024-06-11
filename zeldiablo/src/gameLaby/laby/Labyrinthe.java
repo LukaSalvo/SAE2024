@@ -83,7 +83,6 @@ public class Labyrinthe {
         this.listMonstre = l.listMonstre;
         this.amu = l.amu;
         this.depart = l.depart;
-        creerMonstres(NBMONSTRE);
     }
 
     /**
@@ -178,6 +177,11 @@ public class Labyrinthe {
         }
     }
 
+    /**
+     * Crée un nombre donné de case pièges à des positions valides
+     *
+     * @param nb le nombre de monstres à créer
+     */
     public void creerCasePiege(int nb) {
         Random rand = new Random();
         for (int i = 0; i < nb; i++) {
