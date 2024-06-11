@@ -1,0 +1,97 @@
+@startuml
+title : Chargement du labyrinthe Aléatoirement
+participant Main
+participant "LabyrintheLoader : labyLoad" as A
+participant "Labyrinthe : l" as L
+
+activate Main
+Main -> A: chargerLabyrintheAleatoire()
+activate A
+
+A -> L: Initialiser les bords comme des murs
+activate L
+L -> A: murs initialisés
+deactivate L
+
+A -> L: Choisir point de départ
+activate L
+L -> A: (x, y) point de départ choisi
+deactivate L
+
+A -> L: Marquer (x, y) comme visité
+activate L
+L -> A: (x, y) marqué
+deactivate L
+
+alt Voisins disponibles
+    loop Tant qu'il y a des voisins disponibles
+        A -> L: Choisir voisin au hasard
+        activate L
+        L -> A: Voisin choisi
+        deactivate L
+        
+        A -> L: Ouvrir le mur entre les cellules
+        activate L
+        L -> A: Mur ouvert
+        deactivate L
+        
+        A -> L: Marquer la nouvelle cellule comme visitée
+        activate L
+        L -> A: Nouvelle cellule marquée
+        deactivate L
+        
+        A -> L: Ajouter la cellule à la liste des chemins
+        activate L
+        L -> A: Cellule ajoutée
+        deactivate L
+    end
+else Pas de voisins
+    loop Tant qu'il n'y a pas de voisins disponibles
+        A -> L: Revenir à la cellule précédente
+        activate L
+        L -> A: Cellule précédente obtenue
+        deactivate L
+        
+        A -> L: Ajouter la cellule à la liste de sauvegarde
+        activate L
+        L -> A: Cellule sauvegardée
+        deactivate L
+    end
+end
+
+A -> L: Inverser les murs pour obtenir les chemins
+activate L
+L -> A: Murs inversés
+deactivate L
+
+A -> L: Créer labyrinthe avec murs et autres éléments
+activate L
+L -> A: Labyrinthe créé
+deactivate L
+
+A -> L: Créer monstres
+activate L
+L -> A: Monstres créés
+deactivate L
+
+A -> L: Placer amulette dans une position sauvegardée
+activate L
+L -> A: Amulette placée
+deactivate L
+
+A -> L: Créer case piège
+activate L
+L -> A: Case piège créée
+deactivate L
+
+A -> Main: Retourner labyrinthe
+deactivate A
+deactivate Main
+note across
+Le diagramme montre comment est créer
+Aléatoirement le labyrinthe en initialisant les murs,
+choisissant un point de départ, marquant les cellules visitées et ajoutant des éléments
+de jeu comme des monstres, une amulette et des pièges.
+Le labyrinthe est retourné apres etre creer .
+end note
+@enduml
