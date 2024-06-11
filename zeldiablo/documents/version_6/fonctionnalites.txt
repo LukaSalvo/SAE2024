@@ -1,0 +1,18 @@
+1 Génération automatique de labyrinthe {Ryan(codage,conception), Benjamin(Test,conception)}
+- Descriptif :
+    - Les niveaux ne sont pas stockés en mémoire, mais le labyrinthe est généré automatiquement par le jeu (ce qui permet d'avoir des parties à chaque fois différentes)
+- Critères de validation
+    - Les monstres, les objets et le héros sont bien placés sur des cases vides
+    - Vous pourrez vous inspirer de la page suivante
+
+2. Monstres au comportement intelligent {Amine(Conception,Codage) Luka(Test,Conception)}
+- Descriptif :
+    - A chaque fois que les monstres se déplacent, ils se rapprochent dans la direction du
+    héros en prenant en compte la présence des murs.
+- Critères de validation
+    - Avant son déplacement, le monstre détermine le meilleur chemin pour atteindre
+      le héros.
+    - Le monstre prend en compte les obstacles qui le concernent pour trouver le meilleur
+      chemin.
+    - lorsqu'il se déplace, le monstre suit effectivement le meilleur chemin et parvient
+      jusqu'au héros même s'il y a des obstacles.

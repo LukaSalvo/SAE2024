@@ -1,0 +1,33 @@
+Version 6.0 : Bilan de l'état de l'application et problèmes rencontrés
+État de l'application :
+L'application a été modifier pour améliorer l'expérience de jeu et
+offrir des parties plus diverses. Deux nouvelles fonctionnalités principales ont été intégrées : la génération automatique de labyrinthes et des monstres avec un comportement intelligent.
+
+Objectifs atteints :
+Génération automatique de labyrinthe :
+    - Les monstres, les objets et le héros sont bien placés sur des cases vides.
+    - La génération respecte les règles définies et assure un gameplay équilibré.
+
+Monstres au comportement intelligent :
+    - Avant chaque déplacement, le monstre détermine le meilleur chemin pour atteindre le héros.
+    - Les obstacles sont pris en compte pour le calcul du chemin.
+    - Les monstres suivent effectivement le meilleur chemin pour atteindre le héros malgré les obstacles.
+
+Difficultés rencontrées :
+
+Génération automatique de labyrinthe :
+
+Problème : La génération automatique du labyrinthe a demandé de nombreuses itérations pour garantir que les labyrinthes générés soient toujours jouables et finissable.
+Solution : Des tests exhaustifs et des ajustements de l'algorithme ont été nécessaires. Ryan a travaillé sur le codage et la conception, tandis que Benjamin s'est concentré sur les tests et la validation.
+Monstres au comportement intelligent :
+
+Problème : Un labyrinthe n'est pas un graphe de base, il faut donc adapter le labyrinthe en graphe pour pouvoir utiliser Dijsktra
+Solution : Amine a conçu et codé l'adaptateur ainsi que son code de la SAE dijstra, tandis que Luka a effectué des tests rigoureux et participé à la conception pour s'assurer de l'efficacité des monstre.
+Travail simultané et coordination :
+
+
+
+
+
+
+
