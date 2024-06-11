@@ -20,7 +20,7 @@ public class Monstre extends Personnage {
      */
     public Monstre(int dx, int dy) {
         super(dx, dy, PV_MONSTRE_ENTIER);
-        this.setTypeDeplacement(new DeplacementAleatoire());
+        this.setTypeDeplacement(new DeplacementIntelligent());
     }
 
 

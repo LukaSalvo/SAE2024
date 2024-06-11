@@ -75,6 +75,17 @@ public class Labyrinthe {
         this.depart = depart;
     }
 
+    public Labyrinthe(){
+        Labyrinthe l = LabyrintheLoader.chargerLabyrintheAleatoire();
+        this.murs = l.murs;
+        this.pj = l.pj;
+        this.casesPieges = l.casesPieges;
+        this.listMonstre = l.listMonstre;
+        this.amu = l.amu;
+        this.depart = l.depart;
+        creerMonstres(NBMONSTRE);
+    }
+
     /**
      * Constructeur qui charge le labyrinthe avec un fichier
      *
@@ -164,6 +175,19 @@ public class Labyrinthe {
                 posY = rand.nextInt(murs[0].length);
             }
             this.listMonstre.add(new Monstre(posX, posY));
+        }
+    }
+
+    public void creerCasePiege(int nb) {
+        Random rand = new Random();
+        for (int i = 0; i < nb; i++) {
+            int posX = rand.nextInt(murs.length);
+            int posY = rand.nextInt(murs[0].length);
+            while (!VerfiPositonValide(posX, posY)) {
+                posX = rand.nextInt(murs.length);
+                posY = rand.nextInt(murs[0].length);
+            }
+            this.casesPieges.add(new CasePieges(posX, posY));
         }
     }
 

@@ -44,7 +44,7 @@ public class LabyJeu implements Jeu {
      * @throws IOException si le fichier du labyrinthe ne peut être lu.
      */
     public LabyJeu() throws IOException {
-        this.labyrinthe = new Labyrinthe("labySimple/laby1.txt");
+        this.labyrinthe = new Labyrinthe();
         this.timerMaj = Executors.newScheduledThreadPool(1);
         this.pj = labyrinthe.getPj();
         deplacerMonstre();
@@ -58,7 +58,7 @@ public class LabyJeu implements Jeu {
             for (Monstre m : labyrinthe.getListMonstre()) {
                 m.deplacerPersonnage(labyrinthe);
             }
-        }, 5, 5, TimeUnit.SECONDS);
+        }, 1, 1, TimeUnit.SECONDS);
     }
 
     /**
