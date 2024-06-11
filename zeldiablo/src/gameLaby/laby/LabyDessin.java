@@ -33,8 +33,6 @@ public class LabyDessin implements DessinJeu {
     public static final Color noir = Color.BLACK;
 
 
-
-
     /**
      * Methode pour dessiner le jeu
      * @param jeu jeu a afficher
@@ -156,9 +154,8 @@ public class LabyDessin implements DessinJeu {
      */
     private void dessinerEntite(GraphicsContext gc, int x, int y, int cellWidth, int cellHeight, int pv,Image i ) {
         gc.setFill(getPersonnageColor(pv));
-        gc.setFont(new Font(20));
-        gc.fillRect(x*cellWidth,y*cellHeight-10,getPersonnage(pv),10);
-        gc.drawImage(i,x*cellWidth,y*cellHeight,20,20);
+        gc.fillRect(x*cellWidth,y*cellHeight-10,getPersonnage(pv)*cellHeight/20,10);
+        gc.drawImage(i,x*cellWidth,y*cellHeight,cellWidth,cellHeight);
     }
 
     /**

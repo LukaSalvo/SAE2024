@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.Random;
 
 public class LabyrintheLoader {
+
+    public static final int NB_LIGNES = 20;
+    public static final int NB_COLONNES = 20;
+
     /**
      * charge le labyrinthe
      *
@@ -71,8 +75,8 @@ public class LabyrintheLoader {
 
 
     public static Labyrinthe chargerLabyrintheAleatoire() {
-        int nbLignes = 50;
-        int nbColonnes = 50;
+        int nbLignes = NB_LIGNES;
+        int nbColonnes = NB_COLONNES;
         boolean[][] murs = new boolean[nbLignes][nbColonnes];
         Random rand = new Random();
 
