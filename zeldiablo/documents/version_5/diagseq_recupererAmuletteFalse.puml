@@ -1,7 +1,10 @@
 @startuml
 participant Actor
+
 title : Personnage qui essaye de recuperer Amulette
+activate Actor
 Actor -> Labyrinthe : deplacerPersonnage(Perso,DeplacementClavier)
+
 activate Labyrinthe
 Labyrinthe -> TypeDeplacement : deplacer()
 activate TypeDeplacement
@@ -21,6 +24,7 @@ deactivate Labyrinthe
 Labyrinthe --> Labyrinthe
 deactivate Labyrinthe
 return
+deactivate Actor
 note across
 Lorsque le personnage est placer sur l'amulette il la recupere et son argument passe a vrai et l'amulette devient null
 end note

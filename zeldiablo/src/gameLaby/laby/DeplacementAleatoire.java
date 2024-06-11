@@ -15,7 +15,7 @@ public class DeplacementAleatoire implements TypeDeplacement {
         Random rand = new Random();
         int[] suivante = p.getSuivant(actions[rand.nextInt(actions.length)]);
         if (p.peutBouger(l, suivante[0], suivante[1])) {
-            p.deplacer(suivante);
+            p.setPosition(suivante);
         }
 
     }

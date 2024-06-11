@@ -47,7 +47,7 @@ public class AttaquerAlentourTest {
         monstre.setY(5);
 
         int pvBase = perso.getPv();
-        labyrinthe.deplacerPersonnage(monstre);
+        monstre.deplacerPersonnage(labyrinthe);
 
         // Vérifie que le joueur a perdu 1 point de vie
         assertEquals(pvBase - 1, perso.getPv());
