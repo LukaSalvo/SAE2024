@@ -1,44 +1,47 @@
-6.1 Fin de jeu: mort du héros // Conception, code et test par Luka
+1. Fin de jeu: mort du héros // Conception, code et test par Luka
+- Descriptif :
+    - Au lancement du jeu, une amulette est placée sur une case vide du labyrinthe.
+    Le placement de l'amulette est toujours le même et dépend du niveau.
 
-Au lancement du jeu, une amulette est placée sur une case vide du labyrinthe. Le
-placement de l'amulette est toujours le même et dépend du niveau.
+- Critères de validation
+ - L'amulette ne peut être placée que sur une case vide.
+ - Les monstres et le héros peuvent se situer sur la case de l'amulette.
+ - L'amulette est affichée dans le jeu sous la forme d'un cercle jaune sur la case vide
 
-Critères de validation
+2. Mise en place de l'amulette // Conception, code et test par Benjamin
+- Descriptif :
+ - Au lancement du jeu, une amulette est placée sur une case vide du labyrinthe. Le
+   placement de l'amulette est toujours le même et dépend du niveau.
 
-• L'amulette ne peut être placée que sur une case vide.
-• Les monstres et le héros peuvent se situer sur la case de l'amulette.
-• L'amulette est achée dans le jeu sous la forme d'un cercle jaune sur la case vide
+- Critères de validation
+  - L'amulette ne peut être placée que sur une case vide.
+  - Les monstres et le héros peuvent se situer sur la case de l'amulette.
+  - L'amulette est affichée dans le jeu sous la forme d'un cercle jaune sur la case vide
 
-6.2 Mise en place de l'amulette // Conception, code et test par Benjamin
+3 Acquisition de l'amulette // Conception, code et test par Ryan
+- Descriptif :
+ - Dés que le joueur demande à déplacer le héros sur l'amulette, le héros se déplace et
+  prend l'amulette.
 
-Au lancement du jeu, une amulette est placée sur une case vide du labyrinthe. Le
-placement de l'amulette est toujours le même et dépend du niveau.
+- Critères de validation
+ - L'amulette n'est plus sur le plateau (et n'est plus achée).
+ - Le Héros possède l'amulette.
+ - Un monstre ne récupère pas l'amulette
 
-Critères de validation
+4 Fin de jeu: victoire du héros // Conception, code et test par Amin
+- Descriptif :
+  - Une fois que le héros a pris l'amulette, il peut retourner à l'entrée du labyrinthe et
+    remporter le jeu.
 
-• L'amulette ne peut être placée que sur une case vide.
-• Les monstres et le héros peuvent se situer sur la case de l'amulette.
-• L'amulette est achée dans le jeu sous la forme d'un cercle jaune sur la case vide
+- Critères de validation
+   - Lorsque le héros possède l'amulette et qu'il retourne à l'entrée du labyrinthe, le
+     jeu s'arrête et un message est aché dans la console.
+   - Lorsque le héros ne possède pas l'amulette, le jeu ne s'arrête pas même si le héros
+     retourne à l'entrée.
 
-6.3 Acquisition de l'amulette // Conception, code et test par Ryan
-
-Dés que le joueur demande à déplacer le héros sur l'amulette, le héros se déplace et
-prend l'amulette.
-
-Critères de validation
-
-• L'amulette n'est plus sur le plateau (et n'est plus achée).
-• Le Héros possède l'amulette.
-• Un monstre ne récupère pas l'amulette
-
-6.4 Fin de jeu: victoire du héros // Conception, code et test par Amin
-
-Une fois que le héros a pris l'amulette, il peut retourner à l'entrée du labyrinthe et
-remporter le jeu.
-
-Critères de validation
-• Lorsque le héros possède l'amulette et qu'il retourne à l'entrée du labyrinthe, le
-jeu s'arrête et un message est aché dans la console.
-• Lorsque le héros ne possède pas l'amulette, le jeu ne s'arrête pas même si le héros
-retourne à l'entrée.
-
+5 Refactorisation du code {Ryan,Amin,Benjamin,Luka}
+- Critères de validation
+    - Créer deux classes distinctes pour gérer la création du labyrinthe et la gestion des événements du labyrinthe.
+    - Ne pas utiliser l'opérateur instanceof.
+    - Gérer le déplacement des personnages et ses répercussions dans des classes séparées du labyrinthe, notamment dans les classes Perso et Monstre.
+    - La méthode appliquerRepercussion pour gérer les répercussions du déplacement doit être une méthode abstraite de la classe Personnage, définie dans les classes dérivées Monstre et Perso.

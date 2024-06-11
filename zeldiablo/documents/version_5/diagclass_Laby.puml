@@ -86,49 +86,58 @@ class LabyJeu {
   + getLabyrinthe(): Labyrinthe
   + init(): void
 }
-
+class LabyrintheLoader #pink{
+    + chargerLabyrinthe(nom : String) :Labyrinthe
+}
 class Labyrinthe {
-  + Labyrinthe(String):
-  + VIDE: char
-  + DROITE: String
-  - pj: Perso
-  - murs: boolean[][]
-  + BAS: String
-  + PJ: char
-  + MUR: char
-  + MONSTRE: char
-  + casesPieges: List<CasePieges>
-  + NBMONSTRE: int
-  + HAUT: String
-  + GAUCHE: String
-  + C: char
-  - listMonstre: ArrayList<Monstre>
-  - generationPositionValide(int, int): boolean
-  + getListMonstre(): List<Monstre>
-  + getMurs(): boolean[][]
-  + deplacerPersonnage(Personnage): void
-  - estValide(int, int): boolean
-  + estSurCasePiege(int[], Personnage): void
-  + deplacementPossible(int, int): boolean
-  + getLengthY(): int
-  + getPj(): Perso
-  + personnagePresent(int, int): boolean
-  + creerMonstres(int): void
-  + getLength(): int
-  + majEtatMonstre(): void
-  + getCasesPieges(): List<CasePieges>
-  + repercution(Personnage): void
-  + getMur(int, int): boolean
-  + etreFini(): boolean
+  +Labyrinthe(String)
+  +Labyrinthe(boolean[][], Perso, List<CasePieges>,
+   List<Monstre>, Amulette, Coordonnees)
+  +VIDE: char
+  +DROITE: String
+  -pj: Perso
+  -murs: boolean[][]
+  +BAS: String
+  +PJ: char
+  +MUR: char
+  +MONSTRE: char
+  +casesPieges: List<CasePieges>
+  +NBMONSTRE: int
+  +HAUT: String
+  +GAUCHE: String
+  +C: char
+  +A: char
+  -listMonstre: ArrayList<Monstre>
+  -depart: Coordonnees
+  -amu: Amulette
+  -VerfiPositonValide(int, int): boolean
+  +getListMonstre(): List<Monstre>
+  +getMurs(): boolean[][]
+  +deplacerPersonnage(Personnage): void
+  +estSurCasePiege(int[], Personnage): void
+  +majEtatMonstre(): void
+  +getLengthY(): int
+  +getLength(): int
+  +getPj(): Perso
+  +personnagesPresent(int, int): boolean
+  +creerMonstres(int): void
+  +getCasesPieges(): List<CasePieges>
+  +getMur(int, int): boolean
+  +etreFini(): boolean
+  +estDansLimiteLaby(int, int): boolean
+  +getAmulette(): Amulette
+  +setAmulette(Amulette): void
+  +getDepart(): Coordonnees
 }
 
 class Monstre {
-  + Monstre(int, int):
-  + PV_MONSTRE_ENTIER: int
-  + PV_MONSTRE_MORT: int
-  + PV_MONSTRE_DEMI: int
-  + estMort(): boolean
-  + peutBouger(Labyrinthe, int, int): boolean
+  +Monstre(int, int)
+  +PV_MONSTRE_ENTIER: int
+  +PV_MONSTRE_MORT: int
+  +PV_MONSTRE_DEMI: int
+  +estMort(): boolean
+  +peutBouger(Labyrinthe, int, int): boolean
+  +appliquerRepercussion(Labyrinthe): void
 }
 
 class MoteurJeu {
@@ -148,33 +157,42 @@ class MoteurJeu {
   + start(Stage): void
 }
 
-class Perso {
-  + Perso(int, int):
+class Perso  {
+  + Perso(int x, int y)
   + peutBouger(Labyrinthe, int, int): boolean
+  + appliquerRepercussion(Labyrinthe): void
+  + recupererAmulette(Amulette): boolean
+  + getPossedeAmulette(): boolean
+  + setPossedeAmulette(boolean): void
+  - possedeAmulette: boolean
 }
 
 class Personnage {
-  + Personnage(int, int, int):
-  ~ action: String
-  + PV_DEMI: int
-  + PV_MORT: int
-  + PV_1_QUART: int
-  # pv: int
-  - typeDeplacement: TypeDeplacement
-  + PV_ENTIER: int
-  + PV_3_QUART: int
-  + etrePresent(int, int): boolean
-  + getAction(): String
-  + getPv(): int
-  + estAutour(Personnage): boolean
-  + action(String): void
-  + getType(): TypeDeplacement
-  + peutBouger(Labyrinthe, int, int): boolean
-  + setTypeDeplacement(TypeDeplacement): void
-  + perdrePv(int): void
-  + attaquer(Personnage, TypeAttaque): void
-  + recupererAmulette(Amulette amu): Amulette
+  +Personnage(int, int, int)
+  ~action: String
+  +PV_DEMI: int
+  +PV_MORT: int
+  +PV_1_QUART: int
+  #pv: int
+  -typeDeplacement: TypeDeplacement
+  +PV_ENTIER: int
+  +PV_3_QUART: int
+  +etrePresent(int, int): boolean
+  +getAction(): String
+  +getPv(): int
+  +estAutour(Personnage): boolean
+  +action(String): void
+  +getType(): TypeDeplacement
+  +peutBouger(Labyrinthe, int, int): boolean
+  +setTypeDeplacement(TypeDeplacement): void
+  +perdrePv(int): void
+  +attaquer(Personnage, TypeAttaque): void
+  +recupererAmulette(Amulette): Amulette
+  +deplacerPersonnage(Labyrinthe): void
+  +appliquerRepercussion(Labyrinthe): void
+  +estMort(): boolean
 }
+
 
 class Amulette #pink {
   + Amulette(int, int):

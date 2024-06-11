@@ -1,0 +1,37 @@
+Version 5.0: Bilan de l'état de l'application et problèmes rencontrés
+
+État de l'application :
+    L'application a intégré de nouvelles fonctionnalités et a été optimisée. Désormais, le jeu intègre un système de fin de jeu basé
+    sur la mort du héros ou sa victoire, ainsi que la gestion et l'acquisition d'une amulette.
+    De plus, un refactor important a été fait pour améliorer la maintenabilité et la modularité du code.
+
+Objectifs atteints :
+    - Fin du jeu : Défaite : Lorsque le héros meurt (PV à zéro), il ne peut plus bouger ni attaquer, et la fenêtre de l’application se ferme.
+    - Mise en place de l'amulette : Une amulette est placée sur une case vide du labyrinthe au lancement du jeu. Le placement est constant et dépend du niveau.
+    - Acquisition de l'amulette : Lorsque le héros se déplace sur la case de l'amulette, il la ramasse et elle disparaît du plateau.
+    - Fin de jeu : victoire du héros : Une fois l’amulette en sa possession, le héros peut retourner à l’entrée du labyrinthe pour remporter le jeu.
+    - Refactorisation du code : Le code a été réorganisé pour être plus maintenable et modulaire.
+
+Refactorisation faite :
+    Séparation de la création du labyrinthe(LabyrintheLoader) et de la gestion des événements du labyrinthe(Labyrinthe) en deux classes différentes.
+    Gestion du déplacement des personnages et des répercussions dans des classes distinctes de celle du labyrinthe pour eviter d'utiliser instandOf.
+    Introduction de méthodes abstraites (appliquerRepercution) dans la classe Personnage pour gérer les répercussions spécifiques au type de Personnage dans les classes Monstre et Perso.
+    Amélioration de la clarté et de l'encapsulation des attributs et méthodes (par exemple, Cordonnees à Coordonnees, posX à x).
+
+Difficultés rencontrées :
+
+Travail simultané sur la même classe :
+    - Problème : Plusieurs personnes ont coder en même temps sur la classe Labyrinthe, ce qui a causé des conflits et retardé le projet.
+    - Solution : Refactoring du code
+Refactorisation du code :
+    - Problème : Repenser la conception pour déplacer les méthodes tout en faisant marcher le code a nécessité du temps et à empeché la mise à jour des diagrammes de séquence des méthodes implanté.
+    - Solution : On a eu le temps de mettre a jour Diagramme de classe mais pour les diagramme de séquences, le fonctionnement reste quasiment le meme (juste quelques classes changent).
+
+Implémentation des fonctionalitées :
+Aucune difficulté particulière rencontrée lors de l'implémentation et des tests de cette fonctionnalité.
+
+
+
+
+
+

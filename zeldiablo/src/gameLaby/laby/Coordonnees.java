@@ -29,7 +29,7 @@ public class Coordonnees {
      * @param x nouvelle coordonnée x
      * @param y nouvelle coordonnée y
      */
-    public void deplacer(int x, int y) {
+    public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -39,7 +39,7 @@ public class Coordonnees {
      *
      * @param coordonnee tableau contenant les nouvelles coordonnées [x, y]
      */
-    public void deplacer(int[] coordonnee) {
+    public void setPosition(int[] coordonnee) {
         this.x = coordonnee[0];
         this.y = coordonnee[1];
     }

@@ -8,17 +8,17 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestAmulette {
-
+    
     private Amulette amulette;
     private Perso perso;
     private Monstre monstre;
-
+    
     private Labyrinthe labyrinthe;
 
     @BeforeEach
     public void setup() throws IOException {
         labyrinthe = new Labyrinthe("LabySimple/laby1.txt");
-
+        
         amulette = labyrinthe.getAmulette();
         perso = labyrinthe.getPj();
         monstre = labyrinthe.getListMonstre().get(0);

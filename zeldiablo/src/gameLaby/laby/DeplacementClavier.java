@@ -6,7 +6,7 @@ package gameLaby.laby;
 public class DeplacementClavier implements TypeDeplacement {
 
     /**
-     * Déplace le personnage selon une action  du clavier.
+     * Déplace le personnage selon une action du clavier.
      *
      * @param p    le personnage à déplacer
      * @param laby le labyrinthe dans lequel se déplace le personnage
@@ -17,7 +17,7 @@ public class DeplacementClavier implements TypeDeplacement {
 
         // Vérifie si le déplacement est possible
         if (p.peutBouger(laby, suivante[0], suivante[1])) {
-            p.deplacer(suivante);
+            p.setPosition(suivante);
         }
     }
 }
