@@ -76,8 +76,9 @@ public class LabyDessin implements DessinJeu {
         for (int line = 0; line < murs.length; line++) {
             for (int col = 0; col < murs[line].length; col++) {
                 if (murs[line][col]) {
-                    gc.setFill(Color.BLACK);
-                    gc.fillRect(line * x, col * y, x, y);
+                    gc.drawImage(new Image("file:img/wall.png"),line * x, col * y, x, y);
+                }else{
+                    gc.drawImage(new Image("file:img/grass01.png"),line * x, col * y, x, y);
                 }
             }
         }
@@ -122,8 +123,7 @@ public class LabyDessin implements DessinJeu {
     private void dessinerCasesPieges(GraphicsContext gc, List<CasePieges> casesPieges, int x, int y) {
         for (CasePieges c : casesPieges) {
             if(c.getEtrePasserDessus()){
-                gc.setFill(Color.BROWN);
-                gc.fillRect(c.getX() * x, c.getY() * y, x, y);
+                gc.drawImage(new Image("file:img/bat_down_1.png"),c.getX() * x, c.getY() * y, x, y);
             }
         }
     }
@@ -138,8 +138,7 @@ public class LabyDessin implements DessinJeu {
      */
     public void dessinerAmulette(GraphicsContext gc, Amulette a,Perso pj , int x , int y ){
         if(!pj.getPossedeAmulette()){
-            gc.setFill(Color.YELLOW);
-            gc.fillOval(a.getX()*x,a.getY()*y,x,y);
+            gc.drawImage(new Image("file:img/key.png"),a.getX()*x,a.getY()*y,x,y);
         }
     }
 
