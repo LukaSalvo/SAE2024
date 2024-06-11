@@ -126,6 +126,14 @@ public class LabyDessin implements DessinJeu {
         }
     }
 
+    /**
+     * Methode pour dessiner l'amulette
+     * @param gc objet GraphicsContext
+     * @param a objet de la classe Amulette
+     * @param pj objet de la classe Perso
+     * @param x position x
+     * @param y position y
+     */
     public void dessinerAmulette(GraphicsContext gc, Amulette a,Perso pj , int x , int y ){
         if(!pj.getPossedeAmulette()){
             gc.setFill(Color.YELLOW);

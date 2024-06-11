@@ -3,7 +3,7 @@ package gameLaby.laby;
 /**
  * Classe abstraite pour les personnages
  */
-public abstract class Personnage extends Coordonnees {
+public abstract class Personnage extends Coordonnees{
     /**
      * pv
      */
@@ -31,13 +31,14 @@ public abstract class Personnage extends Coordonnees {
         this.pv = pv;
         ;
     }
+    ;
 
     /**
-     * Methode pour se deplacer
+     * Methode pour verrifier que le personnageest présent à une position donnée
      *
      * @param dx position x
      * @param dy position y
-     * @return retourne true si le deplacement est possible
+     * @return retourne true si  est présent à la position donnée, false sinon
      */
     public boolean etrePresent(int dx, int dy) {
         return (this.x == dx && this.y == dy);
@@ -71,14 +72,34 @@ public abstract class Personnage extends Coordonnees {
     /**
      * Methode pour attaquer un personnage
      *
-     * @param p       personnage attaqué
+     * @param victime       personnage attaqué
      * @param typeAttaque type d'attaque
      */
-    public void attaquer(Personnage p, TypeAttaque typeAttaque) {
+    public void attaquer(Personnage victime, TypeAttaque typeAttaque) {
         if (!estMort()){
-            typeAttaque.attaquer(this, p);
+            typeAttaque.attaquer(this, victime);
         }
     }
+
+
+    /**
+     * Déplace un personnage selon son type de déplacement et gère les répercussions.
+     *
+     * @param laby Le labyrinth dans lequel se déplace le personnage.
+     */
+    public void deplacerPersonnage(Labyrinthe laby) {
+        TypeDeplacement t = this.getType();
+        t.deplacer(this, laby);
+        this.appliquerRepercussion(laby);
+    }
+
+
+    /**
+     * Methode pour appliquer les repercussions du deplacement du personnage dans le labyrinthe
+     *
+     * @param labyrinthe Le labyrinthe dans lequel se deplace le personnage
+     */
+    public abstract void appliquerRepercussion(Labyrinthe labyrinthe);
 
 
     /**
@@ -149,5 +170,6 @@ public abstract class Personnage extends Coordonnees {
     public boolean estMort() {
         return this.pv <= PV_MORT;
     }
+
 
 }
