@@ -13,7 +13,6 @@ public class DeplacementIntelligent implements TypeDeplacement{
 
     @Override
     public void deplacer(Personnage p, Labyrinthe laby) {
-        String[] actions = {HAUT, BAS, GAUCHE, DROITE};
         Algorithme Dijsktra = new Dijkstra();
         AdapterLaby l = new AdapterLaby(laby);
         Valeur v = Dijsktra.resoudre(l, p.getX()+","+p.getY());
