@@ -1,0 +1,27 @@
+@startuml
+title : Calcul du chemin et deplacement du personnage
+participant "DeplacementIntelligent : a" as DeplacementIntelligent
+participant "Personnage : p" as Personnage
+participant "Personnage : p2" as Personnage2
+participant "Valeur : v" as Valeur
+activate DeplacementIntelligent
+DeplacementIntelligent -> Valeur : calculerChemin(p2.getX(),p2.get())
+activate Valeur
+Valeur --> DeplacementIntelligent : suivant
+deactivate Valeur
+alt Si la taille de la liste des plus court chemin (suivant) > 1
+    DeplacementIntelligent -> Personnage : peutBouger(p,l)
+    activate Personnage
+    Personnage --> DeplacementIntelligent
+    deactivate Personnage
+    alt Si p peutBouger
+        DeplacementIntelligent -> Personnage : setPosition(suivante)
+        activate Personnage
+        Personnage --> DeplacementIntelligent
+        deactivate Personnage
+    end
+end
+note across
+On calcule le chemin minimal vers le personnage 2 et on deplace le personnage 1 si c'est possible vers la position suivante
+end note
+@enduml
