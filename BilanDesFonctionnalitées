@@ -1,0 +1,83 @@
+Version 1 
+
+1. Génération de monstres immobiles 
+- Descriptif :
+  - Au lancement du jeu, le jeu ajoute différents monstres dans l'environnement. Les monstres restent immobiles.
+
+2. Déplacement aléatoire des monstres :
+- Descriptif :
+  - Régulièrement, le jeu demande aux monstres de se déplacer dans une direction aléatoire.
+
+3. Cases piégées 
+- Descriptif :
+  - Lorsqu'une entité (héros ou monstre) arrive sur une case piégée, il subit des dégâts.
+
+4. Mort des monstres 
+- Descriptif :
+  - Lorsqu'un monstre n'a plus de points de vie, il meurt et disparaît du jeu.
+
+5. Collision avec un monstre
+- Descriptif :
+  - Lorsque le joueur demande au personnage de se déplacer vers une case contenant un monstre, le personnage ne se déplace pas.
+
+
+Version 2.
+
+1. Attaque des monstres {Amin(Diagramme de séquence,Code),Luka(Diagramme de séquence,Tests)}
+- Descriptif :
+   - Lorsqu'un monstre doit agir, si le monstre se trouve à coté du héros, alors il ne se déplace pas mais il attaque celui-ci.
+
+Attaque du joueur {Benjamin(Diagramme de séquence,Test),Ryan(Digamme de séquence,Code)}
+
+- Descriptif :
+Lorsque le joueur appuie sur une touche donnée (par défaut la touche espace), il eectue une attaque contre les monstres qui se trouvent à côté de lui.
+
+Refactorisation du code {Ryan,Amin,Benjamin,Luka}
+
+Finalisation de la fonctionalité piège {Benjamin}
+
+
+Version 3 
+
+
+1. Fin de jeu: mort du héros // Conception, code et test par Luka
+- Descriptif :
+    - Au lancement du jeu, une amulette est placée sur une case vide du labyrinthe.
+    Le placement de l'amulette est toujours le même et dépend du niveau.
+
+2. Mise en place de l'amulette // Conception, code et test par Benjamin
+- Descriptif :
+ - Au lancement du jeu, une amulette est placée sur une case vide du labyrinthe. Le
+   placement de l'amulette est toujours le même et dépend du niveau.
+
+3 Acquisition de l'amulette // Conception, code et test par Ryan
+- Descriptif :
+ - Dés que le joueur demande à déplacer le héros sur l'amulette, le héros se déplace et
+  prend l'amulette.
+
+4 Fin de jeu: victoire du héros // Conception, code et test par Amin
+- Descriptif :
+  - Une fois que le héros a pris l'amulette, il peut retourner à l'entrée du labyrinthe et
+    remporter le jeu.
+
+5 Refactorisation du code {Ryan,Amin,Benjamin,Luka}
+
+
+Version 4 
+
+
+1 Génération automatique de labyrinthe {Ryan(codage,conception), Benjamin(Test,conception)}
+- Descriptif :
+    - Les niveaux ne sont pas stockés en mémoire, mais le labyrinthe est généré automatiquement par le jeu (ce qui permet d'avoir des parties à chaque fois différentes)
+
+2. Monstres au comportement intelligent {Amine(Conception,Codage) Luka(Test,Conception)}
+- Descriptif :
+    - A chaque fois que les monstres se déplacent, ils se rapprochent dans la direction du
+    héros en prenant en compte la présence des murs.
+
+3.Barre de vie (Benjamin)
+Une barre de vie ce situe sur le dessus des monstres et du héro.
+Elle diminue et change de couleur en fonction des pv du personnage
+
+4. Affichage des monstres et du héros par des sprites
+
