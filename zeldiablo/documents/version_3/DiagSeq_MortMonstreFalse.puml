@@ -1,0 +1,16 @@
+@startuml
+participant Main
+Main -> LabyJeu : deplacerPersonnage
+activate LabyJeu
+
+
+LabyJeu -> Labyrinthe : majEtatMonstre
+activate Labyrinthe
+Labyrinthe -> Personnage : estMort
+activate Personnage
+Personnage --> Labyrinthe : false
+deactivate Personnage
+Labyrinthe --> LabyJeu
+deactivate Labyrinthe
+return
+@enduml
