@@ -107,7 +107,7 @@ public class LabyDessin implements DessinJeu {
     private void dessinerMonstres(GraphicsContext gc, List<Monstre> monstres, int x, int y) {
         for (Monstre monstre : monstres) {
             if(!monstre.estMort()) {
-                gc.setFill(getMonstreColor(monstre.getPv()));
+
                 dessinerEntite(gc, monstre.getX(), monstre.getY(), x, y, monstre.getPv(),new Image("file:img/skeletonlord_up_2.png"));
             }
         }
@@ -189,18 +189,6 @@ public class LabyDessin implements DessinJeu {
         return 0;
     }
 
-    /**
-     * Methode pour obtenir la couleur du monstre, en fonction de ses points de vie
-     * @param pv points de vie
-     * @return
-     */
-    private Color getMonstreColor(int pv) {
-        if (pv >= Monstre.PV_MONSTRE_ENTIER) {
-            return bleuCiel;
-        } else if (pv >= Monstre.PV_MONSTRE_DEMI) {
-            return bleu;
-        } else{
-            return bleuNoir;
-        }
-    }
+
+
 }
