@@ -212,7 +212,8 @@ interface TypeDeplacement << interface >> {
 }
 
 '''nouvelles classes et interfaces pour le plus court chemin'''
-class AdapterLaby #pink {
+class AdapterLaby  #pink implements Graphe {
+  + Labyrinthe laby
   + AdapterLaby(Labyrinthe)
   + listeNoeuds(): List<String>
   + suivants(String): List<Arc>
@@ -234,7 +235,7 @@ class Arcs #pink {
   + getArcs(): ArrayList<Arc>
 }
 
-class Dijkstra #pink{
+class Dijkstra  #pink implements Algorithme{
   + Dijkstra()
   + resoudre(Graphe, String): Valeur
 }
@@ -263,6 +264,7 @@ DeplacementIntelligent  -[#008200,dashed]-^  TypeDeplacement
 LabyDessin            -[#008200,dashed]-^  DessinJeu
 LabyJeu               -[#008200,dashed]-^  Jeu
 LabyJeu              "1" *-[#595959,plain]-> "labyrinthe\n1" Labyrinthe
+AdapterLaby              "1" *-[#595959,plain]-> "labyrinthe\n1" Labyrinthe
 LabyJeu              "1" *-[#595959,plain]-> "pj\n1" Perso
 Labyrinthe           "1" *-[#595959,plain]-> "casesPieges\n*" CasePieges
 Labyrinthe           "1" *-[#595959,plain]-> "listMonstre\n*" Monstre
@@ -275,6 +277,7 @@ Personnage            -[#000082,plain]-^  Coordonnees
 Amulette            -[#000082,plain]-^  Coordonnees
 Personnage           "1" *-[#595959,plain]-> "typeDeplacement\n1" TypeDeplacement
 Arcs           "1" *-[#595959,plain]-> "Arc\n*" Arc
-AdapterLaby           -[#000082,plain]-^  Graphe
-Dijkstra              -[#000082,plain]-^  Algorithme
+
+
+
 @enduml
